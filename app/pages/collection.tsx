@@ -2,13 +2,13 @@ import { defer } from '@remix-run/node';
 import { Await, useLoaderData, useParams } from '@remix-run/react';
 import request, { gql } from 'graphql-request';
 import { useInfiniteQuery } from 'react-query';
-import Spinner from '~/components/spinner';
 import type { LoaderFunction } from '@remix-run/node';
 import { Suspense } from 'react';
 
-import stylesheet from '~/styles/collection.css';
-import { Tab, Tabs } from '~/components/tabs';
 import NFT from '~/components/nft';
+import Spinner from '~/components/spinner';
+import { Tab, Tabs } from '~/components/tabs';
+import stylesheet from '~/styles/collection.css';
 
 const nftsPerPage = 30;
 

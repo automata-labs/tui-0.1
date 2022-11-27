@@ -2,8 +2,8 @@ import type { LoaderFunction } from '@remix-run/node';
 import { defer } from '@remix-run/node';
 import { useLoaderData, useParams } from '@remix-run/react';
 import request, { gql } from 'graphql-request';
-import { Render } from '~/components/render';
 
+import { Render } from '~/components/render';
 import stylesheet from '~/styles/display.css';
 
 export const loader: LoaderFunction = async ({ params }) => {

@@ -7,6 +7,13 @@ module.exports = {
   server: process.env.NODE_ENV === 'development' ? undefined : './server.js',
   ignoredRouteFiles: ['**/.*'],
   serverDependenciesToBundle: ['@center-inc/react'],
+  routes: async (define) => {
+    return define((route) => {
+      route('/action/set-theme', 'actions/set-theme.tsx');
+      route('/nft/:address', 'pages/collection.tsx');
+      route('/nft/:address/:id', 'pages/display.tsx');
+    });
+  },
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "api/index.js",
