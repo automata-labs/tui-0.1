@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev"
+  },
+  "dependencies": {
+    "@center-inc/react": "^1.1.5",
+    "@remix-run/node": "deferred",
+    "@remix-run/react": "deferred",
+    "@remix-run/vercel": "deferred",
+    "@vercel/node": "^2.6.2",
+    "content-type-parser": "^1.0.2",
+    "graphql-request": "^5.0.0",
+    "isbot": "^3.6.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.2",
+    "react-use": "^17.4.0",
+    "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "deferred",
+    "@remix-run/eslint-config": "^1.7.6",
+    "@remix-run/serve": "deferred",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "@types/styled-components": "^5.1.26",
+    "eslint": "^8.27.0",
+    "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

@@ -1,0 +1,52 @@
+.display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px;
+  margin: 0 auto;
+  grid-gap: 40px;
+
+  height: 100%;
+  width: 1080px;
+}
+
+.display-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.display-label-name {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.display-label-collection {
+  opacity: 0.5;
+  margin-top: 8px;
+}
+
+.display-label-description {
+  margin-top: 20px;
+  line-height: 1.4;
+  opacity: 0.5;
+  white-space: pre-wrap;
+}
+
+.display-label-group {
+  margin-top: 20px;
+}
+
+.display-label-group-title {
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+.display-label-group-value {
+  margin-top: 4px;
+}

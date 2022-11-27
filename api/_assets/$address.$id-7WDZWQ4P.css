@@ -1,0 +1,8 @@
+.showcase {
+  max-height: min(768px, 50vh);
+  max-width: 768px;
+}
+
+.nft-image {
+  vertical-align: top;
+}

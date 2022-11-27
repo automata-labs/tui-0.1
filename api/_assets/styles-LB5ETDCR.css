@@ -1,0 +1,25 @@
+html {
+  --background-color: white;
+  --color: black;
+
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+html.dark {
+  --background-color: black;
+  --color: white;
+}
+
+html.monokai {
+  --background-color: black;
+  --color: white;
+}
+
+.dark-component {
+  color: white;
+}
+
+.light-component {
+  color: black;
+}

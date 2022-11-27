@@ -1,0 +1,31 @@
+/**
+ * Themes
+ */
+
+ :root {
+    --background-color: black;
+    --color: white;
+    --color-scheme: dark;
+    --button-border-color: rgba(255, 255, 255, 0.2);
+    --button-background-color-hover: rgba(255, 255, 255, 0.125);
+  }
+  
+  html {
+    color-scheme: var(--color-scheme);
+    background-color: var(--background-color);
+    color: var(--color);
+  }
+  
+  html.light {
+    --background-color: white;
+    --color: black;
+    --color-scheme: light;
+    --button-border-color: rgba(0, 0, 0, 0.2);
+    --button-background-color-hover: rgba(9, 9, 9, 0.125);
+  }
+  
+  html.monokai {
+    --background-color: #2c292d;
+    --color: #78dce8;
+    --color-scheme: dark;
+  }

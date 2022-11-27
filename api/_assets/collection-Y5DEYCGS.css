@@ -1,0 +1,11 @@
+.collection-header {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
+}
+
+.collection-image {
+  max-height: 100px;
+  max-width: 100px;
+  vertical-align: top;
+}

@@ -1,0 +1,125 @@
+/**
+ * Axiom
+ */
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+
+  color: var(--color);
+  font-family: 'ABC Diatype Mono Unlicensed Trial', 'SF Mono', -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 12px;
+  font-feature-settings: 'zero' on, 'calt' off;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+*, *:focus {
+  outline: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/**
+ * Fundamentals
+ */
+
+.button {
+  background: transparent;
+  border: 1px solid var(--button-border-color);
+  border-radius: 2px;
+  padding: 4px 8px;
+
+  font-family: 'ABC Diatype Mono Unlicensed Trial', 'SF Mono', -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 12px;
+  font-feature-settings: 'zero' on, 'calt' off;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--button-background-color-hover);
+}
+
+.button:focus {
+  border-color: var(--button-border-color-focus);
+}
+
+.button:active {
+  border-color: var(--button-border-color-active);
+}
+
+.input {
+  background: transparent;
+  border: 1px solid var(--button-border-color);
+  border-radius: 2px;
+  padding: 4px 8px;
+
+  font-family: 'ABC Diatype Mono Unlicensed Trial', 'SF Mono', -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+    Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 12px;
+  font-feature-settings: 'zero' on, 'calt' off;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.input:focus {
+  border-color: rgba(255, 255, 255, 0.75);
+}
+
+/**
+ * Shared components
+ */
+
+.root-content {
+  padding-top: 40px;
+}
+
+.navigation-bar {
+  background-color: inherit;
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 6px 10px;
+
+  border-bottom: 1px solid var(--button-border-color);
+}
+
+.navigation-bar-inner {
+  display: flex;
+  align-items: center;
+}
+
+.navigation-bar-middleware {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation-bar-search {
+  max-width: 500px;
+  flex: 1;
+}

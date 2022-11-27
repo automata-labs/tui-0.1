@@ -1,0 +1,16 @@
+.display {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px;
+
+  height: 100%;
+  width: 1080px;
+}
+
+.nft-image {
+  vertical-align: top;
+}
