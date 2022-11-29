@@ -1,6 +1,5 @@
 import type { MediaPreset } from '@center-inc/react';
 import { useCenterContext } from '@center-inc/react';
-import { defer } from '@remix-run/node';
 import contentTypeParser from 'content-type-parser';
 import { useState } from 'react';
 import { useQuery } from 'react-query';

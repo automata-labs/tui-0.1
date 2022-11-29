@@ -13,6 +13,7 @@ import { Providers } from '~/providers';
 import { getThemeSession } from './servers/theme.server';
 import global from '~/styles/global.css';
 import reset from '~/styles/reset.css';
+import shared from '~/styles/shared.css';
 import themes from '~/styles/themes.css';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
@@ -37,6 +38,7 @@ export function links() {
   return [
     { rel: 'stylesheet', href: reset },
     { rel: 'stylesheet', href: global },
+    { rel: 'stylesheet', href: shared },
     { rel: 'stylesheet', href: themes },
   ];
 }

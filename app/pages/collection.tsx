@@ -61,10 +61,10 @@ export default function Page() {
     getNextPageParam: (lastPage) => {
       return lastPage?.continuation;
     },
-  });
+  }) as any;
 
   const nfts = nftData?.pages?.reduce(
-    (state: any, current: any) => state.concat(current.tokens),
+    (state: any, current: any) => state.concat(current?.tokens),
     []
   );
 
@@ -102,7 +102,7 @@ export default function Page() {
       {!error ? (
         <div className="nft-grid pad">
           {nfts?.map((nft: any, i: number) => (
-            <NFT key={i} nft={nft?.token} />
+            <NFT key={i} nft={nft?.token} market={nft?.market} />
           ))}
 
           {(isLoading || isFetchingNextPage) &&
