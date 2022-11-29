@@ -23,7 +23,12 @@ export function Render({ address, id, preset }: RenderProps) {
       network: 'ethereum-mainnet',
     });
   };
-  const { data } = useQuery(`/nft/${address}/${id}:${preset}`, fetcher, { staleTime: Infinity });
+  const { data } = useQuery(`/nft/${address}/${id}:${preset}`, fetcher, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  });
   const [loaded, setLoaded] = useState(false);
 
   const parsed = contentTypeParser(data?.contentType);
