@@ -50,7 +50,7 @@
 }
 
 .navigation-bar-search {
-  max-width: 500px;
+  max-width: 568px;
   flex: 1;
 }
 
@@ -60,10 +60,12 @@
 }
 
 .theme-button {
-  display: flex;
-  flex-wrap: wrap;
-  width: 26px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   padding: 4px;
+  aspect-ratio: 1;
+  width: 34px;
 }
 
 .tabs {
