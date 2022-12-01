@@ -51,8 +51,6 @@ export default function Page() {
 
   const height = measurement ? measurement.height : 0;
 
-  console.log(height);
-
   return (
     <main className="page">
       <div className="display">

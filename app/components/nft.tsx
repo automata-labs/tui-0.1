@@ -56,7 +56,12 @@ export default function NFT({ nft, market }: NFTProps) {
   const address = nft?.address ?? nft?.contract;
   const id = nft?.id ?? nft?.tokenId;
 
+  let floorPrice;
   let lastSale;
+
+  if (market?.floorAsk?.price?.amount?.native) {
+    floorPrice = market?.floorAsk?.price?.amount?.native;
+  }
 
   if (nft?.lastBuy?.value) {
     lastSale = nft?.lastBuy?.value;
@@ -79,12 +84,14 @@ export default function NFT({ nft, market }: NFTProps) {
           <div className="nft-collection-name">{nft?.collection?.name}</div>
         </div>
         <div className="nft-price">
-          <div className="nft-price-floor">
-            <div className="nft-price-title">Price</div>
-            <div className="nft-price-value">
-              Ξ{market.floorAsk.price.amount.native}
+          {floorPrice && (
+            <div className="nft-price-floor">
+              <div className="nft-price-title">Price</div>
+              <div className="nft-price-value">
+                Ξ{market.floorAsk.price.amount.native}
+              </div>
             </div>
-          </div>
+          )}
           {lastSale && (
             <div className="nft-price-last">
               <div className="nft-price-title">Last Sale</div>
