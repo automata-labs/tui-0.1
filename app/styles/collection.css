@@ -13,6 +13,7 @@
   overflow: hidden;
   flex-grow: 1;
   flex-shrink: 0;
+  aspect-ratio: 1;
 
   max-height: 100px;
   max-width: 100px;
@@ -32,10 +33,31 @@
   display: flex;
   flex-direction: column;
   grid-gap: 4px;
-
-  margin-bottom: 16px;
 }
 
 .collection-core-address {
   opacity: 0.5;
+}
+
+.collection-info {
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 20px 40px;
+
+  margin: 12px 0 20px 0;
+}
+
+.collection-info-group {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 6px;
+}
+
+.collection-info-group-key {
+  opacity: 0.5;
+  font-size: 11px;
+}
+
+.collection-info-group-value {
+  font-size: 16px;
 }

@@ -21,6 +21,14 @@ export const loader: LoaderFunction = async ({ params }) => {
         name
         image
         banner
+        floorAsk
+        topBid
+        volume {
+          allTime
+        }
+        tokenCount
+        ownerCount
+        onSaleCount
       }
     }
   `;
@@ -86,6 +94,65 @@ export default function Page() {
                   <div className="collection-core">
                     <div>{data?.collection?.name}</div>
                     <div className="collection-core-address">{address}</div>
+                  </div>
+
+                  <div className="collection-info">
+                    <div className="collection-info-group">
+                      <div className="collection-info-group-key">
+                        FLOOR PRICE
+                      </div>
+                      <div className="collection-info-group-value">
+                        Ξ{data?.collection?.floorAsk}
+                      </div>
+                    </div>
+                    <div className="collection-info-group">
+                      <div className="collection-info-group-key">TOP BID</div>
+                      <div className="collection-info-group-value">
+                        {data?.collection?.topBid
+                          ? `Ξ${data?.collection?.topBid}`
+                          : '—'}
+                      </div>
+                    </div>
+                    <div className="collection-info-group">
+                      <div className="collection-info-group-key">
+                        TOTAL VOLUME
+                      </div>
+                      <div className="collection-info-group-value">
+                        {data?.collection?.volume?.allTime
+                          ? `Ξ${data?.collection?.volume?.allTime}`
+                          : '—'}
+                      </div>
+                    </div>
+                    <div className="collection-info-group">
+                      <div className="collection-info-group-key">
+                        TOTAL LISTED
+                      </div>
+                      <div className="collection-info-group-value">
+                        {data?.collection?.onSaleCount
+                          ? data?.collection?.onSaleCount
+                          : '—'}
+                      </div>
+                    </div>
+                    <div className="collection-info-group">
+                      <div className="collection-info-group-key">
+                        TOTAL SUPPLY
+                      </div>
+                      <div className="collection-info-group-value">
+                        {data?.collection?.tokenCount
+                          ? data?.collection?.tokenCount
+                          : '—'}
+                      </div>
+                    </div>
+                    <div className="collection-info-group">
+                      <div className="collection-info-group-key">
+                        TOTAL HOLDERS
+                      </div>
+                      <div className="collection-info-group-value">
+                        {data?.collection?.ownerCount
+                          ? data?.collection?.ownerCount
+                          : '—'}
+                      </div>
+                    </div>
                   </div>
 
                   <Tabs>
