@@ -47,6 +47,10 @@ a {
  * Fundamentals
  */
 
+/**
+ * Button
+ */
+
 .button {
   background: transparent;
   border: 1px solid var(--button-border-color);
@@ -77,27 +81,30 @@ a {
   border-color: var(--button-border-color-active);
 }
 
-.text-button {
+.button.button--text {
   background: transparent;
   border: 0;
   padding: 0;
   opacity: 0.5;
 
-  font-family: 'ABC Diatype Mono Unlicensed Trial', 'SF Mono', -apple-system,
-    BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
-    Droid Sans, Helvetica Neue, sans-serif;
   font-size: 11px;
-  font-feature-settings: 'zero' on, 'calt' off;
-  text-rendering: geometricPrecision;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  cursor: pointer;
 }
 
-.text-button:hover {
+.button.button--text:hover {
   opacity: 1;
 }
+
+.button.button--filled {
+  background-color: var(--standard-fill-color);
+}
+
+.button.button--filled:hover {
+  background-color: var(--standard-filled-fill-color);
+}
+
+/**
+ * Input
+ */
 
 .input {
   background: transparent;
@@ -117,4 +124,58 @@ a {
 
 .input:focus {
   border-color: var(--input-border-color-focus);
+}
+
+.input--empty {
+  border: 0;
+  border-radius: 0;
+}
+
+/**
+ * Modal
+ */
+
+.modal-content {
+  box-shadow: 0px 4px 32px 32px rgba(0, 0, 0, 0.5);
+}
+
+.modal-body {
+  border-radius: 2px;
+  padding: 20px;
+
+  backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
+  background-color: rgba(0, 0, 0, 0.65);
+  /* background-color: rgba(29, 30, 43, 0.498); */
+}
+
+/**
+ * Launcher
+ */
+
+.launcher {
+  background-color: rgba(0, 0, 0, 1);
+  backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
+  
+  max-width: 640px;
+}
+
+.launcher-breadcrumbs {
+  display: flex;
+  padding: 16px 16px 0 16px;
+}
+
+.launcher-crumb {
+  background-color: var(--standard-fill-color);
+  border-radius: 2px;
+  color: var(--color-grey1);
+  font-size: 10px;
+  padding: 2px 4px;
+}
+
+.launcher-search {
+  border: 0;
+  background-color: transparent;
+
+  padding: 16px;
+  width: 100%;
 }

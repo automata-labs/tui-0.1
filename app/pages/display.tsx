@@ -87,7 +87,7 @@ export default function Page() {
             )}
             {height >= 143 && (
               <button
-                className="text-button display-label-read-more-button"
+                className="button button--text display-label-read-more-button"
                 onClick={() => setReadMore(!readMore)}
               >
                 {!readMore ? 'READ MORE' : 'SHOW LESS'}

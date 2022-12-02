@@ -1,7 +1,7 @@
 import { defer } from '@remix-run/node';
 import { Await, useLoaderData, useParams } from '@remix-run/react';
 import request, { gql } from 'graphql-request';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 import type { LoaderFunction } from '@remix-run/node';
 import { Suspense } from 'react';
 
@@ -9,6 +9,10 @@ import NFT from '~/components/nft';
 import Spinner from '~/components/spinner';
 import { Tab, Tabs } from '~/components/tabs';
 import stylesheet from '~/styles/collection.css';
+import Filter from '~/components/filter';
+import { useLauncher } from '~/contexts/launcher';
+import Breadcrumb from '~/components/breadcrumb';
+import Image from '~/components/image';
 
 const nftsPerPage = 30;
 
@@ -43,6 +47,15 @@ export function links() {
 }
 
 export default function Page() {
+  const { address } = useParams() as any;
+  const { setBreadcrumbs } = useLauncher() as any;
+
+  const attributesFetcher = async () => {
+    return fetch(`https://api.reservoir.tools/collections/${address}/attributes/all/v2`, {
+      headers: { 'x-api-key': 'keya3b4ede6985c6e4270561c6a' },
+    }).then((res) => res.json())
+  };
+
   const fetcher = (address: string) => {
     return ({ pageParam }: any) => {
       const url = pageParam
@@ -55,7 +68,6 @@ export default function Page() {
     };
   };
 
-  const { address } = useParams() as any;
   const { data } = useLoaderData();
   const {
     data: nftData,
@@ -70,6 +82,12 @@ export default function Page() {
       return lastPage?.continuation;
     },
   }) as any;
+  const { data: attributesData } = useQuery(`/nft/${address}:attributes`, attributesFetcher, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  });
 
   const nfts = nftData?.pages?.reduce(
     (state: any, current: any) => state.concat(current?.tokens),
@@ -83,9 +101,10 @@ export default function Page() {
           {(data) => {
             return (
               <>
+                <Breadcrumb data={[{ text: data?.collection?.name }]} />
                 <div className="collection-header pad">
                   <div className="collection-image-wrapper">
-                    <img
+                    <Image
                       className="collection-image"
                       src={data?.collection?.image}
                       alt={data?.collection?.name}
@@ -167,20 +186,25 @@ export default function Page() {
       </Suspense>
 
       {!error ? (
-        <div className="nft-grid pad">
-          {nfts?.map((nft: any, i: number) => (
-            <NFT key={i} nft={nft?.token} market={nft?.market} />
-          ))}
+        <>
+          <div className="collection-search pad">
+            <Filter />
+          </div>
+          <div className="nft-grid pad">
+            {nfts?.map((nft: any, i: number) => (
+              <NFT key={i} nft={nft?.token} market={nft?.market} />
+            ))}
 
-          {(isLoading || isFetchingNextPage) &&
-            Array(nftsPerPage)
-              .fill(0)
-              .map((_, i) => (
-                <div className="nft" key={`${Math.random()}:${i}`}>
-                  <Spinner />
-                </div>
-              ))}
-        </div>
+            {(isLoading || isFetchingNextPage) &&
+              Array(nftsPerPage)
+                .fill(0)
+                .map((_, i) => (
+                  <div className="nft" key={`${Math.random()}:${i}`}>
+                    <Spinner kind="line" />
+                  </div>
+                ))}
+          </div>
+        </>
       ) : (
         <div>error!</div>
       )}

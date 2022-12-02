@@ -12,12 +12,14 @@ import { ThemeProvider, useTheme } from '~/contexts/theme';
 import { Providers } from '~/providers';
 import { getThemeSession } from './servers/theme.server';
 import global from '~/styles/global.css';
+import modal from '~/styles/modal.css';
 import reset from '~/styles/reset.css';
 import shared from '~/styles/shared.css';
 import themes from '~/styles/themes.css';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import type { Theme } from '~/contexts/theme';
+import Launcher from './components/launcher';
 
 export type LoaderData = {
   theme: Theme | null;
@@ -40,6 +42,11 @@ export function links() {
     { rel: 'stylesheet', href: global },
     { rel: 'stylesheet', href: shared },
     { rel: 'stylesheet', href: themes },
+    { rel: 'stylesheet', href: modal },
+    // {
+    //   rel: 'stylesheet',
+    //   href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css',
+    // },
   ];
 }
 
@@ -69,6 +76,7 @@ export function App({ env }: any) {
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
+          <Launcher />
         </Providers>
       </body>
     </html>

@@ -35,7 +35,7 @@ export function Render({ address, id, preset }: RenderProps) {
 
   return (
     <>
-      {!loaded && <Spinner />}
+      {!loaded && <Spinner kind="line" />}
       {type === 'image' && (
         <img
           className="nft-image"

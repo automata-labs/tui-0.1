@@ -5,10 +5,13 @@
  :root {
     --background-color: black;
     --color: rgba(255, 255, 255, 0.88);
+    --color-grey1: rgba(255, 255, 255, 0.5);
     --color-scheme: dark;
 
     --standard-border-color: rgba(255, 255, 255, 0.2);
     --standard-fill-color: rgba(255, 255, 255, 0.075);
+    --standard-fill-color--dark: rgba(255, 255, 255, 0.115);
+    --standard-filled-fill-color: rgba(255, 255, 255, 0.2);
 
     --button-border-color: var(--standard-border-color);
     --button-border-color-focus: rgba(255, 255, 255, 0.4);
@@ -21,6 +24,9 @@
     --navigation-bar-background-color: black;
 
     --nft-background-color: rgb(255 255 255 / 12.5%);
+
+    --modal-backdrop: rgba(0, 0, 0, 0.8);
+    --modal-background: #131313;
   }
   
   html {
