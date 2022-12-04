@@ -132,6 +132,23 @@ a {
 }
 
 /**
+ * Image
+ */
+
+.img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.img--fallback {
+  max-height: 100%;
+  max-width: 100%;
+
+  padding: 2px;
+  opacity: 0.75;
+}
+
+/**
  * Modal
  */
 

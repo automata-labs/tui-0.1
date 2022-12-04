@@ -4,6 +4,7 @@ import { defer } from '@remix-run/node';
 import { Await, useLoaderData, useParams } from '@remix-run/react';
 import { Suspense, useState } from 'react';
 
+import Image from '~/components/image';
 import { Render } from '~/components/render';
 import stylesheet from '~/styles/display.css';
 
@@ -52,7 +53,9 @@ export default function Page() {
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
                         }}
-                      />
+                      >
+                        <Image className="img--fallback" />
+                      </div>
                       <div className="display-label-collection-name">
                         {data?.collection?.name}
                       </div>
@@ -102,7 +105,7 @@ export default function Page() {
 
                     <div className="divider divider--display"></div>
 
-                    <div className="display-label-attributes">
+                    {data?.attributes?.length > 0 && <div className="display-label-attributes">
                       <div className="display-label-attributes-heading">
                         ATTRIBUTES
                       </div>
@@ -123,7 +126,7 @@ export default function Page() {
                           </div>
                         </div>
                       ))}
-                    </div>
+                    </div>}
                   </div>
                 </>
               );

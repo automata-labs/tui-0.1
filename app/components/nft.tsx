@@ -19,7 +19,11 @@ export default function NFT({ nft, market }: any) {
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
-          ></div>
+          >
+            {!nft?.collection?.image && (
+              <Image className="img--fallback" />
+            )}
+          </div>
           <div className="nft-collection-name">{nft?.collection?.name}</div>
         </div>
         <div className="nft-price">
