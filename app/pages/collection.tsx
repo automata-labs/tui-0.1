@@ -17,28 +17,10 @@ import Image from '~/components/image';
 const nftsPerPage = 30;
 
 export const loader: LoaderFunction = async ({ params }) => {
-  const variables = { address: params.address };
-  const query = gql`
-    query Collection($address: String!) {
-      collection(address: $address) {
-        address
-        name
-        image
-        banner
-        floorAsk
-        topBid
-        volume {
-          allTime
-        }
-        tokenCount
-        ownerCount
-        onSaleCount
-      }
-    }
-  `;
-
   return defer({
-    data: request('http://localhost:4001/graphql', query, variables),
+    data: fetch(
+      `https://api-nijynot.vercel.app/api/collection/info?id=${params.address}`
+    ).then((res) => res.json()),
   });
 };
 
@@ -50,17 +32,17 @@ export default function Page() {
   const { address } = useParams() as any;
   const { setBreadcrumbs } = useLauncher() as any;
 
-  const attributesFetcher = async () => {
-    return fetch(`https://api.reservoir.tools/collections/${address}/attributes/all/v2`, {
-      headers: { 'x-api-key': 'keya3b4ede6985c6e4270561c6a' },
-    }).then((res) => res.json())
-  };
+  // const attributesFetcher = async () => {
+  //   return fetch(`https://api.reservoir.tools/collections/${address}/attributes/all/v2`, {
+  //     headers: { 'x-api-key': 'keya3b4ede6985c6e4270561c6a' },
+  //   }).then((res) => res.json())
+  // };
 
   const fetcher = (address: string) => {
     return ({ pageParam }: any) => {
       const url = pageParam
-        ? `https://api.reservoir.tools/tokens/v5?collection=${address}&sortBy=floorAskPrice&sortDirection=asc&limit=${nftsPerPage}&continuation=${pageParam}`
-        : `https://api.reservoir.tools/tokens/v5?collection=${address}&sortBy=floorAskPrice&sortDirection=asc&limit=${nftsPerPage}`;
+        ? `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&cursor=${encodeURIComponent(pageParam)}`
+        : `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}`;
 
       return fetch(url, {
         headers: { 'x-api-key': 'keya3b4ede6985c6e4270561c6a' },
@@ -79,20 +61,24 @@ export default function Page() {
   } = useInfiniteQuery(`/nft/${address}`, fetcher(address), {
     staleTime: Infinity,
     getNextPageParam: (lastPage) => {
-      return lastPage?.continuation;
+      return lastPage?.cursor;
     },
   }) as any;
-  const { data: attributesData } = useQuery(`/nft/${address}:attributes`, attributesFetcher, {
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-  });
+  // const { data: attributesData } = useQuery(`/nft/${address}:attributes`, attributesFetcher, {
+  //   staleTime: Infinity,
+  //   refetchOnWindowFocus: false,
+  //   refetchOnMount: false,
+  //   refetchOnReconnect: false,
+  // });
 
+  
   const nfts = nftData?.pages?.reduce(
     (state: any, current: any) => state.concat(current?.tokens),
     []
   );
+
+  console.log(nftData);
+  console.log(nfts);
 
   return (
     <main className="page">
@@ -101,17 +87,17 @@ export default function Page() {
           {(data) => {
             return (
               <>
-                <Breadcrumb data={[{ text: data?.collection?.name }]} />
+                <Breadcrumb data={[{ text: data?.name }]} />
                 <div className="collection-header pad">
                   <div className="collection-image-wrapper">
                     <Image
                       className="collection-image"
-                      src={data?.collection?.image}
-                      alt={data?.collection?.name}
+                      src={data?.image}
+                      alt={data?.name}
                     />
                   </div>
                   <div className="collection-core">
-                    <div>{data?.collection?.name}</div>
+                    <div>{data?.name}</div>
                     <div className="collection-core-address">{address}</div>
                   </div>
 
@@ -121,14 +107,14 @@ export default function Page() {
                         FLOOR PRICE
                       </div>
                       <div className="collection-info-group-value">
-                        Ξ{data?.collection?.floorAsk}
+                        Ξ{data?.floor?.price?.amount?.native}
                       </div>
                     </div>
                     <div className="collection-info-group">
                       <div className="collection-info-group-key">TOP BID</div>
                       <div className="collection-info-group-value">
-                        {data?.collection?.topBid
-                          ? `Ξ${data?.collection?.topBid}`
+                        {data?.topBid?.price?.amount?.native
+                          ? `Ξ${data?.topBid?.price?.amount?.native}`
                           : '—'}
                       </div>
                     </div>
@@ -137,8 +123,8 @@ export default function Page() {
                         TOTAL VOLUME
                       </div>
                       <div className="collection-info-group-value">
-                        {data?.collection?.volume?.allTime
-                          ? `Ξ${data?.collection?.volume?.allTime}`
+                        {data?.volume?.allTime
+                          ? `Ξ${data?.volume?.allTime}`
                           : '—'}
                       </div>
                     </div>
@@ -147,9 +133,7 @@ export default function Page() {
                         TOTAL LISTED
                       </div>
                       <div className="collection-info-group-value">
-                        {data?.collection?.onSaleCount
-                          ? data?.collection?.onSaleCount
-                          : '—'}
+                        {data?.listed ? data?.listed : '—'}
                       </div>
                     </div>
                     <div className="collection-info-group">
@@ -157,9 +141,7 @@ export default function Page() {
                         TOTAL SUPPLY
                       </div>
                       <div className="collection-info-group-value">
-                        {data?.collection?.tokenCount
-                          ? data?.collection?.tokenCount
-                          : '—'}
+                        {data?.supply ? data?.supply : '—'}
                       </div>
                     </div>
                     <div className="collection-info-group">
@@ -167,9 +149,7 @@ export default function Page() {
                         TOTAL HOLDERS
                       </div>
                       <div className="collection-info-group-value">
-                        {data?.collection?.ownerCount
-                          ? data?.collection?.ownerCount
-                          : '—'}
+                        {data?.holders ? data?.holders : '—'}
                       </div>
                     </div>
                   </div>
@@ -192,7 +172,7 @@ export default function Page() {
           </div>
           <div className="nft-grid pad">
             {nfts?.map((nft: any, i: number) => (
-              <NFT key={i} nft={nft?.token} market={nft?.market} />
+              <NFT key={i} nft={nft} market={nft?.market} />
             ))}
 
             {(isLoading || isFetchingNextPage) &&

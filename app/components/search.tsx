@@ -31,8 +31,6 @@ function SearchResultSkeleton() {
 export default function Search({ search }: SearchProps) {
   const { data, isLoading, isFetching } = useNFTSearch(search);
 
-  console.log(data)
-
   return (
     <>
       <div className="search-results">
@@ -46,10 +44,10 @@ export default function Search({ search }: SearchProps) {
           ? Array(4)
               .fill(0)
               .map((_, i) => <SearchResultSkeleton key={i} />)
-          : data?.collections?.map((collection: any) => {
+          : data?.map((collection: any) => {
               const floor =
                 collection?.floorAskPrice ??
-                collection?.floorAsk?.price?.amount?.native;
+                collection?.floor?.price?.amount?.native;
               const volume = collection?.allTimeVolume ?? collection?.volume?.allTime;
 
               return (

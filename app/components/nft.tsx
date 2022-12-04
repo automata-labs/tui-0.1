@@ -1,75 +1,9 @@
 import { Link } from '@remix-run/react';
 import { Render } from './render';
 
-type NFTProps = {
-  nft: {
-    address: string;
-    contract: string;
-    id: string;
-    tokenId: string;
-    name: string;
-    collection: {
-      name: string;
-      image: string;
-    };
-    lastBuy: {
-      value: string;
-      timestamp: number;
-    };
-    lastSell: {
-      value: string;
-      timestamp: number;
-    };
-    floor: {
-      priceEth: string;
-      source: {
-        id: string;
-        domain: string;
-        name: string;
-        icon: string;
-        url: string;
-      };
-    };
-  };
-  market: {
-    floorAsk: {
-      price: {
-        amount: {
-          decimal: number;
-          native: number;
-          raw: number;
-          usd: number;
-        };
-      };
-      source: {
-        domain: string;
-        icon: string;
-        id: string;
-        name: string;
-        url: string;
-      };
-    };
-  };
-};
-
-export default function NFT({ nft, market }: NFTProps) {
+export default function NFT({ nft, market }: any) {
   const address = nft?.address ?? nft?.contract;
   const id = nft?.id ?? nft?.tokenId;
-
-  let floorPrice;
-  let lastSale;
-
-  if (market?.floorAsk?.price?.amount?.native) {
-    floorPrice = market?.floorAsk?.price?.amount?.native;
-  }
-
-  if (nft?.lastBuy?.value) {
-    lastSale = nft?.lastBuy?.value;
-  }
-
-  if (nft?.lastSell?.value) {
-    lastSale = nft?.lastBuy?.value;
-  }
 
   return (
     <Link className="nft" to={`/nft/${address}/${id}`}>
@@ -84,18 +18,18 @@ export default function NFT({ nft, market }: NFTProps) {
           <div className="nft-collection-name">{nft?.collection?.name}</div>
         </div>
         <div className="nft-price">
-          {floorPrice && (
+          {nft?.floor?.price?.amount?.native && (
             <div className="nft-price-floor">
               <div className="nft-price-title">Price</div>
               <div className="nft-price-value">
-                Ξ{market.floorAsk.price.amount.native}
+                Ξ{nft?.floor?.price?.amount?.native}
               </div>
             </div>
           )}
-          {lastSale && (
+          {nft?.last?.value && (
             <div className="nft-price-last">
               <div className="nft-price-title">Last Sale</div>
-              <div className="nft-price-value">Ξ{lastSale}</div>
+              <div className="nft-price-value">Ξ{nft?.last?.value}</div>
             </div>
           )}
         </div>
