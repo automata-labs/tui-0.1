@@ -45,13 +45,14 @@ export default function Page() {
                       {data?.name ?? `#${data?.id}`}
                     </div>
                     <div className="display-label-collection">
-                      <div className="display-label-collection-icon">
-                        <img
-                          className="display-label-collection-image"
-                          src={data?.collection?.image}
-                          alt="ok"
-                        />
-                      </div>
+                      <div
+                        className="display-label-collection-icon"
+                        style={{
+                          background: `url(${data?.collection?.image})`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                        }}
+                      />
                       <div className="display-label-collection-name">
                         {data?.collection?.name}
                       </div>

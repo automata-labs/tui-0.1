@@ -12,11 +12,14 @@ export default function NFT({ nft, market }: any) {
       <div className="nft-info">
         <div className="nft-name">{nft?.name ? nft?.name : `#${id}`}</div>
         <div className="nft-collection">
-          <Image
-            className="nft-collection-image"
-            src={nft?.collection?.image}
-            alt={nft?.collection?.name}
-          />
+          <div
+            className="nft-collection-icon"
+            style={{
+              background: `url(${nft?.collection?.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
           <div className="nft-collection-name">{nft?.collection?.name}</div>
         </div>
         <div className="nft-price">

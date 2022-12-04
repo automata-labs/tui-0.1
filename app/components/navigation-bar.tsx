@@ -9,10 +9,17 @@ function Dropdown({ children }: any) {
 
 export function NavigationBar() {
   const [show, setShow] = useState(false);
+  const [value, setValue] = useState('');
   const [search, setSearch] = useDebouncedState('', 75, 0);
 
   const ref = useRef(null);
   useClickOutside(ref, () => setShow(false));
+
+  const hide = () => {
+    setShow(false);
+    setValue('');
+    setSearch('');
+  };
 
   return (
     <nav className="navigation-bar">
@@ -25,12 +32,16 @@ export function NavigationBar() {
             <input
               className="input input--empty navigation-bar-search-input"
               placeholder="Search tokens, collections, accounts and more..."
+              value={value}
               onFocus={() => setShow(true)}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setValue(e.target.value);
+                setSearch(e.target.value);
+              }}
             />
             {show && (
               <Dropdown>
-                <Search search={search} hide={() => setShow(false)} />
+                <Search search={search} hide={() => hide()} />
               </Dropdown>
             )}
           </div>
