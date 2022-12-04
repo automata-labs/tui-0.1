@@ -8,10 +8,12 @@ import { Render } from '~/components/render';
 import stylesheet from '~/styles/display.css';
 
 export const loader: LoaderFunction = async ({ params }) => {
+  const data = fetch(
+    `https://api-nijynot.vercel.app/api/nft?address=${params.address}&id=${params.id}`
+  ).then((res) => res.json());
+
   return defer({
-    data: fetch(
-      `https://api-nijynot.vercel.app/api/nft?address=${params.address}&id=${params.id}`
-    ).then((res) => res.json()),
+    data,
   });
 };
 

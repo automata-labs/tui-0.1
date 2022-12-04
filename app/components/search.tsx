@@ -6,6 +6,7 @@ import Image from './image';
 
 type SearchProps = {
   search: string;
+  hide: any;
 };
 
 function SearchResultSkeleton() {
@@ -28,7 +29,7 @@ function SearchResultSkeleton() {
   );
 }
 
-export default function Search({ search }: SearchProps) {
+export default function Search({ search, hide }: SearchProps) {
   const { data, isLoading, isFetching } = useNFTSearch(search);
 
   return (
@@ -52,7 +53,8 @@ export default function Search({ search }: SearchProps) {
 
               return (
                 <Link
-                  to={`/nft/${collection?.collectionId ?? collection?.id}`}
+                  to={`/collection/${collection?.collectionId ?? collection?.id}`}
+                  onClick={() => hide()}
                   className="search-result"
                   key={collection?.collectionId}
                 >

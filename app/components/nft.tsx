@@ -1,4 +1,6 @@
 import { Link } from '@remix-run/react';
+
+import Image from './image';
 import { Render } from './render';
 
 export default function NFT({ nft, market }: any) {
@@ -10,7 +12,7 @@ export default function NFT({ nft, market }: any) {
       <div className="nft-info">
         <div className="nft-name">{nft?.name ? nft?.name : `#${id}`}</div>
         <div className="nft-collection">
-          <img
+          <Image
             className="nft-collection-image"
             src={nft?.collection?.image}
             alt={nft?.collection?.name}

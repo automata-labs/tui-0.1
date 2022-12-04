@@ -10,7 +10,7 @@ module.exports = {
   routes: async (define) => {
     return define((route) => {
       route('/action/set-theme', 'actions/set-theme.tsx');
-      route('/nft/:address', 'pages/collection.tsx');
+      route('/collection/:address', 'pages/collection.tsx');
       route('/nft/:address/:id', 'pages/display.tsx');
       route('/spinners', 'pages/spinners.tsx');
     });

@@ -30,7 +30,7 @@ export function NavigationBar() {
             />
             {show && (
               <Dropdown>
-                <Search search={search} />
+                <Search search={search} hide={() => setShow(false)} />
               </Dropdown>
             )}
           </div>
