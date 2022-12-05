@@ -54,7 +54,7 @@ export default function Page() {
                           backgroundPosition: 'center',
                         }}
                       >
-                        <Image className="img--fallback" />
+                        {!data?.collection?.image && <Image className="img--fallback" />}
                       </div>
                       <div className="display-label-collection-name">
                         {data?.collection?.name}
@@ -105,28 +105,30 @@ export default function Page() {
 
                     <div className="divider divider--display"></div>
 
-                    {data?.attributes?.length > 0 && <div className="display-label-attributes">
-                      <div className="display-label-attributes-heading">
-                        ATTRIBUTES
-                      </div>
-
-                      {data?.attributes.map((attribute: any, i: number) => (
-                        <div key={i} className="display-label-attribute">
-                          <div className="display-label-attribute-key">
-                            {attribute?.key}
-                          </div>
-                          <div className="display-label-attribute-value">
-                            <div className="display-label-attribute-value-value">
-                              {attribute?.value}
-                            </div>
-
-                            <div className="display-label-attribute-count">
-                              {attribute?.tokenCount}
-                            </div>
-                          </div>
+                    {data?.attributes?.length > 0 && (
+                      <div className="display-label-attributes">
+                        <div className="display-label-attributes-heading">
+                          ATTRIBUTES
                         </div>
-                      ))}
-                    </div>}
+
+                        {data?.attributes.map((attribute: any, i: number) => (
+                          <div key={i} className="display-label-attribute">
+                            <div className="display-label-attribute-key">
+                              {attribute?.key}
+                            </div>
+                            <div className="display-label-attribute-value">
+                              <div className="display-label-attribute-value-value">
+                                {attribute?.value}
+                              </div>
+
+                              <div className="display-label-attribute-count">
+                                {attribute?.tokenCount}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </>
               );

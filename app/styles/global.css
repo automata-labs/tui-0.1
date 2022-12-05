@@ -102,6 +102,11 @@ a {
   background-color: var(--standard-filled-fill-color);
 }
 
+.button.button--fullscreen {
+  background-color: var(--standard-fill-color);
+  width: 100%;
+}
+
 /**
  * Input
  */

@@ -142,6 +142,10 @@
   width: 40px;
 }
 
+.search-result-image-wrapper--token {
+  border-radius: 50%;
+}
+
 .search-result-image {
   max-height: 100%;
   max-width: 100%;
@@ -156,6 +160,13 @@
 }
 
 .search-result-main-title {
+  display: flex;
+  align-items: baseline;
+}
+
+.search-result-main-title-ext {
+  margin-left: 6px;
+  opacity: 0.5;
 }
 
 .search-result-main-subtitle {
@@ -232,7 +243,7 @@
 
 .nft-info {
   display: flex;
-  grid-gap: 3px;
+  grid-gap: 4px;
   flex-direction: column;
   position: absolute;
   background: rgba(0, 0, 0, 0.9);
@@ -241,8 +252,6 @@
   bottom: 0;
   left: 0;
   padding: 12px;
-  text-align: right;
-  justify-content: flex-end;
   z-index: 100;
   font-size: 11px;
 
@@ -279,7 +288,6 @@
 
 .nft-collection {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
 }
 

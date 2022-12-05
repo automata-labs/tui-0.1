@@ -1,5 +1,7 @@
 import { useParams } from '@remix-run/react';
+import { useEffect } from 'react';
 import { useInfiniteQuery, useQuery } from 'react-query';
+import { useIntersectionObserver } from 'react-intersection-observer-hook';
 
 import NFT from '~/components/nft';
 import Spinner from '~/components/spinner';
@@ -15,40 +17,46 @@ export function links() {
 }
 
 export function fetchers(address: string) {
-  return [
-    () => {
-      return fetch(
-        `http://api-nijynot.vercel.app/api/collection/info?id=${address}`
-      ).then((res) => res.json())
-    },
-    ({ pageParam }: any) => {
-      const url = pageParam
-        ? `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&cursor=${encodeURIComponent(
-            pageParam
-          )}`
-        : `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}`;
-  
-      return fetch(url, {
-        headers: { 'x-api-key': 'keya3b4ede6985c6e4270561c6a' },
-      }).then((res) => res.json());
-    }
-  ];
+  const a = () => {
+    return fetch(
+      `http://api-nijynot.vercel.app/api/collection/info?id=${address}`
+    ).then((res) => res.json());
+  };
+
+  const b = ({ pageParam }: any) => {
+    const url = pageParam
+      ? `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&cursor=${encodeURIComponent(
+          pageParam
+        )}`
+      : `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}`;
+
+    return fetch(url, {
+      headers: { 'x-api-key': 'keya3b4ede6985c6e4270561c6a' },
+    }).then((res) => res.json());
+  };
+
+  return [a, b];
 }
 
 export default function Page() {
   const { address } = useParams() as any;
   const [fetcherInfo, fetcherNFTs] = useFetchers(fetchers(address)) as any;
 
-  const { data: dataInfo, isLoading: load0, isFetching: fetch0 } = useQuery(
-    `/collection/${address}`,
-    fetcherInfo,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-    }
-  ) as any;
+  const [ref, { entry }] = useIntersectionObserver();
+
+  console.log('asffsfs');
+  console.log(entry);
+
+  const {
+    data: dataInfo,
+    isLoading: load0,
+    isFetching: fetch0,
+  } = useQuery(`/collection/${address}`, fetcherInfo, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  }) as any;
   const {
     data: dataNFTs,
     error,
@@ -63,10 +71,11 @@ export default function Page() {
     },
   }) as any;
 
-  const nfts = dataNFTs?.pages?.reduce(
-    (state: any, current: any) => state.concat(current?.tokens),
-    []
-  );
+  useEffect(() => {
+    if (entry?.isIntersecting && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [entry?.isIntersecting, fetchNextPage, hasNextPage]);
 
   return (
     <main className="page">
@@ -105,7 +114,9 @@ export default function Page() {
               <div className="collection-info-group">
                 <div className="collection-info-group-key">TOTAL VOLUME</div>
                 <div className="collection-info-group-value">
-                  {dataInfo?.volume?.allTime ? `Ξ${dataInfo?.volume?.allTime}` : '—'}
+                  {dataInfo?.volume?.allTime
+                    ? `Ξ${dataInfo?.volume?.allTime}`
+                    : '—'}
                 </div>
               </div>
               <div className="collection-info-group">
@@ -141,27 +152,56 @@ export default function Page() {
           <div className="collection-search pad">
             <Filter />
           </div>
-          <div className="nft-grid pad">
-            {nfts?.map((nft: any, i: number) => (
-              <NFT key={i} nft={nft} market={nft?.market} />
-            ))}
+          <div>
+            {dataNFTs?.pages?.map((page: any, i: number) => {
+              return (
+                <div key={i} className="nft-grid pad">
+                  {page?.tokens?.map((nft: any, j: number) => {
+                    const target =
+                      dataNFTs?.pages.length === i + 1 &&
+                      page?.tokens.length === j + 1;
 
-            {(load1 || fetch1) &&
-              Array(30)
-                .fill(0)
-                .map((_, i) => (
-                  <div className="nft" key={`${Math.random()}:${i}`}>
-                    <Spinner kind="line" />
-                  </div>
-                ))}
+                    return (
+                      <NFT
+                        innerRef={target ? ref : undefined}
+                        key={`${i}:${j}:${nft.id}`}
+                        nft={nft}
+                        market={nft?.market}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
+
+            {(load1 || fetch1) && (
+              <div className="nft-grid pad">
+                {Array(30)
+                  .fill(0)
+                  .map((_, i) => {
+                    return (
+                      <div className="nft" key={`${Math.random()}:${i}`}>
+                        <Spinner kind="line" />
+                      </div>
+                    );
+                  })}
+              </div>
+            )}
           </div>
         </>
       ) : (
-        <div>error!</div>
+        <div className="pad">Failed to load collection.</div>
       )}
 
       {hasNextPage && (
-        <button onClick={() => fetchNextPage()}>load more!</button>
+        <div className="pad collection-load-more-wrapper">
+          <button
+            onClick={() => fetchNextPage()}
+            className="button button--fullscreen"
+          >
+            Load more
+          </button>
+        </div>
       )}
     </main>
   );

@@ -3,13 +3,13 @@ import { Link } from '@remix-run/react';
 import Image from './image';
 import { Render } from './render';
 
-export default function NFT({ nft, market }: any) {
+export default function NFT({ innerRef, nft, market }: any) {
   const address = nft?.address ?? nft?.contract;
   const id = nft?.id ?? nft?.tokenId;
 
   return (
     <Link className="nft" to={`/nft/${address}/${id}`}>
-      <div className="nft-info">
+      <div ref={innerRef} className="nft-info">
         <div className="nft-name">{nft?.name ? nft?.name : `#${id}`}</div>
         <div className="nft-collection">
           <div
