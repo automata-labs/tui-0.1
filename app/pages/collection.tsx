@@ -44,9 +44,6 @@ export default function Page() {
 
   const [ref, { entry }] = useIntersectionObserver();
 
-  console.log('asffsfs');
-  console.log(entry);
-
   const {
     data: dataInfo,
     isLoading: load0,
