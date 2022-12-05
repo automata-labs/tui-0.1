@@ -146,21 +146,25 @@ export default function Page() {
 
       {!error ? (
         <>
-          <div className="collection-search pad">
-            <Filter />
+          <div className="collection-filters pad">
+            <Filter text="Price: Low to High" />
+            <Filter text="Traits" />
+            <Filter text="Platform" />
+            {dataInfo?.holders ? (
+              <div className="collection-filters-items-number">
+                {dataInfo?.holders} items
+              </div>
+            ) : (
+              <Spinner kind="line" />
+            )}
           </div>
           <div>
             {dataNFTs?.pages?.map((page: any, i: number) => {
               return (
                 <div key={i} className="nft-grid pad">
                   {page?.tokens?.map((nft: any, j: number) => {
-                    const target =
-                      dataNFTs?.pages.length === i + 1 &&
-                      page?.tokens.length === j + 1;
-
                     return (
                       <NFT
-                        innerRef={target ? ref : undefined}
                         key={`${i}:${j}:${nft.id}`}
                         nft={nft}
                         market={nft?.market}
@@ -171,7 +175,7 @@ export default function Page() {
               );
             })}
 
-            {(load1 || fetch1) && (
+            {load1 && (
               <div className="nft-grid pad">
                 {Array(30)
                   .fill(0)
@@ -184,21 +188,14 @@ export default function Page() {
                   })}
               </div>
             )}
+
+            <div ref={ref} className="collection-load-more-spinner">
+              {fetch1 && hasNextPage && <Spinner kind="simpleDotsScrolling" />}
+            </div>
           </div>
         </>
       ) : (
         <div className="pad">Failed to load collection.</div>
-      )}
-
-      {hasNextPage && (
-        <div className="pad collection-load-more-wrapper">
-          <button
-            onClick={() => fetchNextPage()}
-            className="button button--fullscreen"
-          >
-            Load more
-          </button>
-        </div>
       )}
     </main>
   );

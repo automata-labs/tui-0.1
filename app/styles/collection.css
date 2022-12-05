@@ -62,11 +62,26 @@
   font-size: 16px;
 }
 
-.collection-search {
+.collection-filters {
+  display: flex;
+  align-items: center;
+  grid-gap: 16px;
+
   margin-top: 16px;
 }
 
 .collection-load-more-wrapper {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.collection-filters-items-number {
+  opacity: 0.75;
+}
+
+.collection-load-more-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 128px;
 }

@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
 type FilterProps = {
-  attributes: any;
+  text: string;
 };
 
-export default function AttributesFilter() {
+export default function AttributesFilter({ text }: FilterProps) {
   return (
     <>
       <button
         // onClick={() => setShowModal(!showModal)}
         className="button button--filled attributes-filter"
       >
-        Traits
+        {text}
         <svg
           width="10"
           height="5"
