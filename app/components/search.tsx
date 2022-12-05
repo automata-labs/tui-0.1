@@ -173,8 +173,17 @@ export default function Search({ search, hide }: SearchProps) {
     isFetching: fetch1,
   } = useTokenSearch(search);
 
+  let blockRender;
   let tokensRender;
   let collectionRender;
+
+  if (isBlockQuery) {
+    if (blockData?.hash) {
+      blockRender = <SearchResultBlock block={blockData} />;
+    } else {
+      blockRender = <SearchResultBlockSkeleton search={search} />;
+    }
+  }
 
   if (load1 || fetch1) {
     tokensRender = Array(4)
@@ -207,12 +216,7 @@ export default function Search({ search, hide }: SearchProps) {
   return (
     <>
       <div className="search-results">
-        {isBlockQuery &&
-          (blockData?.hash ? (
-            <SearchResultBlock block={blockData} />
-          ) : (
-            <SearchResultBlockSkeleton search={search} />
-          ))}
+        {blockRender}
 
         {search ? (
           <div className="search-results-title">Tokens</div>
