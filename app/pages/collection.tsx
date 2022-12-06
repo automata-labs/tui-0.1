@@ -79,10 +79,10 @@ export default function Page() {
     if (dataInfo?.name) {
       setLauncher({
         breadcrumbs: [dataInfo?.name],
-        controls: [
-          { text: 'Sort by ...', control: 'sort' },
-          { text: 'Filter by traits', control: 'filter-traits' },
-          { text: 'Filter by platform', control: 'filter-platform' },
+        options: [
+          { icon: 'filter', text: 'Sort - Price: Low to High', control: 'sort' },
+          { icon: 'filter', text: 'Filter by "Traits"', control: 'filter-traits' },
+          { icon: 'filter', text: 'Filter by "Platform"', control: 'filter-platform' },
         ],
       });
     }
@@ -164,9 +164,9 @@ export default function Page() {
             <Filter text="Price: Low to High" />
             <Filter text="Traits" />
             <Filter text="Platform" />
-            {dataInfo?.holders ? (
+            {dataInfo?.supply ? (
               <div className="collection-filters-items-number">
-                {dataInfo?.holders} items
+                {dataInfo?.supply} items
               </div>
             ) : (
               <Spinner kind="line" />

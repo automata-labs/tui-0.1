@@ -11,7 +11,7 @@ type LauncherProviderProps = {
 export function LauncherProvider({ children }: LauncherProviderProps) {
   const [show, setShow] = useState(false);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [controls, setControls] = useState([]);
+  const [options, setOptions] = useState([]);
 
   const launch = () => {
     setShow(true);
@@ -22,6 +22,7 @@ export function LauncherProvider({ children }: LauncherProviderProps) {
   };
 
   const toggle = () => {
+    console.log('ok')
     if (show) {
       hide();
     } else {
@@ -29,24 +30,24 @@ export function LauncherProvider({ children }: LauncherProviderProps) {
     }
   };
 
-  const setLauncher = ({ breadcrumbs, controls }: any) => {
+  const setLauncher = ({ breadcrumbs, options }: any) => {
     setBreadcrumbs(breadcrumbs);
-    setControls(controls);
+    setOptions(options);
   };
 
   useMousetrap(['mod+k'], toggle);
 
   const contextValue = {
     setLauncher,
-    
+
     visible: show,
     launch,
     hide,
 
     breadcrumbs,
     setBreadcrumbs,
-    controls,
-    setControls,
+    options,
+    setOptions,
   };
 
   return (

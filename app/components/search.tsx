@@ -142,7 +142,6 @@ export default function Search() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [value, setValue] = useState('');
   const {
-    index,
     selected,
     setIndex,
     setSearch,
@@ -152,8 +151,6 @@ export default function Search() {
     loadingTokens,
     loadingCollections,
   } = useSearch() as any;
-
-  console.log(index, selected)
 
   const open = () => {
     setIsSearchOpen(true);
