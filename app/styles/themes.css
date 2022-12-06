@@ -5,6 +5,7 @@
  :root {
     --background-color: black;
     --color: rgba(255, 255, 255, 0.88);
+    --color-grey0: rgba(255, 255, 255, 0.75);
     --color-grey1: rgba(255, 255, 255, 0.5);
     --color-scheme: dark;
 

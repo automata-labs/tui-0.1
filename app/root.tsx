@@ -7,19 +7,21 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
-import { NavigationBar } from './components/navigation-bar';
-import { ThemeProvider, useTheme } from '~/contexts/theme';
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
+
 import { Providers } from '~/providers';
+import Launcher from './components/launcher';
+import { NavigationBar } from './components/navigation-bar';
+import { SearchProvider } from './contexts/search';
+import type { Theme } from '~/contexts/theme';
+import { ThemeProvider, useTheme } from '~/contexts/theme';
 import { getThemeSession } from './servers/theme.server';
 import global from '~/styles/global.css';
 import modal from '~/styles/modal.css';
 import reset from '~/styles/reset.css';
 import shared from '~/styles/shared.css';
 import themes from '~/styles/themes.css';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
-import { json } from '@remix-run/node';
-import type { Theme } from '~/contexts/theme';
-import Launcher from './components/launcher';
 
 export type LoaderData = {
   theme: Theme | null;
@@ -67,7 +69,9 @@ export function App({ env }: any) {
       </head>
       <body>
         <Providers env={env}>
-          <NavigationBar />
+          <SearchProvider>
+            <NavigationBar />
+          </SearchProvider>
 
           <div className="root-content">
             <Outlet />

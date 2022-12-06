@@ -3,23 +3,19 @@ import { Link } from '@remix-run/react';
 import { useRef, useState } from 'react';
 import Search from './search';
 
-function Dropdown({ children }: any) {
-  return <div className="navigation-bar-search-dropdown">{children}</div>;
-}
-
 export function NavigationBar() {
-  const [show, setShow] = useState(false);
-  const [value, setValue] = useState('');
-  const [search, setSearch] = useDebouncedState('', 75, 0);
+  // const [show, setShow] = useState(false);
+  // const [value, setValue] = useState('');
+  // const [search, setSearch] = useDebouncedState('', 75, 0);
 
-  const ref = useRef(null);
-  useClickOutside(ref, () => setShow(false));
+  // const ref = useRef(null);
+  // useClickOutside(ref, () => setShow(false));
 
-  const hide = () => {
-    setShow(false);
-    setValue('');
-    setSearch('');
-  };
+  // const hide = () => {
+  //   setShow(false);
+  //   setValue('');
+  //   setSearch('');
+  // };
 
   return (
     <nav className="navigation-bar">
@@ -28,23 +24,7 @@ export function NavigationBar() {
           <Link to="/">Telescope</Link>
         </div>
         <div className="navigation-bar-middleware">
-          <div ref={ref} className="navigation-bar-search">
-            <input
-              className="input input--empty navigation-bar-search-input"
-              placeholder="Search tokens, collections, accounts and more..."
-              value={value}
-              onFocus={() => setShow(true)}
-              onChange={(e) => {
-                setValue(e.target.value);
-                setSearch(e.target.value);
-              }}
-            />
-            {show && (
-              <Dropdown>
-                <Search search={search} hide={() => hide()} />
-              </Dropdown>
-            )}
-          </div>
+          <Search />
         </div>
         <div className="navigation-bar-right">
           <button className="button">{'>'}</button>

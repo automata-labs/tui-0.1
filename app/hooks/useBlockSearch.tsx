@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { useQuery } from 'react-query';
 
 export default function useBlockSearch(number: string) {
@@ -8,20 +9,24 @@ export default function useBlockSearch(number: string) {
     url = `https://api-nijynot.vercel.app/api/blockchain/block?number=${number}`;
   }
 
-  return [match, useQuery(
-    `search-blocks:${number}`,
-    () => {
-      if (url) {
-        return fetch(url).then((res) => res.json());
-      }
-
-      return undefined;
-    },
+  const { data, isLoading, isFetching } = useQuery(
     {
+      queryKey: `useBlockSearch:${number}`,
+      queryFn: () => {
+        return (url)
+         ? fetch(url).then((res) => res.json())
+         : undefined;
+      },
       staleTime: Infinity,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
     }
-  ) as any];
+  ) as any;
+
+  return {
+    match,
+    blocks: _.isEmpty(data) ? [] : [data],
+    loading: isLoading || isFetching,
+  };
 }

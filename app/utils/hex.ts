@@ -18,5 +18,9 @@ export function decimalify(value: string) {
 }
 
 export function hashid(value: string) {
+  if (!value) {
+    return '';
+  }
+
   return `${value.substring(0, 6)}...${value.substring(value.length - 4, value.length)}`;
 }

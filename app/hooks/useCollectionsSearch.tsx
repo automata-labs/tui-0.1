@@ -1,14 +1,14 @@
 import { useQuery } from 'react-query';
 
-export default function useTokenSearch(search: string) {
+export default function useCollectionsSearch(search: string) {
   let url = search
-    ? `https://api-nijynot.vercel.app/api/search/tokens?query=${encodeURIComponent(
+    ? `https://api-nijynot.vercel.app/api/search/nfts?query=${encodeURIComponent(
         search
       )}`
-    : `https://api-nijynot.vercel.app/api/trending/tokens`;
+    : `https://api-nijynot.vercel.app/api/trending/nfts`;
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `search-tokens:${search}`,
+    queryKey: `useCollectionsSearch:${search}`,
     queryFn: () => fetch(url).then((res) => res.json()),
     staleTime: Infinity,
     refetchOnWindowFocus: false,
@@ -17,7 +17,7 @@ export default function useTokenSearch(search: string) {
   }) as any;
 
   return {
-    tokens: data ?? [],
+    collections: data ?? [],
     loading: isLoading || isFetching,
   };
 }

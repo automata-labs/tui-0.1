@@ -9,8 +9,9 @@ import { Tab, Tabs } from '~/components/tabs';
 import stylesheet from '~/styles/collection.css';
 import Filter from '~/components/filter';
 import Image from '~/components/image';
-import CollectionHeader from '~/skeletons/collection-header';
 import useFetchers from '~/hooks/useFetchers';
+import CollectionHeader from '~/skeletons/collection-header';
+import { useLauncher } from '~/contexts/launcher';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
@@ -41,7 +42,7 @@ export function fetchers(address: string) {
 export default function Page() {
   const { address } = useParams() as any;
   const [fetcherInfo, fetcherNFTs] = useFetchers(fetchers(address)) as any;
-
+  const { setLauncher } = useLauncher() as any;
   const [ref, { entry }] = useIntersectionObserver();
 
   const {
@@ -73,6 +74,19 @@ export default function Page() {
       fetchNextPage();
     }
   }, [entry?.isIntersecting, fetchNextPage, hasNextPage]);
+
+  useEffect(() => {
+    if (dataInfo?.name) {
+      setLauncher({
+        breadcrumbs: [dataInfo?.name],
+        controls: [
+          { text: 'Sort by ...', control: 'sort' },
+          { text: 'Filter by traits', control: 'filter-traits' },
+          { text: 'Filter by platform', control: 'filter-platform' },
+        ],
+      });
+    }
+  }, [dataInfo?.name]);
 
   return (
     <main className="page">

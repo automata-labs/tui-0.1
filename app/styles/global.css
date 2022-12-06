@@ -201,3 +201,36 @@ a {
   padding: 16px;
   width: 100%;
 }
+
+.launcher-controls {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 6px 2px 6px;
+}
+
+.launcher-control {
+  display: flex;
+  align-items: center;
+  grid-gap: 16px;
+
+  color: var(--color-grey0);
+  border-radius: 2px;
+  padding: 12px 10px;
+  margin-bottom: 4px;
+
+  cursor: pointer;
+}
+
+.launcher-control:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.launcher-control:hover > .launcher-control-icon {
+  opacity: 0.7;
+}
+
+.launcher-control-icon {
+  fill: white;
+  opacity: 0.3;
+}

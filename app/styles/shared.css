@@ -124,6 +124,10 @@
   grid-gap: 10px;
 }
 
+.search-result.active {
+  background-color: var(--standard-fill-color);
+}
+
 .search-result:hover {
   background-color: var(--standard-fill-color--dark);
 }
@@ -142,7 +146,7 @@
   width: 40px;
 }
 
-.search-result-image-wrapper--token {
+.search-result-image-wrapper--round {
   border-radius: 50%;
 }
 
