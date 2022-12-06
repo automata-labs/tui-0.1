@@ -49,30 +49,30 @@ export function SearchProvider({ children }: SearchProviderProps) {
   };
 
   const getSelectedToIndex = (value: any) => {
-    if (!selected?.type) {
+    if (!value?.type) {
       return null;
     }
 
     const results = [...blocks, ...tokens, ...collections];
 
-    if (selected?.type === 'block') {
+    if (value?.type === 'block') {
       return results.findIndex(
         (element) =>
-          element.type === selected?.type && element.number === selected?.number
+          element.type === value?.type && element.number === value?.number
       );
     }
 
-    if (selected?.type === 'token') {
+    if (value?.type === 'token') {
       return results.findIndex(
         (element) =>
-          element.type === selected?.type && element.address === selected?.address
+          element.type === value?.type && element.address === value?.address
       );
     }
 
-    if (selected?.type === 'collection') {
+    if (value?.type === 'collection') {
       return results.findIndex(
         (element) =>
-          element.type === selected?.type && element.id === selected?.id
+          element.type === value?.type && element.id === value?.id
       );
     }
 
@@ -87,8 +87,8 @@ export function SearchProvider({ children }: SearchProviderProps) {
       setSelected(getIndexToSelected(value));
       setIndex(value);
     } else if (value && value.type) {
-      setSelected(value);
       setIndex(getSelectedToIndex(value));
+      setSelected(value);
     }
   };
 
@@ -132,8 +132,6 @@ export function SearchProvider({ children }: SearchProviderProps) {
       select(0);
     }
   }, [loadingTokens, loadingCollections]);
-
-  console.log(index, selected);
 
   return (
     <SearchContext.Provider
