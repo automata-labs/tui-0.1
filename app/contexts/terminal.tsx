@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react';
 
 import useMousetrap from '~/hooks/useMousetrap';
 
-export const LauncherContext = React.createContext({});
+export const TerminalContext = React.createContext({});
 
-type LauncherProviderProps = {
+type TerminalProviderProps = {
   children: React.ReactNode;
 };
 
-export function LauncherProvider({ children }: LauncherProviderProps) {
+export function TerminalProvider({ children }: TerminalProviderProps) {
   const [show, setShow] = useState(false);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [options, setOptions] = useState([]);
@@ -30,7 +30,7 @@ export function LauncherProvider({ children }: LauncherProviderProps) {
     }
   };
 
-  const setLauncher = ({ breadcrumbs, options }: any) => {
+  const setTerminal = ({ breadcrumbs, options }: any) => {
     setBreadcrumbs(breadcrumbs);
     setOptions(options);
   };
@@ -38,7 +38,7 @@ export function LauncherProvider({ children }: LauncherProviderProps) {
   useMousetrap(['mod+k'], toggle);
 
   const contextValue = {
-    setLauncher,
+    setTerminal,
 
     visible: show,
     launch,
@@ -51,17 +51,17 @@ export function LauncherProvider({ children }: LauncherProviderProps) {
   };
 
   return (
-    <LauncherContext.Provider value={contextValue}>
+    <TerminalContext.Provider value={contextValue}>
       {children}
-    </LauncherContext.Provider>
+    </TerminalContext.Provider>
   );
 }
 
-export function useLauncher() {
-  const context = useContext(LauncherContext);
+export function useTerminal() {
+  const context = useContext(TerminalContext);
 
   if (context === undefined) {
-    throw new Error('`useLauncher` must be within a LauncherProvider');
+    throw new Error('`useTerminal` must be within a TerminalProvider');
   }
 
   return context;

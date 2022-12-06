@@ -1,7 +1,7 @@
 import { CenterProvider } from '@center-inc/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { LauncherProvider } from './contexts/launcher';
+import { TerminalProvider } from './contexts/terminal';
 import { SpinnerProvider } from './contexts/spinner';
 
 const client = new QueryClient();
@@ -18,9 +18,9 @@ export function Providers({ children, env }: ProvidersProps) {
     <QueryClientProvider client={client}>
       <CenterProvider network="ethereum-mainnet" mode="production" apiKey={env.CENTER_KEY}>
         <SpinnerProvider>
-          <LauncherProvider>
+          <TerminalProvider>
             {children}
-          </LauncherProvider>
+          </TerminalProvider>
         </SpinnerProvider>
       </CenterProvider>
     </QueryClientProvider>

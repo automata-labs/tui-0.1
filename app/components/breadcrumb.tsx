@@ -1,12 +1,12 @@
 import { useDeepCompareEffect } from '@react-hookz/web';
-import { useLauncher } from '~/contexts/launcher';
+import { useTerminal } from '~/contexts/terminal';
 
 type BreadcrumbProps = {
   data: any;
 };
 
 export default function Breadcrumb({ data }: BreadcrumbProps) {
-  const { setBreadcrumbs } = useLauncher() as any;
+  const { setBreadcrumbs } = useTerminal() as any;
 
   useDeepCompareEffect(() => {
     setBreadcrumbs(data);

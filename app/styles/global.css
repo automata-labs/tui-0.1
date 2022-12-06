@@ -171,22 +171,22 @@ a {
 }
 
 /**
- * Launcher
+ * Terminal
  */
 
-.launcher {
+.terminal {
   background-color: rgba(0, 0, 0, 1);
   backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
   
   max-width: 640px;
 }
 
-.launcher-breadcrumbs {
+.terminal-breadcrumbs {
   display: flex;
   padding: 16px 16px 0 16px;
 }
 
-.launcher-crumb {
+.terminal-crumb {
   background-color: var(--standard-fill-color);
   border-radius: 2px;
   color: var(--color-grey1);
@@ -194,7 +194,7 @@ a {
   padding: 2px 4px;
 }
 
-.launcher-search {
+.terminal-search {
   border: 0;
   background-color: transparent;
 
@@ -202,13 +202,13 @@ a {
   width: 100%;
 }
 
-.launcher-options {
+.terminal-options {
   display: flex;
   flex-direction: column;
   padding: 6px 6px 2px 6px;
 }
 
-.launcher-option {
+.terminal-option {
   display: flex;
   align-items: center;
   grid-gap: 16px;
@@ -221,16 +221,16 @@ a {
   cursor: pointer;
 }
 
-.launcher-option:hover {
+.terminal-option:hover {
   background: rgba(255, 255, 255, 0.1);
   color: white;
 }
 
-.launcher-option:hover > .launcher-option-icon {
+.terminal-option:hover > .terminal-option-icon {
   opacity: 0.7;
 }
 
-.launcher-option svg {
+.terminal-option svg {
   fill: white;
   opacity: 0.3;
 }

@@ -11,7 +11,7 @@ import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 
 import { Providers } from '~/providers';
-import Launcher from './components/launcher';
+import Terminal from './components/terminal';
 import { NavigationBar } from './components/navigation-bar';
 import { SearchProvider } from './contexts/search';
 import type { Theme } from '~/contexts/theme';
@@ -80,7 +80,7 @@ export function App({ env }: any) {
           <ScrollRestoration />
           <Scripts />
           <LiveReload />
-          <Launcher />
+          <Terminal />
         </Providers>
       </body>
     </html>

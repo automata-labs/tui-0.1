@@ -11,7 +11,7 @@ import Filter from '~/components/filter';
 import Image from '~/components/image';
 import useFetchers from '~/hooks/useFetchers';
 import CollectionHeader from '~/skeletons/collection-header';
-import { useLauncher } from '~/contexts/launcher';
+import { useTerminal } from '~/contexts/terminal';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
@@ -42,7 +42,7 @@ export function fetchers(address: string) {
 export default function Page() {
   const { address } = useParams() as any;
   const [fetcherInfo, fetcherNFTs] = useFetchers(fetchers(address)) as any;
-  const { setLauncher } = useLauncher() as any;
+  const { setTerminal } = useTerminal() as any;
   const [ref, { entry }] = useIntersectionObserver();
 
   const {
@@ -77,7 +77,7 @@ export default function Page() {
 
   useEffect(() => {
     if (dataInfo?.name) {
-      setLauncher({
+      setTerminal({
         breadcrumbs: [dataInfo?.name],
         options: [
           { icon: 'filter', text: 'Sort - Price: Low to High', control: 'sort' },

@@ -1,6 +1,6 @@
 import Modal from 'react-bootstrap/Modal';
 
-import { useLauncher } from '~/contexts/launcher';
+import { useTerminal } from '~/contexts/terminal';
 
 function Icon({ type }: any) {
   if (type === 'search') {
@@ -36,8 +36,8 @@ function Icon({ type }: any) {
   return <></>;
 }
 
-export default function Launcher() {
-  const { visible, hide, breadcrumbs, options } = useLauncher() as any;
+export default function Terminal() {
+  const { visible, hide, breadcrumbs, options } = useTerminal() as any;
 
   return (
     <>
@@ -48,20 +48,20 @@ export default function Launcher() {
         show={visible}
         onHide={() => hide()}
       >
-        <div className="launcher">
+        <div className="terminal">
           {breadcrumbs?.length > 0 && (
-            <div className="launcher-breadcrumbs">
+            <div className="terminal-breadcrumbs">
               {breadcrumbs.map((crumb: string, i: number) => {
                 if (i === 0 || i === breadcrumbs?.length) {
                   return (
-                    <div className="launcher-crumb" key={i}>
+                    <div className="terminal-crumb" key={i}>
                       {crumb}
                     </div>
                   );
                 } else {
                   return (
                     <>
-                      <div className="launcher-crumb">{crumb}</div>
+                      <div className="terminal-crumb">{crumb}</div>
                       <div>{'>'}</div>
                     </>
                   );
@@ -71,16 +71,16 @@ export default function Launcher() {
           )}
           <input
             autoFocus
-            className="input launcher-search"
+            className="input terminal-search"
             placeholder="> Type in commend or search..."
           />
 
           {options?.length > 0 && (
             <>
               <div className="divider"></div>
-              <div className="launcher-options">
+              <div className="terminal-options">
                 {options.map((option: any) => (
-                  <div key={option.control} className="launcher-option">
+                  <div key={option.control} className="terminal-option">
                     <Icon type={option.icon} />
                     {option.text}
                   </div>
