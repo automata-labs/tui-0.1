@@ -33,10 +33,15 @@
 }
 
 .display-label-collection {
-  display: flex;
+  display: inline-flex;
   align-items: center;
 
   margin-top: 4px;
+}
+
+.display-label-collection:hover div {
+  color: white;
+  opacity: 1;
 }
 
 .display-label-collection-icon {

@@ -23,7 +23,7 @@ import shared from '~/styles/shared.css';
 import terminal from '~/styles/terminal.css';
 import themes from '~/styles/themes.css';
 
-import Terminal from './terminal/root';
+import Terminal from './terminal/terminal-root';
 import { MemoryRouter } from 'react-router-dom';
 
 export type LoaderData = {

@@ -1,13 +1,13 @@
 import { useMeasure } from '@react-hookz/web';
 import type { LoaderFunction } from '@remix-run/node';
-import { useParams } from '@remix-run/react';
+import { Link, useParams } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 
 import Image from '~/components/image';
 import { Render } from '~/components/render';
+import { useGoto } from '~/contexts/terminal-context';
 import useNFT from '~/hooks/useNFT';
 import stylesheet from '~/styles/display.css';
-import { useGoto } from '~/contexts/terminal-context';
 
 export const loader: LoaderFunction = async ({ params }) => {
   return null;
@@ -21,7 +21,6 @@ export default function Page() {
   const { address, id } = useParams() as any;
   const { data, loading } = useNFT(address, id) as any;
 
-  // const { data } = useLoaderData();
   const [readMore, setReadMore] = useState(false);
   const [measurement, ref] = useMeasure<HTMLDivElement>();
   const { goto } = useGoto();
@@ -44,22 +43,27 @@ export default function Page() {
               <div className="display-label-name">
                 {data?.name ?? `#${data?.id}`}
               </div>
-              <div className="display-label-collection">
-                <div
-                  className="display-label-collection-icon"
-                  style={{
-                    background: `url(${data?.collection?.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }}
+              <div>
+                <Link
+                  to={`/collection/${address}`}
+                  className="display-label-collection"
                 >
-                  {!data?.collection?.image && (
-                    <Image className="img--fallback" />
-                  )}
-                </div>
-                <div className="display-label-collection-name">
-                  {data?.collection?.name}
-                </div>
+                  <div
+                    className="display-label-collection-icon"
+                    style={{
+                      background: `url(${data?.collection?.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
+                  >
+                    {!data?.collection?.image && (
+                      <Image className="img--fallback" />
+                    )}
+                  </div>
+                  <div className="display-label-collection-name">
+                    {data?.collection?.name}
+                  </div>
+                </Link>
               </div>
               <div className="display-label-description-wrapper">
                 {data?.description && (

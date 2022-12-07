@@ -7,7 +7,7 @@ import { useTerminal } from '../contexts/terminal-context';
 import Display from './pages/display';
 
 export default function Terminal() {
-  const { visible, hide, prompt, setPrompt, increment, decrement, run } = useTerminal() as any;
+  const { visible, hide, prompt, setPrompt, setIndex, increment, decrement, run } = useTerminal() as any;
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,7 +35,10 @@ export default function Terminal() {
             className="input terminal-prompt-input"
             placeholder="Type in command or search..."
             value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
+            onChange={(e) => {
+              setIndex(0);
+              setPrompt(e.target.value);
+            }}
             onKeyDown={(e) => {
               if (e.key === 'ArrowDown') {
                 e.preventDefault();
