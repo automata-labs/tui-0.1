@@ -1,0 +1,118 @@
+/**
+ * Terminal
+ */
+
+ .terminal {
+  background-color: rgba(0, 0, 0, 1);
+  backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
+  
+  max-width: 640px;
+}
+
+.terminal-prompt {
+  display: flex;
+  align-items: center;
+}
+
+.terminal-prompt-icon {
+  padding-left: 16px;
+}
+
+.terminal-prompt-input {
+  border: 0;
+  background-color: transparent;
+
+  padding: 16px 16px 16px 10px;
+  width: 100%;
+}
+
+.terminal-body {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 6px;
+
+  padding: 8px;
+}
+
+.terminal-command {
+  display: flex;
+  align-items: center;
+  grid-gap: 10px;
+  color: var(--color-grey0);
+
+  border-radius: 2px;
+  padding: 10px 8px;
+}
+
+.terminal-command.active {
+  background-color: var(--standard-fill-color--dark);
+  color: white;
+}
+
+.terminal-command:hover {
+  background-color: var(--standard-fill-color--dark);
+}
+
+.terminal-command svg {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+.terminal-command-text {
+  display: flex;
+  align-items: center;
+}
+
+/**
+ * Breadcrumbs
+ */
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  grid-gap: 8px;
+  
+  padding: 14px 14px 2px 14px;
+}
+
+.breadcrumb {
+  background: var(--standard-fill-color--dark);
+  border-radius: 2px;
+  color: var(--color-grey0);
+  font-size: 11px;
+
+  height: 21px;
+
+  display: flex;
+  align-items: center;
+  padding: 1px 4px 0;
+}
+
+.breadcrumb:hover {
+  color: white;
+}
+
+.breadcrumb-divider {
+  opacity: 0.5;
+}
+
+.breadcrumb-icon {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-icon:hover > .breadcrumb {
+  color: white;
+}
+
+.breadcrumb-icon-image {
+  border: 1px solid var(--standard-border-color);
+  border-radius: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 20px;
+  width: 20px;
+  margin-right: 4px;
+}

@@ -11,7 +11,6 @@ import Filter from '~/components/filter';
 import Image from '~/components/image';
 import useFetchers from '~/hooks/useFetchers';
 import CollectionHeader from '~/skeletons/collection-header';
-import { useTerminal } from '~/contexts/terminal';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
@@ -42,7 +41,6 @@ export function fetchers(address: string) {
 export default function Page() {
   const { address } = useParams() as any;
   const [fetcherInfo, fetcherNFTs] = useFetchers(fetchers(address)) as any;
-  const { setTerminal } = useTerminal() as any;
   const [ref, { entry }] = useIntersectionObserver();
 
   const {
@@ -74,19 +72,6 @@ export default function Page() {
       fetchNextPage();
     }
   }, [entry?.isIntersecting, fetchNextPage, hasNextPage]);
-
-  useEffect(() => {
-    if (dataInfo?.name) {
-      setTerminal({
-        breadcrumbs: [dataInfo?.name],
-        options: [
-          { icon: 'filter', text: 'Sort - Price: Low to High', control: 'sort' },
-          { icon: 'filter', text: 'Filter by "Traits"', control: 'filter-traits' },
-          { icon: 'filter', text: 'Filter by "Platform"', control: 'filter-platform' },
-        ],
-      });
-    }
-  }, [dataInfo?.name]);
 
   return (
     <main className="page">

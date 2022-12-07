@@ -211,7 +211,7 @@ export default function Search() {
 
       {isSearchOpen &&
         (loadingTokens || loadingCollections ? (
-          <div style={{ padding: 16 }}>
+          <div className="center pad-2x">
             <Spinner kind="simpleDotsScrolling" />
           </div>
         ) : (

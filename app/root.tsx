@@ -11,7 +11,6 @@ import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 
 import { Providers } from '~/providers';
-import Terminal from './components/terminal';
 import { NavigationBar } from './components/navigation-bar';
 import { SearchProvider } from './contexts/search';
 import type { Theme } from '~/contexts/theme';
@@ -21,7 +20,11 @@ import global from '~/styles/global.css';
 import modal from '~/styles/modal.css';
 import reset from '~/styles/reset.css';
 import shared from '~/styles/shared.css';
+import terminal from '~/styles/terminal.css';
 import themes from '~/styles/themes.css';
+
+import Terminal from './terminal/root';
+import { MemoryRouter } from 'react-router-dom';
 
 export type LoaderData = {
   theme: Theme | null;
@@ -45,10 +48,7 @@ export function links() {
     { rel: 'stylesheet', href: shared },
     { rel: 'stylesheet', href: themes },
     { rel: 'stylesheet', href: modal },
-    // {
-    //   rel: 'stylesheet',
-    //   href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css',
-    // },
+    { rel: 'stylesheet', href: terminal },
   ];
 }
 
@@ -69,18 +69,20 @@ export function App({ env }: any) {
       </head>
       <body>
         <Providers env={env}>
-          <SearchProvider>
-            <NavigationBar />
-          </SearchProvider>
+          <MemoryRouter>
+            <SearchProvider>
+              <NavigationBar />
+            </SearchProvider>
 
-          <div className="root-content">
-            <Outlet />
-          </div>
+            <div className="root-content">
+              <Outlet />
+            </div>
 
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-          <Terminal />
+            <Terminal />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </MemoryRouter>
         </Providers>
       </body>
     </html>

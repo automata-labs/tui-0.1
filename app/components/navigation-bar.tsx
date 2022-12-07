@@ -1,21 +1,10 @@
-import { useClickOutside, useDebouncedState } from '@react-hookz/web';
 import { Link } from '@remix-run/react';
-import { useRef, useState } from 'react';
+import { useTerminal } from '~/contexts/terminal-context';
+
 import Search from './search';
 
 export function NavigationBar() {
-  // const [show, setShow] = useState(false);
-  // const [value, setValue] = useState('');
-  // const [search, setSearch] = useDebouncedState('', 75, 0);
-
-  // const ref = useRef(null);
-  // useClickOutside(ref, () => setShow(false));
-
-  // const hide = () => {
-  //   setShow(false);
-  //   setValue('');
-  //   setSearch('');
-  // };
+  const { launch } = useTerminal() as any;
 
   return (
     <nav className="navigation-bar">
@@ -27,7 +16,9 @@ export function NavigationBar() {
           <Search />
         </div>
         <div className="navigation-bar-right">
-          <button className="button">{'>'}</button>
+          <button className="button" onClick={() => launch()}>
+            {'>'}
+          </button>
           <div className="button theme-button">
             <div
               style={{

@@ -1,5 +1,5 @@
 import { useDeepCompareEffect } from '@react-hookz/web';
-import { useTerminal } from '~/contexts/terminal';
+import { useTerminal } from '~/contexts/terminal-context';
 
 type BreadcrumbProps = {
   data: any;

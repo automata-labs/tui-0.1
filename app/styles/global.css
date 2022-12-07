@@ -47,6 +47,20 @@ a {
  * Fundamentals
  */
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pad-1x {
+  padding: 8px;
+}
+
+.pad-2x {
+  padding: 16px;
+}
+
 /**
  * Button
  */
@@ -168,69 +182,4 @@ a {
   backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
   background-color: rgba(0, 0, 0, 0.65);
   /* background-color: rgba(29, 30, 43, 0.498); */
-}
-
-/**
- * Terminal
- */
-
-.terminal {
-  background-color: rgba(0, 0, 0, 1);
-  backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
-  
-  max-width: 640px;
-}
-
-.terminal-breadcrumbs {
-  display: flex;
-  padding: 16px 16px 0 16px;
-}
-
-.terminal-crumb {
-  background-color: var(--standard-fill-color);
-  border-radius: 2px;
-  color: var(--color-grey1);
-  font-size: 10px;
-  padding: 2px 4px;
-}
-
-.terminal-search {
-  border: 0;
-  background-color: transparent;
-
-  padding: 16px;
-  width: 100%;
-}
-
-.terminal-options {
-  display: flex;
-  flex-direction: column;
-  padding: 6px 6px 2px 6px;
-}
-
-.terminal-option {
-  display: flex;
-  align-items: center;
-  grid-gap: 16px;
-
-  color: var(--color-grey0);
-  border-radius: 2px;
-  padding: 12px 10px;
-  margin-bottom: 4px;
-
-  cursor: pointer;
-}
-
-.terminal-option:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-.terminal-option:hover > .terminal-option-icon {
-  opacity: 0.7;
-}
-
-.terminal-option svg {
-  fill: white;
-  opacity: 0.3;
 }

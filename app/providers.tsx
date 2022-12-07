@@ -1,7 +1,7 @@
 import { CenterProvider } from '@center-inc/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { TerminalProvider } from './contexts/terminal';
+import { TerminalProvider } from './contexts/terminal-context';
 import { SpinnerProvider } from './contexts/spinner';
 
 const client = new QueryClient();
