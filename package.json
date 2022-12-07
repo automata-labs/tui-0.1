@@ -8,6 +8,7 @@
   "dependencies": {
     "@center-inc/react": "^1.1.5",
     "@react-hookz/web": "^19.2.0",
+    "@react-spring/web": "^9.5.5",
     "@remix-run/node": "deferred",
     "@remix-run/react": "deferred",
     "@remix-run/vercel": "deferred",

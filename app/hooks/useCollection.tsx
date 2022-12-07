@@ -1,14 +1,14 @@
 import { useQuery } from 'react-query';
 
-export default function useNFT(address: string, id: string) {
+export default function useCollection(address: string) {
   const fetcher = () => {
     return fetch(
-      `https://api-nijynot.vercel.app/api/nft?address=${address}&id=${id}`
+      `http://api-nijynot.vercel.app/api/collection/info?id=${address}`
     ).then((res) => res.json());
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `nft:${address}+${id}`,
+    queryKey: `collection:${address}`,
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

@@ -29,7 +29,6 @@ export default function Terminal() {
         <Breadcrumbs />
 
         <div className="terminal-prompt">
-          <div className="terminal-prompt-icon">{'>'}</div>
           <input
             ref={inputRef}
             className="input terminal-prompt-input"

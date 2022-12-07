@@ -1,6 +1,6 @@
 import { useParams } from '@remix-run/react';
 import { useEffect } from 'react';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 
 import NFT from '~/components/nft';
@@ -9,21 +9,16 @@ import { Tab, Tabs } from '~/components/tabs';
 import stylesheet from '~/styles/collection.css';
 import Filter from '~/components/filter';
 import Image from '~/components/image';
-import useFetchers from '~/hooks/useFetchers';
 import CollectionHeader from '~/skeletons/collection-header';
+import { useGoto, useTerminal } from '~/contexts/terminal-context';
+import useCollection from '~/hooks/useCollection';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
 }
 
-export function fetchers(address: string) {
-  const a = () => {
-    return fetch(
-      `http://api-nijynot.vercel.app/api/collection/info?id=${address}`
-    ).then((res) => res.json());
-  };
-
-  const b = ({ pageParam }: any) => {
+export default function Page() {
+  const fetcher = ({ pageParam }: any) => {
     const url = pageParam
       ? `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&cursor=${encodeURIComponent(
           pageParam
@@ -35,24 +30,12 @@ export function fetchers(address: string) {
     }).then((res) => res.json());
   };
 
-  return [a, b];
-}
-
-export default function Page() {
   const { address } = useParams() as any;
-  const [fetcherInfo, fetcherNFTs] = useFetchers(fetchers(address)) as any;
   const [ref, { entry }] = useIntersectionObserver();
+  const { goto } = useGoto();
+  const { hide } = useTerminal() as any;
 
-  const {
-    data: dataInfo,
-    isLoading: load0,
-    isFetching: fetch0,
-  } = useQuery(`/collection/${address}`, fetcherInfo, {
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-  }) as any;
+  const { data: dataInfo, loading: loadingCollection } = useCollection(address) as any;
   const {
     data: dataNFTs,
     error,
@@ -60,12 +43,17 @@ export default function Page() {
     hasNextPage,
     isLoading: load1,
     isFetchingNextPage: fetch1,
-  } = useInfiniteQuery(`/nft/${address}`, fetcherNFTs, {
+  } = useInfiniteQuery(`nft-pages:${address}`, fetcher, {
     staleTime: Infinity,
     getNextPageParam: (lastPage: any) => {
       return lastPage?.cursor;
     },
   }) as any;
+
+  useEffect(() => {
+    hide();
+    goto(`/collection/${address}`);
+  }, []);
 
   useEffect(() => {
     if (entry?.isIntersecting && hasNextPage) {
@@ -75,7 +63,7 @@ export default function Page() {
 
   return (
     <main className="page">
-      {load0 || fetch0 ? (
+      {loadingCollection ? (
         <CollectionHeader />
       ) : (
         <>

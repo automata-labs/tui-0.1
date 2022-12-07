@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import Image from '~/components/image';
 import { Render } from '~/components/render';
-import { useGoto } from '~/contexts/terminal-context';
+import { useGoto, useTerminal } from '~/contexts/terminal-context';
 import useNFT from '~/hooks/useNFT';
 import stylesheet from '~/styles/display.css';
 
@@ -24,10 +24,12 @@ export default function Page() {
   const [readMore, setReadMore] = useState(false);
   const [measurement, ref] = useMeasure<HTMLDivElement>();
   const { goto } = useGoto();
+  const { hide } = useTerminal() as any;
 
   const height = measurement ? measurement.height : 0;
 
   useEffect(() => {
+    hide();
     goto(`/nft/${address}/${id}`);
   }, []);
 
