@@ -1,7 +1,3 @@
-:root {
-  overflow-y: auto !important;
-}
-
 .display {
   display: flex;
   height: 100%;

@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import { useNavigate } from '@remix-run/react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import useMousetrap from '~/hooks/useMousetrap';
@@ -15,10 +16,16 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
   const [index, setIndex] = useState<number | null>(null);
   const [length, setLength] = useState(0);
   const [selected, setSelected] = useState({}) as any;
+  const [anchor, setAnchor] = useState('');
 
+  const navigate = useNavigate();
   const { goto } = useGoto();
 
   const launch = () => {
+    if (anchor) {
+      goto(anchor);
+    }
+
     setIndex(0);
     setVisible(true);
   };
@@ -55,13 +62,21 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
   const run = () => {
     if (selected?.kind === 'log') {
       console.log(selected);
+      hide();
     }
 
     if (selected?.kind === 'navigate') {
+      navigate(selected?.to);
+      hide();
+    }
+
+    if (selected?.kind === 'goto') {
       goto(selected?.to);
     }
 
     if (selected?.kind === 'href' && selected?.to) {
+      hide();
+
       try {
         const url = new URL(selected?.to);
         window.open(url.toString(), '_newtab');
@@ -69,8 +84,6 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
         console.log(e);
       }
     }
-
-    hide();
   };
 
   useMousetrap(['mod+k'], toggle);
@@ -88,6 +101,8 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
         setLength,
         selected,
         setSelected,
+        anchor,
+        setAnchor,
 
         launch,
         hide,
@@ -117,7 +132,9 @@ export function useTerminal() {
 export function useGoto() {
   const history = useHistory();
 
-  return {
-    goto: (path: string) => history.push(path),
-  };
+  const goto = useCallback((path: string) => {
+    history.push(path)
+  }, [history]);
+
+  return { goto };
 }

@@ -1,5 +1,5 @@
 import { useParams } from '@remix-run/react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 
@@ -10,7 +10,7 @@ import stylesheet from '~/styles/collection.css';
 import Filter from '~/components/filter';
 import Image from '~/components/image';
 import CollectionHeader from '~/skeletons/collection-header';
-import { useGoto, useTerminal } from '~/contexts/terminal-context';
+import { useTerminal } from '~/contexts/terminal-context';
 import useCollection from '~/hooks/useCollection';
 
 export function links() {
@@ -25,16 +25,11 @@ export default function Page() {
         )}`
       : `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}`;
 
-    return fetch(url, {
-      headers: { 'x-api-key': 'keya3b4ede6985c6e4270561c6a' },
-    }).then((res) => res.json());
+    return fetch(url).then((res) => res.json());
   };
 
   const { address } = useParams() as any;
-  const [ref, { entry }] = useIntersectionObserver();
-  const { goto } = useGoto();
-  const { hide } = useTerminal() as any;
-
+  const { setAnchor, hide } = useTerminal() as any;
   const { data: dataInfo, loading: loadingCollection } = useCollection(address) as any;
   const {
     data: dataNFTs,
@@ -50,10 +45,13 @@ export default function Page() {
     },
   }) as any;
 
+  const [ref, { entry }] = useIntersectionObserver();
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     hide();
-    goto(`/collection/${address}`);
-  }, []);
+    setAnchor(`/collection/${address}`);
+  }, [address]);
 
   useEffect(() => {
     if (entry?.isIntersecting && hasNextPage) {
@@ -145,7 +143,7 @@ export default function Page() {
               <Spinner kind="line" />
             )}
           </div>
-          <div>
+          <div ref={scrollerRef}>
             {dataNFTs?.pages?.map((page: any, i: number) => {
               return (
                 <div key={i} className="nft-grid pad">

@@ -1,11 +1,9 @@
 import { Link } from '@remix-run/react';
-import { useTerminal } from '~/contexts/terminal-context';
 
 import Search from './search';
+import Terminal from '~/terminal/terminal-root';
 
 export function NavigationBar() {
-  const { launch } = useTerminal() as any;
-
   return (
     <nav className="navigation-bar">
       <div className="navigation-bar-inner">
@@ -16,9 +14,9 @@ export function NavigationBar() {
           <Search />
         </div>
         <div className="navigation-bar-right">
-          <button className="button" onClick={() => launch()}>
-            {'>'}
-          </button>
+
+          <Terminal />
+
           <div className="button theme-button">
             <div
               style={{

@@ -3,46 +3,40 @@ import { useParams } from 'react-router-dom';
 
 import Spinner from '~/components/spinner';
 import { useTerminal } from '~/contexts/terminal-context';
+import useCollection from '~/hooks/useCollection';
 import useCommands from '~/hooks/useCommands';
-import useNFT from '~/hooks/useNFT';
+import useTraits from '~/hooks/useTraits';
 import Command from '../components/command';
 
-export default function Display() {
-  const { address, id } = useParams() as any;
-  const { data, loading } = useNFT(address, id);
+export default function Collection() {
+  const { address } = useParams() as any;
+  const { data, loading } = useCollection(address);
   const { index, setLength, setSelected } = useTerminal() as any;
+
+  // pre-loading traits
+  const {} = useTraits(address);
 
   const { prompt } = useTerminal() as any;
   const { commands } = useCommands(prompt, [
     {
-      kind: 'log',
-      icon: 'fullscreen',
-      text: 'Show Fullscreen',
-      to: '#',
+      kind: 'goto',
+      icon: 'filter',
+      text: 'Filter by "Traits"',
+      to: `/collection/${address}/trait`,
     },
-    {
-      kind: 'log',
-      icon: 'arrow-right',
-      text: 'Go to Owner',
-      to: `/account/${data?.owner}`,
-    },
-    {
-      kind: 'navigate',
-      icon: 'arrow-right',
-      text: 'Go to Collection',
-      to: `/collection/${address}`,
-    },
-    {
-      kind: 'href',
-      icon: 'opensea',
-      text: 'View on OpenSea ↗',
-      to: `https://opensea.io/assets/ethereum/${data?.contract}/${data?.id}`,
-    },
+    ...(data?.slug ? [
+      {
+        kind: 'href',
+        icon: 'opensea',
+        text: 'View on OpenSea ↗',
+        to: `https://opensea.io/collection/${data?.slug}`,
+      },
+    ] : []),
     {
       kind: 'href',
       icon: 'etherscan',
       text: 'View on Etherscan ↗',
-      to: `https://etherscan.io/address/${data?.contract}`,
+      to: `https://etherscan.io/address/${address}`,
     },
   ]) as any;
 

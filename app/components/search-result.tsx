@@ -1,5 +1,6 @@
 import { Link } from '@remix-run/react';
 import { clsx } from 'clsx';
+
 import { useSearch } from '~/contexts/search';
 
 type SearchResultProps = {
@@ -25,7 +26,7 @@ export default function SearchResult({
   secondaryTitle,
   secondarySubtitle,
 }: SearchResultProps) {
-  const { select, getIdentifier } = useSearch() as any;
+  const { select, getIdentifier, reset, close } = useSearch() as any;
 
   return (
     <Link
@@ -36,6 +37,10 @@ export default function SearchResult({
       }}
       onMouseLeave={() => {
         select(null);
+      }}
+      onClick={() => {
+        reset();
+        close();
       }}
     >
       <div

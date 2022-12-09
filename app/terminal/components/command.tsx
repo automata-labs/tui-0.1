@@ -1,7 +1,8 @@
+import { Link } from '@remix-run/react';
 import clsx from 'clsx';
 import { Link as MemoryLink } from 'react-router-dom';
-import { useTerminal } from '~/contexts/terminal-context';
 
+import { useTerminal } from '~/contexts/terminal-context';
 import Icon from './icon';
 
 export default function Command({ command }: any) {
@@ -27,7 +28,7 @@ export default function Command({ command }: any) {
     );
   }
 
-  if (command?.kind === 'navigate') {
+  if (command?.kind === 'goto') {
     return (
       <MemoryLink
         to={command?.to}
@@ -45,6 +46,27 @@ export default function Command({ command }: any) {
         <Icon kind={command?.icon} />
         <div style={{ paddingTop: 1 }}>{command?.text}</div>
       </MemoryLink>
+    );
+  }
+
+  if (command?.kind === 'navigate') {
+    return (
+      <Link
+        to={command?.to}
+        className={clsx([
+          'terminal-command',
+          index === command?.id && 'active',
+        ])}
+        onMouseEnter={() => {
+          setIndex(command?.id);
+        }}
+        onMouseLeave={() => {
+          setIndex(null);
+        }}
+      >
+        <Icon kind={command?.icon} />
+        <div style={{ paddingTop: 1 }}>{command?.text}</div>
+      </Link>
     );
   }
 

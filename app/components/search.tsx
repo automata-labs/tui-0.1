@@ -1,6 +1,6 @@
 import { useClickOutside } from '@react-hookz/web';
 import { DateTime } from 'luxon';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Spinner from './spinner';
 import Image from './image';
@@ -139,32 +139,27 @@ export default function Search() {
   const outsideRef = useRef(null);
   const navigate = useNavigate();
 
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [value, setValue] = useState('');
   const {
+    value,
+    setValue,
+    setQuery,
+    visible,
+    setVisible,
     selected,
     setIndex,
-    setSearch,
-    select,
+
     increment,
     decrement,
     loadingTokens,
     loadingCollections,
+    open,
+    close,
+    reset,
   } = useSearch() as any;
 
-  const open = () => {
-    setIsSearchOpen(true);
-    select(0);
-  };
-
   const hide = () => {
-    setIsSearchOpen(false);
+    close(false);
     inputRef?.current?.blur();
-  };
-
-  const reset = () => {
-    setValue('');
-    setSearch('');
   };
 
   useClickOutside(outsideRef, () => hide());
@@ -185,7 +180,7 @@ export default function Search() {
         onFocus={() => open()}
         onChange={(e) => {
           setValue(e.target.value);
-          setSearch(e.target.value);
+          setQuery(e.target.value);
           setIndex(0);
         }}
         onKeyDown={(e) => {
@@ -199,7 +194,7 @@ export default function Search() {
 
           if (e.key === 'Enter' && selected?.to) {
             navigate(selected?.to);
-            setIsSearchOpen(false);
+            setVisible(false);
             reset();
           }
 
@@ -209,7 +204,7 @@ export default function Search() {
         }}
       />
 
-      {isSearchOpen &&
+      {visible &&
         (loadingTokens || loadingCollections ? (
           <div className="center pad-2x">
             <Spinner kind="simpleDotsScrolling" />

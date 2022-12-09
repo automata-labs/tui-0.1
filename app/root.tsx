@@ -4,27 +4,25 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
+import { MemoryRouter } from 'react-router-dom';
 
 import { Providers } from '~/providers';
-import { NavigationBar } from './components/navigation-bar';
-import { SearchProvider } from './contexts/search';
+import { NavigationBar } from '~/components/navigation-bar';
+import { ScrollRestoration } from '~/components/scroll-restoration';
+import { SearchProvider } from '~/contexts/search';
 import type { Theme } from '~/contexts/theme';
 import { ThemeProvider, useTheme } from '~/contexts/theme';
-import { getThemeSession } from './servers/theme.server';
+import { getThemeSession } from '~/servers/theme.server';
 import global from '~/styles/global.css';
-import modal from '~/styles/modal.css';
+import dialog from '~/styles/dialog.css';
 import reset from '~/styles/reset.css';
 import shared from '~/styles/shared.css';
 import terminal from '~/styles/terminal.css';
 import themes from '~/styles/themes.css';
-
-import Terminal from './terminal/terminal-root';
-import { MemoryRouter } from 'react-router-dom';
 
 export type LoaderData = {
   theme: Theme | null;
@@ -47,8 +45,8 @@ export function links() {
     { rel: 'stylesheet', href: global },
     { rel: 'stylesheet', href: shared },
     { rel: 'stylesheet', href: themes },
-    { rel: 'stylesheet', href: modal },
     { rel: 'stylesheet', href: terminal },
+    { rel: 'stylesheet', href: dialog },
   ];
 }
 
@@ -68,8 +66,8 @@ export function App({ env }: any) {
         <Links />
       </head>
       <body>
-        <Providers env={env}>
-          <MemoryRouter>
+        <MemoryRouter>
+          <Providers env={env}>
             <SearchProvider>
               <NavigationBar />
             </SearchProvider>
@@ -78,12 +76,11 @@ export function App({ env }: any) {
               <Outlet />
             </div>
 
-            <Terminal />
             <ScrollRestoration />
             <Scripts />
             <LiveReload />
-          </MemoryRouter>
-        </Providers>
+          </Providers>
+        </MemoryRouter>
       </body>
     </html>
   );

@@ -12,14 +12,16 @@ type SearchProviderProps = {
 };
 
 export function SearchProvider({ children }: SearchProviderProps) {
-  const [search, setSearch] = useDebouncedState('', 75, 0);
+  const [visible, setVisible] = useState(false);
+  const [value, setValue] = useState('');
+  const [query, setQuery] = useDebouncedState('', 75, 0);
   const [index, setIndex] = useState<number | null>(null);
   const [selected, setSelected] = useState({}) as any;
 
-  const { blocks, match } = useBlockSearch(search);
-  const { tokens, loading: loadingTokens } = useTokenSearch(search);
+  const { blocks, match } = useBlockSearch(query);
+  const { tokens, loading: loadingTokens } = useTokenSearch(query);
   const { collections, loading: loadingCollections } =
-    useCollectionsSearch(search);
+    useCollectionsSearch(query);
 
   const getIdentifier = (value: any) => {
     if (value?.type === 'block') {
@@ -127,6 +129,20 @@ export function SearchProvider({ children }: SearchProviderProps) {
     setIndex(nextIndex);
   };
 
+  const open = () => {
+    setVisible(true);
+    select(0);
+  };
+
+  const close = () => {
+    setVisible(false);
+  };
+
+  const reset = () => {
+    setValue('');
+    setQuery('');
+  };
+
   useEffect(() => {
     if (!loadingTokens && !loadingCollections) {
       select(0);
@@ -136,12 +152,17 @@ export function SearchProvider({ children }: SearchProviderProps) {
   return (
     <SearchContext.Provider
       value={{
-        search,
-        setSearch,
+        visible,
+        setVisible,
+        value,
+        setValue,
+        query,
+        setQuery,
         index,
         setIndex,
         selected,
         setSelected,
+
         blocks,
         match,
         tokens,
@@ -153,6 +174,9 @@ export function SearchProvider({ children }: SearchProviderProps) {
         decrement,
         getIdentifier,
         getSelectedToIndex,
+        open,
+        close,
+        reset,
       }}
     >
       {children}

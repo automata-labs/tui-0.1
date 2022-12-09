@@ -47,6 +47,8 @@ export function Render({ address, id, preset }: RenderProps) {
       )}
       {type === 'video' && (
         <video
+          className="nft-image"
+          style={{ display: loaded ? 'initial' : 'none' }}
           controls
           autoPlay
           muted
