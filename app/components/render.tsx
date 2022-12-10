@@ -6,14 +6,13 @@ import { useQuery } from 'react-query';
 import Spinner from './spinner';
 
 type RenderProps = {
+  preRender?: string;
   address: string;
   id: string;
   preset: MediaPreset;
 };
 
-export function Render({ address, id, preset }: RenderProps) {
-  const { client } = useCenterContext();
-
+export function Render({ preRender, address, id, preset }: RenderProps) {
   const fetcher = async () => {
     return client.rendering.renderNft({
       address,
@@ -22,26 +21,33 @@ export function Render({ address, id, preset }: RenderProps) {
       network: 'ethereum-mainnet',
     });
   };
-  const { data } = useQuery(`/nft/${address}/${id}:${preset}`, fetcher, {
+
+  const { client } = useCenterContext();
+  const [shouldRender, setShouldRender] = useState(!preRender);
+  const [loaded, setLoaded] = useState(false);
+  const { data } = useQuery(`nft:${address}:${id}:${preset}`, fetcher, {
+    enabled: shouldRender,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
-  const [loaded, setLoaded] = useState(false);
 
-  const parsed = contentTypeParser(data?.contentType);
+  const parsed = contentTypeParser(preRender ?? data?.contentType);
   const type = parsed && parsed.type;
 
   return (
     <>
       {!loaded && <Spinner kind="line" />}
-      {type === 'image' && (
+      {(type === 'image' || preRender) && (
         <img
           className="nft-image"
           style={{ display: loaded ? 'initial' : 'none' }}
-          src={data?.mediaUrl}
+          src={preRender ?? data?.mediaUrl}
           onLoad={() => setLoaded(true)}
+          onError={() => {
+            setShouldRender(true);
+          }}
           alt={'rendered nft'}
         />
       )}

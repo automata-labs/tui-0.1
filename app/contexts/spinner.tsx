@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useInterval } from 'react-use';
 
 export const SpinnerContext = React.createContext({});

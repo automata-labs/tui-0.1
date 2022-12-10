@@ -1,4 +1,4 @@
-import { useNavigate } from '@remix-run/react';
+import { useNavigate, useSearchParams } from '@remix-run/react';
 import React, { useCallback, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -18,14 +18,17 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
   const [selected, setSelected] = useState({}) as any;
   const [anchor, setAnchor] = useState('');
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { goto } = useGoto();
 
-  const launch = () => {
-    if (anchor) {
+  const launch = (to?: string) => {
+    if (to) {
+      goto(to);
+    } else if (anchor) {
       goto(anchor);
     }
-
+    
     setIndex(0);
     setVisible(true);
   };
@@ -34,7 +37,7 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
     setVisible(false);
   };
 
-  const toggle = () => {
+  const toggle = (e: Event) => {
     if (visible) hide();
     else launch();
   };
@@ -72,6 +75,22 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
 
     if (selected?.kind === 'goto') {
       goto(selected?.to);
+      setIndex(0);
+    }
+
+    if (selected?.kind === 'form-checkbox') {
+      if (!searchParams.getAll(selected?.key).includes(selected?.value)) {
+        searchParams.append(selected?.key, selected?.value);
+      } else {
+        const values = searchParams.getAll(selected?.key).filter(value => value !== selected?.value);
+        searchParams.delete(selected?.key);
+
+        for (const value of values) {
+          searchParams.append(selected?.key, value);
+        }
+      }
+
+      setSearchParams(searchParams, { replace: true });
     }
 
     if (selected?.kind === 'href' && selected?.to) {
@@ -111,6 +130,7 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
         increment,
         decrement,
 
+        goto,
         run,
       }}
     >
@@ -132,9 +152,12 @@ export function useTerminal() {
 export function useGoto() {
   const history = useHistory();
 
-  const goto = useCallback((path: string) => {
-    history.push(path)
-  }, [history]);
+  const goto = useCallback(
+    (path: string) => {
+      history.push(path);
+    },
+    [history]
+  );
 
   return { goto };
 }

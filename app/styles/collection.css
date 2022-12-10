@@ -35,6 +35,12 @@
   grid-gap: 4px;
 }
 
+.collection-core-name {
+  font-size: 16px;
+  font-family: 'ABC Diatype Unlicensed Trial';
+  letter-spacing: -0.02em;
+}
+
 .collection-core-address {
   opacity: 0.5;
 }
@@ -84,4 +90,25 @@
   justify-content: center;
   align-items: center;
   height: 128px;
+}
+
+.collection-active-filters {
+  display: flex;
+  grid-gap: 16px;
+
+  margin-top: 16px;
+}
+
+.collection-filter {
+  display: flex;
+  align-items: center;
+  grid-gap: 8px;
+
+  color: var(--color-grey1);
+}
+
+.collection-filter svg {
+  fill: white;
+  opacity: 0.5;
+  /* scale: 0.9; */
 }

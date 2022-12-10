@@ -12,18 +12,24 @@ export default function Trait() {
   const { data, loading } = useTraits(address);
   const { index, setLength, setSelected } = useTerminal() as any;
 
-  const values = data.find((trait: any) => trait.key === key)?.values?.map((value: any) => ({
-    kind: 'log',
-    icon: null,
-    text: value.value,
-    to: `/collection/${address}/trait/${key}`,
-  })) ?? [];
+  const values =
+    data
+      .find((trait: any) => trait.key === key)
+      ?.values?.map((value: any) => ({
+        kind: 'form-checkbox',
+        key: `attributes[${key}]`,
+        value: value?.value,
+        icon: null,
+        text: value?.value,
+        details: (
+          <div className="terminal-command-details-text">
+            {value?.count} items
+          </div>
+        ),
+      })) ?? [];
 
   const { prompt } = useTerminal() as any;
-  const { commands } = useCommands(
-    prompt,
-    values,
-  ) as any;
+  const { commands } = useCommands(prompt, values) as any;
 
   useEffect(() => {
     setLength(commands?.length);

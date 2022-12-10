@@ -69,6 +69,21 @@
   align-items: center;
 }
 
+.terminal-command-details {
+  display: flex;
+  grid-gap: 16px;
+  flex-grow: 1;
+  justify-content: flex-end;
+
+  opacity: 0.5;
+}
+
+.terminal-command-text {
+}
+
+.terminal-command-details-active {
+}
+
 /**
  * Breadcrumbs
  */

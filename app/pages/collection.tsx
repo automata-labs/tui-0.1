@@ -1,4 +1,4 @@
-import { useParams } from '@remix-run/react';
+import { useParams, useSearchParams } from '@remix-run/react';
 import { useEffect, useRef } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
@@ -12,6 +12,9 @@ import Image from '~/components/image';
 import CollectionHeader from '~/skeletons/collection-header';
 import { useTerminal } from '~/contexts/terminal-context';
 import useCollection from '~/hooks/useCollection';
+import useTraits from '~/hooks/useTraits';
+import CollectionFilter from '~/components/collection-filter';
+import Icon from '~/terminal/components/icon';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
@@ -22,15 +25,19 @@ export default function Page() {
     const url = pageParam
       ? `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&cursor=${encodeURIComponent(
           pageParam
-        )}`
-      : `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}`;
+        )}&${searchParams.toString()}`
+      : `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&${searchParams.toString()}`;
 
     return fetch(url).then((res) => res.json());
   };
 
   const { address } = useParams() as any;
-  const { setAnchor, hide } = useTerminal() as any;
-  const { data: dataInfo, loading: loadingCollection } = useCollection(address) as any;
+  const [searchParams] = useSearchParams();
+  const { setAnchor, launch, hide } = useTerminal() as any;
+  const { data: dataInfo, loading: loadingCollection } = useCollection(
+    address
+  ) as any;
+  const _ = useTraits(address);
   const {
     data: dataNFTs,
     error,
@@ -38,16 +45,20 @@ export default function Page() {
     hasNextPage,
     isLoading: load1,
     isFetchingNextPage: fetch1,
-  } = useInfiniteQuery(`nft-pages:${address}`, fetcher, {
-    staleTime: Infinity,
-    getNextPageParam: (lastPage: any) => {
-      return lastPage?.cursor;
-    },
-  }) as any;
+  } = useInfiniteQuery(
+    `nft-pages:${address}:${searchParams.toString()}`,
+    fetcher,
+    {
+      staleTime: Infinity,
+      getNextPageParam: (lastPage: any) => {
+        return lastPage?.cursor;
+      },
+    }
+  ) as any;
 
   const [ref, { entry }] = useIntersectionObserver();
   const scrollerRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     hide();
     setAnchor(`/collection/${address}`);
@@ -74,7 +85,7 @@ export default function Page() {
               />
             </div>
             <div className="collection-core">
-              <div>{dataInfo?.name}</div>
+              <div className="collection-core-name">{dataInfo?.name}</div>
               <div className="collection-core-address">{address}</div>
             </div>
 
@@ -133,7 +144,15 @@ export default function Page() {
         <>
           <div className="collection-filters pad">
             <Filter text="Price: Low to High" />
-            <Filter text="Traits" />
+            <button
+              className="button button--filled attributes-filter"
+              onClick={() => {
+                launch(`/collection/${address}/trait`);
+              }}
+            >
+              Traits
+              <Icon kind="filter" />
+            </button>
             <Filter text="Platform" />
             {dataInfo?.supply ? (
               <div className="collection-filters-items-number">
@@ -143,6 +162,13 @@ export default function Page() {
               <Spinner kind="line" />
             )}
           </div>
+          {searchParams.toString() !== '' && (
+            <div className="collection-active-filters pad">
+              {Array.from(searchParams.entries()).map((entry, i) => {
+                return <CollectionFilter key={i} searchParam={entry} />;
+              })}
+            </div>
+          )}
           <div ref={scrollerRef}>
             {dataNFTs?.pages?.map((page: any, i: number) => {
               return (

@@ -6,11 +6,14 @@ import { useTerminal } from '~/contexts/terminal-context';
 import useTraits from '~/hooks/useTraits';
 import useCommands from '~/hooks/useCommands';
 import Command from '../components/command';
+import { useSearchParams } from '@remix-run/react';
 
 export default function Traits() {
   const { address } = useParams() as any;
   const { data, loading } = useTraits(address);
   const { index, setLength, setSelected } = useTerminal() as any;
+
+  const [searchParams] = useSearchParams();
 
   const { prompt } = useTerminal() as any;
   const { commands } = useCommands(
@@ -18,8 +21,20 @@ export default function Traits() {
     data.map((trait: any) => ({
       kind: 'goto',
       icon: null,
-      text: trait?.key,
       to: `/collection/${address}/trait/${trait?.key}`,
+      text: trait?.key,
+      details: (
+        <>
+          {searchParams.getAll(`attributes[${trait?.key}]`).length > 0 && (
+            <div className=".terminal-command-details-active">
+              ({searchParams.getAll(`attributes[${trait?.key}]`).length} active)
+            </div>
+          )}
+          <div className="terminal-command-details-text">
+            {trait?.attributeCount} attributes
+          </div>
+        </>
+      ),
     }))
   ) as any;
 

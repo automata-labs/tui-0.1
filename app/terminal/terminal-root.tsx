@@ -27,8 +27,8 @@ export default function Terminal() {
     enter: { opacity: 1, x: '-50%', y: 0, scale: 1 },
     leave: { opacity: 0, x: '-50%', y: 6, scale: 0.97 },
     config: {
-      mass: 1,
-      tension: 365,
+      mass: 0.8,
+      tension: 425,
       friction: 23,
     },
   });
@@ -87,7 +87,7 @@ export default function Terminal() {
 
                       if (e.key === 'k' && e.metaKey) {
                         e.preventDefault();
-                        toggle();
+                        // toggle();
                       }
                     }}
                   />

@@ -3,7 +3,7 @@ import { Link } from '@remix-run/react';
 import Image from './image';
 import { Render } from './render';
 
-export default function NFT({ innerRef, nft, market }: any) {
+export default function NFT({ innerRef, nft }: any) {
   const address = nft?.address ?? nft?.contract;
   const id = nft?.id ?? nft?.tokenId;
 
@@ -45,7 +45,7 @@ export default function NFT({ innerRef, nft, market }: any) {
       </div>
 
       <div className="nft-image-wrapper">
-        <Render address={address} id={id} preset="medium" />
+        <Render preRender={nft?.image} address={address} id={id} preset="medium" />
       </div>
     </Link>
   );
