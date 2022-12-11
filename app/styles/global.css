@@ -79,6 +79,10 @@ a {
   border-radius: 2px;
   padding: 8px 12px;
 
+  display: flex;
+  align-items: center;
+  grid-gap: 8px;
+
   font-family: 'ABC Diatype Mono Unlicensed Trial', 'SF Mono', -apple-system,
     BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
     Droid Sans, Helvetica Neue, sans-serif;
@@ -89,6 +93,10 @@ a {
   -moz-osx-font-smoothing: grayscale;
 
   cursor: pointer;
+}
+
+.button span {
+  padding-top: 1px;
 }
 
 .button:hover {

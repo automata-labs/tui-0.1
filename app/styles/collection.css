@@ -8,7 +8,6 @@
 
 .collection-image-wrapper {
   background-color: var(--nft-background-color);
-  border: 1px solid var(--standard-border-color);
   border-radius: 2px;
   overflow: hidden;
   flex-grow: 1;
@@ -21,6 +20,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  position: relative;
+}
+
+.collection-image-wrapper::after {
+  border-radius: 2px;
+  box-shadow:
+    inset 1px 0px var(--standard-border-color),
+    inset 0px 1px var(--standard-border-color),
+    inset -1px 0px var(--standard-border-color),
+    inset 0px -1px var(--standard-border-color);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .collection-image {
@@ -95,6 +111,7 @@
 .collection-active-filters {
   display: flex;
   grid-gap: 16px;
+  flex-wrap: wrap;
 
   margin-top: 16px;
 }

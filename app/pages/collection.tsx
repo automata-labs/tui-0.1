@@ -32,7 +32,7 @@ export default function Page() {
   };
 
   const { address } = useParams() as any;
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { setAnchor, launch, hide } = useTerminal() as any;
   const { data: dataInfo, loading: loadingCollection } = useCollection(
     address
@@ -167,6 +167,16 @@ export default function Page() {
               {Array.from(searchParams.entries()).map((entry, i) => {
                 return <CollectionFilter key={i} searchParam={entry} />;
               })}
+
+              <button
+                className="button button--text"
+                onClick={() => {
+                  setSearchParams({}, { replace: true });
+                }}
+              >
+                <Icon kind="x-square-fill" />
+                <span>Clear all sort, filters, ...</span>
+              </button>
             </div>
           )}
           <div ref={scrollerRef}>
