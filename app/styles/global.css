@@ -2,13 +2,13 @@
  * Axiom
  */
 
-:root {
-  overflow-y: scroll;
+/* body {
+  overflow-y: scroll !important;
 }
 
 html body {
   margin-right: 0 !important;
-}
+} */
 
 html,
 body {

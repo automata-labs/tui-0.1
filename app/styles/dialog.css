@@ -1,3 +1,17 @@
+[role="dialog"] {
+  position: fixed;
+  left: 50%;
+  top: 0;
+  margin-top: 20vh;
+  width: 100%;
+  max-width: 640px;
+  /* margin-right: 20px;
+  margin-left: 20px; */
+
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
 .dialog-overlay {
   background-color: rgba(0, 0, 0, 0.285);
   position: fixed;
@@ -5,25 +19,19 @@
   z-index: 1055;
 }
 
-
 .dialog-content {
-  
   backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
   background-color: black;
-
   box-shadow: 0px 4px 32px 32px rgba(0, 0, 0, 0.5);
-
   outline: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 3px;
 
-  position: fixed;
+  /* position: fixed;
   left: 50%;
   margin-top: 20vh;
   margin-right: 20px;
-  margin-left: 20px;
+  margin-left: 20px; */
 
   width: 100%;
   max-width: 640px;
-
-  z-index: 9999;
 }

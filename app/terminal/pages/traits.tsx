@@ -30,9 +30,17 @@ export default function Traits() {
               ({searchParams.getAll(`attributes[${trait?.key}]`).length} active)
             </div>
           )}
-          <div className="terminal-command-details-text">
-            {trait?.attributeCount} attributes
-          </div>
+          {trait?.attributeCount && (
+            <div className="terminal-command-details-text">
+              {trait?.attributeCount} attributes
+            </div>
+          )}
+          {Number.isInteger(trait?.minRange) &&
+            Number.isInteger(trait?.maxRange) && (
+              <div className="terminal-command-details-text">
+                {trait?.maxRange} - {trait?.minRange} attributes
+              </div>
+            )}
         </>
       ),
     }))

@@ -143,12 +143,18 @@ export default function Page() {
       {!error ? (
         <>
           <div className="collection-filters pad">
-            <Filter text="Price: Low to High" />
             <button
               className="button button--filled attributes-filter"
               onClick={() => {
                 launch(`/collection/${address}/trait`);
               }}
+            >
+              Price: Low to High
+              <Icon kind="arrow-switch-vertical" />
+            </button>
+            <button
+              className="button button--filled attributes-filter"
+              onClick={() => launch(`/collection/${address}/trait`)}
             >
               Traits
               <Icon kind="filter" />
