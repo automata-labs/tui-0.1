@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-export default function useCollection(address: string) {
+export default function useCollection(address: string): any {
   const fetcher = () => {
     return fetch(
       `http://api-nijynot.vercel.app/api/collection/info?id=${address}`

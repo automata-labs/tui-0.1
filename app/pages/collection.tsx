@@ -1,6 +1,5 @@
 import { useParams, useSearchParams } from '@remix-run/react';
 import { useEffect, useRef } from 'react';
-import { useInfiniteQuery } from 'react-query';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 
 import NFT from '~/components/nft';
@@ -15,44 +14,27 @@ import useCollection from '~/hooks/useCollection';
 import useTraits from '~/hooks/useTraits';
 import CollectionFilter from '~/components/collection-filter';
 import Icon from '~/terminal/components/icon';
+import useNFTs from '~/hooks/useNFTs';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
 }
 
 export default function Page() {
-  const fetcher = ({ pageParam }: any) => {
-    const url = pageParam
-      ? `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&cursor=${encodeURIComponent(
-          pageParam
-        )}&${searchParams.toString()}`
-      : `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&${searchParams.toString()}`;
-
-    return fetch(url).then((res) => res.json());
-  };
-
   const { address } = useParams() as any;
   const [searchParams, setSearchParams] = useSearchParams();
   const { setAnchor, launch, hide } = useTerminal() as any;
-  const { data: dataInfo, loading: loadingCollection } = useCollection(
-    address
-  ) as any;
-  const _ = useTraits(address);
+
+  const { data: dataInfo, loading: loadingCollection } = useCollection(address);
   const {
-    data: dataNFTs,
+    data: nfts,
     error,
+    loading: load1,
+    fetching: fetch1,
     fetchNextPage,
     hasNextPage,
-    isLoading: load1,
-    isFetchingNextPage: fetch1,
-  } = useInfiniteQuery({
-    queryKey: `nft-pages:${address}:${searchParams.toString()}`,
-    queryFn: fetcher,
-    staleTime: Infinity,
-    getNextPageParam: (lastPage: any) => {
-      return lastPage?.cursor;
-    },
-  }) as any;
+  } = useNFTs(address);
+  const _ = useTraits(address);
 
   const [ref, { entry }] = useIntersectionObserver();
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -144,7 +126,7 @@ export default function Page() {
             <button
               className="button button--filled attributes-filter"
               onClick={() => {
-                launch(`/collection/${address}/trait`);
+                launch(`/collection/${address}/traits`);
               }}
             >
               Price: Low to High
@@ -152,7 +134,7 @@ export default function Page() {
             </button>
             <button
               className="button button--filled attributes-filter"
-              onClick={() => launch(`/collection/${address}/trait`)}
+              onClick={() => launch(`/collection/${address}/traits`)}
             >
               Traits
               <Icon kind="filter" />
@@ -184,7 +166,7 @@ export default function Page() {
             </div>
           )}
           <div ref={scrollerRef}>
-            {dataNFTs?.pages?.map((page: any, i: number) => {
+            {nfts?.pages?.map((page: any, i: number) => {
               return (
                 <div key={i} className="nft-grid pad">
                   {page?.tokens?.map((nft: any, j: number) => {

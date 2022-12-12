@@ -11,10 +11,10 @@ export default function Breadcrumbs() {
       </MemoryLink>
 
       <Switch>
-        <Route path="/collection/:address/trait/:key">
+        <Route path="/collection/:address/traits/:key">
           <CollectionTraitBreadcrumbs />
         </Route>
-        <Route path="/collection/:address/trait">
+        <Route path="/collection/:address/traits">
           <CollectionTraitsBreadcrumbs />
         </Route>
         <Route path="/collection/:address">
@@ -81,7 +81,7 @@ function CollectionTraitsBreadcrumbs() {
         </div>
       </MemoryLink>
       <div className="breadcrumb-divider">{'>'}</div>
-      <MemoryLink className="breadcrumb" to={`/collection/${address}/trait`}>
+      <MemoryLink className="breadcrumb" to={`/collection/${address}/traits`}>
         Filter by "Traits"
       </MemoryLink>
     </>
@@ -113,11 +113,11 @@ function CollectionTraitBreadcrumbs() {
         </div>
       </MemoryLink>
       <div className="breadcrumb-divider">{'>'}</div>
-      <MemoryLink className="breadcrumb" to={`/collection/${address}/trait`}>
+      <MemoryLink className="breadcrumb" to={`/collection/${address}/traits`}>
         Filter by "Traits"
       </MemoryLink>
       <div className="breadcrumb-divider">{'>'}</div>
-      <MemoryLink className="breadcrumb" to={`/collection/${address}/trait/${key}`}>
+      <MemoryLink className="breadcrumb" to={`/collection/${address}/traits/${key}`}>
         {key}
       </MemoryLink>
     </>

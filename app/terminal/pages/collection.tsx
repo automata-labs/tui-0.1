@@ -22,7 +22,7 @@ export default function Collection() {
       kind: 'goto',
       icon: 'filter',
       text: 'Filter by "Traits"',
-      to: `/collection/${address}/trait`,
+      to: `/collection/${address}/traits`,
     },
     ...(data?.slug ? [
       {

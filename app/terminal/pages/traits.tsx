@@ -21,7 +21,7 @@ export default function Traits() {
     data.map((trait: any) => ({
       kind: 'goto',
       icon: null,
-      to: `/collection/${address}/trait/${trait?.key}`,
+      to: `/collection/${address}/traits/${trait?.key}`,
       text: trait?.key,
       details: (
         <>

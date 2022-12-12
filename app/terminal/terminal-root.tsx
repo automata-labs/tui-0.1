@@ -90,11 +90,11 @@ export default function Terminal({ styles, item }: any) {
                     <Display />
                   </Route>
 
-                  <Route path="/collection/:address/trait/:key">
+                  <Route path="/collection/:address/traits/:key">
                     <Trait />
                   </Route>
 
-                  <Route path="/collection/:address/trait">
+                  <Route path="/collection/:address/traits">
                     <Traits />
                   </Route>
 

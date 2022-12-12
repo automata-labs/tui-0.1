@@ -13,8 +13,8 @@ function useTraitInternal(address: string, key: string) {
 function useRange(address: string, key: string, enabled: boolean) {
   const fetcher = ({ pageParam }: any) => {
     const url = pageParam
-      ? `http://localhost:3001/api/collection/traits/range?id=${address}&trait=${key}&limit=21&offset=${pageParam}`
-      : `http://localhost:3001/api/collection/traits/range?id=${address}&trait=${key}&limit=21`;
+      ? `https://api-nijynot.vercel.app/api/collection/traits/range?id=${address}&trait=${key}&limit=21&offset=${pageParam}`
+      : `https://api-nijynot.vercel.app/api/collection/traits/range?id=${address}&trait=${key}&limit=21`;
 
     return fetch(url).then((res) => res.json());
   };
