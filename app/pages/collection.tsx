@@ -45,16 +45,14 @@ export default function Page() {
     hasNextPage,
     isLoading: load1,
     isFetchingNextPage: fetch1,
-  } = useInfiniteQuery(
-    `nft-pages:${address}:${searchParams.toString()}`,
-    fetcher,
-    {
-      staleTime: Infinity,
-      getNextPageParam: (lastPage: any) => {
-        return lastPage?.cursor;
-      },
-    }
-  ) as any;
+  } = useInfiniteQuery({
+    queryKey: `nft-pages:${address}:${searchParams.toString()}`,
+    queryFn: fetcher,
+    staleTime: Infinity,
+    getNextPageParam: (lastPage: any) => {
+      return lastPage?.cursor;
+    },
+  }) as any;
 
   const [ref, { entry }] = useIntersectionObserver();
   const scrollerRef = useRef<HTMLDivElement>(null);

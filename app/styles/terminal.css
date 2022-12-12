@@ -56,10 +56,6 @@
   color: white;
 }
 
-.terminal-command:hover {
-  background-color: var(--standard-fill-color--dark);
-}
-
 .terminal-command svg {
   fill: rgba(255, 255, 255, 0.5);
 }
@@ -82,6 +78,10 @@
 }
 
 .terminal-command-details-active {
+}
+
+.terminal-load-more-area {
+  height: 64px;
 }
 
 /**

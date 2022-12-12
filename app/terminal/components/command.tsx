@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from '@remix-run/react';
 import clsx from 'clsx';
+import { useRef, useState } from 'react';
 import { Link as MemoryLink } from 'react-router-dom';
 
 import { useTerminal } from '~/contexts/terminal-context';
@@ -16,7 +17,7 @@ export default function Command({ command }: any) {
           'terminal-command',
           index === command?.id && 'active',
         ])}
-        onMouseEnter={() => {
+        onMouseMove={() => {
           setIndex(command?.id);
         }}
         onMouseLeave={() => {
@@ -37,7 +38,7 @@ export default function Command({ command }: any) {
           'terminal-command',
           index === command?.id && 'active',
         ])}
-        onMouseEnter={() => {
+        onMouseMove={() => {
           setIndex(command?.id);
         }}
         onMouseLeave={() => {
@@ -61,7 +62,7 @@ export default function Command({ command }: any) {
           'terminal-command',
           index === command?.id && 'active',
         ])}
-        onMouseEnter={() => {
+        onMouseMove={() => {
           setIndex(command?.id);
         }}
         onMouseLeave={() => {
@@ -81,7 +82,7 @@ export default function Command({ command }: any) {
           'terminal-command',
           index === command?.id && 'active',
         ])}
-        onMouseEnter={() => {
+        onMouseMove={() => {
           setIndex(command?.id);
         }}
         onMouseLeave={() => {
@@ -129,7 +130,7 @@ export default function Command({ command }: any) {
           'terminal-command',
           index === command?.id && 'active',
         ])}
-        onMouseEnter={() => {
+        onMouseMove={() => {
           setIndex(command?.id);
         }}
         onMouseLeave={() => {
