@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { animated } from '@react-spring/web';
 import { useEffect, useRef } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 
 import { useTerminal } from '~/contexts/terminal-context';
 import Breadcrumbs from './components/breadcrumbs';
@@ -24,6 +24,7 @@ export default function Terminal({ styles, item }: any) {
     decrement,
     run,
   } = useTerminal() as any;
+  const location = useLocation();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -31,6 +32,13 @@ export default function Terminal({ styles, item }: any) {
       inputRef?.current?.focus();
     }
   }, [visible]);
+
+  useEffect(() => {
+    if (visible) {
+      inputRef?.current?.focus();
+      setIndex(0);
+    }
+  }, [location]);
 
   return (
     <Dialog.Root open={visible} onOpenChange={toggle}>

@@ -11,7 +11,6 @@ import Command from '../components/command';
 export default function Trait() {
   const { address, key } = useParams() as any;
   const { prompt, index, setLength, setSelected } = useTerminal() as any;
-
   const {
     data: trait,
     loading,
@@ -36,7 +35,6 @@ export default function Trait() {
     : [];
 
   const { commands } = useCommands(prompt, values) as any;
-
   const [ref, { entry }] = useIntersectionObserver();
 
   useEffect(() => {
@@ -51,7 +49,7 @@ export default function Trait() {
 
   useEffect(() => {
     setSelected(commands[index]);
-  }, [index, commands?.length]);
+  }, [index, loading, commands?.length]);
 
   return (
     <>

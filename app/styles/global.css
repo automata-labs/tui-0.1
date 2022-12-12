@@ -43,7 +43,7 @@ body {
 }
 
 *:focus {
-  outline: 0;
+  outline: 1px solid red;
 }
 
 a {
@@ -190,21 +190,4 @@ a {
 
   padding: 2px;
   opacity: 0.75;
-}
-
-/**
- * Modal
- */
-
-.modal-content {
-  /* box-shadow: 0px 4px 32px 32px rgba(0, 0, 0, 0.5); */
-}
-
-.modal-body {
-  border-radius: 2px;
-  padding: 20px;
-
-  backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
-  background-color: rgba(0, 0, 0, 0.65);
-  /* background-color: rgba(29, 30, 43, 0.498); */
 }

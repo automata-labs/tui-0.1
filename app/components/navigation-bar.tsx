@@ -1,9 +1,9 @@
 import { Link } from '@remix-run/react';
 
 import Search from './search';
-import Terminal from '~/terminal/terminal-root';
+import Terminal from '~/terminal/terminal';
 import { useTerminal } from '~/contexts/terminal-context';
-import { animated, easings, useTransition } from '@react-spring/web';
+import { easings, useTransition } from '@react-spring/web';
 import { useState } from 'react';
 
 export function NavigationBar() {
@@ -15,8 +15,6 @@ export function NavigationBar() {
     enter: { opacity: 1, scale: 1 },
     leave: { opacity: 0, scale: 0.95 },
     config: {
-      // duration: visible ? 350 : 200,
-      // easing: visible ? easings.easeOutExpo : easings.easeInOutExpo,
       duration: 200,
       easing: easings.easeOutExpo,
     },
@@ -27,7 +25,7 @@ export function NavigationBar() {
 
   return transitions((styles, item) => {
     return (
-      <animated.nav
+      <nav
         className="navigation-bar"
         style={{ marginRight: visible || item || finality ? 15 : 0 }}
       >
@@ -78,7 +76,7 @@ export function NavigationBar() {
             <button className="button">Connect Wallet</button>
           </div>
         </div>
-      </animated.nav>
+      </nav>
     );
   });
 }
