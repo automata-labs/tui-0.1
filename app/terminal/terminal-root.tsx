@@ -7,6 +7,7 @@ import { useTerminal } from '~/contexts/terminal-context';
 import Breadcrumbs from './components/breadcrumbs';
 import Collection from './pages/collection';
 import Display from './pages/display';
+import Sources from './pages/sources';
 import Trait from './pages/trait';
 import Traits from './pages/traits';
 
@@ -96,6 +97,10 @@ export default function Terminal({ styles, item }: any) {
 
                   <Route path="/collection/:address/traits">
                     <Traits />
+                  </Route>
+
+                  <Route path="/collection/:address/sources">
+                    <Sources />
                   </Route>
 
                   <Route path="/collection/:address">

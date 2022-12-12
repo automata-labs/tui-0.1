@@ -2,7 +2,7 @@ import { useNavigate, useSearchParams } from '@remix-run/react';
 import React, { useCallback, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import useMousetrap from '~/hooks/useMousetrap';
+import useHotKeys from '~/hooks/useHotKeys';
 
 export const TerminalContext = React.createContext({});
 
@@ -105,7 +105,11 @@ export function TerminalProvider({ children }: TerminalProviderProps) {
     }
   };
 
-  useMousetrap(['mod+k'], toggle);
+  useHotKeys('command+k,ctrl+k', toggle);
+  useHotKeys('down', (e: Event) => {
+    e.preventDefault();
+    increment();
+  });
 
   return (
     <TerminalContext.Provider

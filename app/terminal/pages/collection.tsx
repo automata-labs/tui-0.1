@@ -24,6 +24,12 @@ export default function Collection() {
       text: 'Filter by "Traits"',
       to: `/collection/${address}/traits`,
     },
+    {
+      kind: 'goto',
+      icon: 'filter',
+      text: 'Filter by "Platform"',
+      to: `/collection/${address}/sources`,
+    },
     ...(data?.slug ? [
       {
         kind: 'href',

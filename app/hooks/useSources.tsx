@@ -1,14 +1,14 @@
 import { useQuery } from 'react-query';
 
-export default function useTraits(id: string) {
+export default function useSources(id?: string) {
   const fetcher = () => {
     return fetch(
-      `https://api-nijynot.vercel.app/api/collection/traits?id=${id}`
+      `https://api-nijynot.vercel.app/api/collection/sources?id=${id}`
     ).then((res) => res.json());
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `collection:traits:${id}`,
+    queryKey: `collection:sources:${id}`,
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
@@ -17,7 +17,7 @@ export default function useTraits(id: string) {
   });
 
   return {
-    data: data ?? [],
+    data: data ? data.filter((value: any) => value.source !== 'sudoswap.xyz') : [],
     loading: isLoading || isFetching,
   };
 }

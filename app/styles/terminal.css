@@ -48,7 +48,7 @@
   color: var(--color-grey0);
 
   border-radius: 2px;
-  padding: 10px 8px;
+  padding: 12px 12px;
 }
 
 .terminal-command.active {

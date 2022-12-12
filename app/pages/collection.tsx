@@ -15,6 +15,7 @@ import useTraits from '~/hooks/useTraits';
 import CollectionFilter from '~/components/collection-filter';
 import Icon from '~/terminal/components/icon';
 import useNFTs from '~/hooks/useNFTs';
+import useSources from '~/hooks/useSources';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
@@ -34,7 +35,9 @@ export default function Page() {
     fetchNextPage,
     hasNextPage,
   } = useNFTs(address);
-  const _ = useTraits(address);
+
+  useTraits(address);
+  useSources(address);
 
   const [ref, { entry }] = useIntersectionObserver();
   const scrollerRef = useRef<HTMLDivElement>(null);
@@ -139,7 +142,13 @@ export default function Page() {
               Traits
               <Icon kind="filter" />
             </button>
-            <Filter text="Platform" />
+            <button
+              className="button button--filled attributes-filter"
+              onClick={() => launch(`/collection/${address}/sources`)}
+            >
+              Platform
+              <Icon kind="filter" />
+            </button>
             {dataInfo?.supply ? (
               <div className="collection-filters-items-number">
                 {dataInfo?.supply} items

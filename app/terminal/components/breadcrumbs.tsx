@@ -17,6 +17,9 @@ export default function Breadcrumbs() {
         <Route path="/collection/:address/traits">
           <CollectionTraitsBreadcrumbs />
         </Route>
+        <Route path="/collection/:address/sources">
+          <CollectionSourcesBreadcrumbs />
+        </Route>
         <Route path="/collection/:address">
           <CollectionBreadcrumbs />
         </Route>
@@ -119,6 +122,38 @@ function CollectionTraitBreadcrumbs() {
       <div className="breadcrumb-divider">{'>'}</div>
       <MemoryLink className="breadcrumb" to={`/collection/${address}/traits/${key}`}>
         {key}
+      </MemoryLink>
+    </>
+  );
+}
+
+function CollectionSourcesBreadcrumbs() {
+  const { address } = useParams() as any;
+  const { data, loading } = useCollection(address);
+
+  return (
+    <>
+      <div className="breadcrumb-divider">{'>'}</div>
+      <MemoryLink className="breadcrumb-icon" to={`/collection/${address}`}>
+        <div
+          className="breadcrumb-icon-image"
+          style={
+            data?.image && {
+              background: `url(${data?.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }
+          }
+        >
+          {loading && <Spinner kind="line" />}
+        </div>
+        <div className="breadcrumb">
+          {loading ? <Spinner kind="simpleDotsScrolling" /> : data?.name}
+        </div>
+      </MemoryLink>
+      <div className="breadcrumb-divider">{'>'}</div>
+      <MemoryLink className="breadcrumb" to={`/collection/${address}/sources`}>
+        Filter by "Platform"
       </MemoryLink>
     </>
   );

@@ -91,6 +91,7 @@ export default function Command({ command }: any) {
         htmlFor={command?.value}
       >
         <input
+          className="checkbox"
           type="checkbox"
           id={command?.value}
           name={command?.key}
