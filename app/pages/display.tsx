@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import Image from '~/components/image';
 import { Render } from '~/components/render';
-import { useTerminal } from '~/contexts/terminal-context';
+import { useKernel } from '~/contexts/kernel';
 import useNFT from '~/hooks/useNFT';
 import stylesheet from '~/styles/display.css';
 
@@ -23,7 +23,7 @@ export default function Page() {
 
   const [readMore, setReadMore] = useState(false);
   const [measurement, ref] = useMeasure<HTMLDivElement>();
-  const { setAnchor, hide } = useTerminal() as any;
+  const { setAnchor, hide } = useKernel() as any;
 
   const height = measurement ? measurement.height : 0;
 

@@ -1,15 +1,15 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { animated } from '@react-spring/web';
-import { useEffect, useRef } from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import { useTerminal } from '~/contexts/terminal-context';
-import Breadcrumbs from './components/breadcrumbs';
-import Collection from './pages/collection';
-import Display from './pages/display';
-import Sources from './pages/sources';
-import Trait from './pages/trait';
-import Traits from './pages/traits';
+import Breadcrumbs from '~/components/breadcrumbs/breadcrumbs';
+import { useKernel } from '~/contexts/kernel';
+import Collection from '~/components/commands/collection-cmds';
+import Display from '~/components/commands/display-cmds';
+import Sources from '~/components/commands/sources-cmds';
+import Trait from '~/components/commands/trait-cmds';
+import Traits from '~/components/commands/traits-cmds';
 
 const Overlay = animated(Dialog.Overlay);
 
@@ -19,13 +19,9 @@ export default function Terminal({ styles, item }: any) {
     toggle,
     prompt,
     setPrompt,
-    setIndex,
-    increment,
-    decrement,
-    run,
-  } = useTerminal() as any;
-  const location = useLocation();
-  const inputRef = useRef<HTMLInputElement>(null);
+    shortcuts,
+    inputRef,
+  } = useKernel() as any;
 
   useEffect(() => {
     if (visible) {
@@ -33,23 +29,13 @@ export default function Terminal({ styles, item }: any) {
     }
   }, [visible]);
 
-  useEffect(() => {
-    if (visible) {
-      inputRef?.current?.focus();
-      setIndex(0);
-    }
-  }, [location]);
-
   return (
     <Dialog.Root open={visible} onOpenChange={toggle}>
       <Dialog.Trigger className="button">{'>'}</Dialog.Trigger>
 
       {item ? (
         <Dialog.Portal forceMount className="dialog-portal">
-          <Overlay
-            className="dialog-overlay"
-            style={{ opacity: 0 }}
-          />
+          <Overlay className="dialog-overlay" style={{ opacity: 0 }} />
           <Dialog.Content>
             <animated.div style={styles} className="dialog-content">
               <Breadcrumbs />
@@ -60,31 +46,8 @@ export default function Terminal({ styles, item }: any) {
                   className="input terminal-prompt-input"
                   placeholder="Type in command or search..."
                   value={prompt}
-                  onChange={(e) => {
-                    setIndex(0);
-                    setPrompt(e.target.value);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'ArrowDown') {
-                      e.preventDefault();
-                      increment();
-                    }
-
-                    if (e.key === 'ArrowUp') {
-                      e.preventDefault();
-                      decrement();
-                    }
-
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      run();
-                    }
-
-                    if (e.key === 'k' && e.metaKey) {
-                      e.preventDefault();
-                      toggle();
-                    }
-                  }}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  onKeyDown={(e) => shortcuts(e.nativeEvent)}
                 />
               </div>
               <div className="divider"></div>
@@ -95,25 +58,12 @@ export default function Terminal({ styles, item }: any) {
                     <div>root route</div>
                   </Route>
 
-                  <Route path="/nft/:address/:id">
-                    <Display />
-                  </Route>
+                  <Route exact path="/nft/:address/:id" component={Display} />
 
-                  <Route path="/collection/:address/traits/:key">
-                    <Trait />
-                  </Route>
-
-                  <Route path="/collection/:address/traits">
-                    <Traits />
-                  </Route>
-
-                  <Route path="/collection/:address/sources">
-                    <Sources />
-                  </Route>
-
-                  <Route path="/collection/:address">
-                    <Collection />
-                  </Route>
+                  <Route exact path="/collection/:address" component={Collection} />
+                  <Route exact path="/collection/:address/traits" component={Traits} />
+                  <Route exact path="/collection/:address/traits/:key" component={Trait} />
+                  <Route exact path="/collection/:address/sources" component={Sources} />
                 </Switch>
               </div>
             </animated.div>

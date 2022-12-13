@@ -2,12 +2,12 @@ import { Link } from '@remix-run/react';
 
 import Search from './search';
 import Terminal from '~/terminal/terminal';
-import { useTerminal } from '~/contexts/terminal-context';
+import { useKernel } from '~/contexts/kernel';
 import { easings, useTransition } from '@react-spring/web';
 import { useState } from 'react';
 
 export function NavigationBar() {
-  const { visible } = useTerminal() as any;
+  const { visible } = useKernel() as any;
   const [finality, setFinality] = useState(visible) as any;
 
   const transitions = useTransition(visible, {
@@ -15,7 +15,7 @@ export function NavigationBar() {
     enter: { opacity: 1, scale: 1 },
     leave: { opacity: 0, scale: 0.95 },
     config: {
-      duration: 200,
+      duration: visible ? 200 : 400,
       easing: easings.easeOutExpo,
     },
     onRest: () => {

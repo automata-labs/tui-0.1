@@ -1,58 +1,48 @@
-import { useEffect } from 'react';
+import { useSearchParams } from '@remix-run/react';
 import { useParams } from 'react-router-dom';
 
+import Command from '~/components/terminal/command';
 import Spinner from '~/components/spinner';
-import { useTerminal } from '~/contexts/terminal-context';
+import { useKernel } from '~/contexts/kernel';
 import useTraits from '~/hooks/useTraits';
 import useCommands from '~/hooks/useCommands';
-import Command from '../components/command';
-import { useSearchParams } from '@remix-run/react';
 
 export default function Traits() {
   const { address } = useParams() as any;
+
   const { data, loading } = useTraits(address);
-  const { index, setLength, setSelected } = useTerminal() as any;
-
+  const { prompt } = useKernel() as any;
   const [searchParams] = useSearchParams();
-
-  const { prompt } = useTerminal() as any;
   const { commands } = useCommands(
     prompt,
     data.map((trait: any) => ({
-      kind: 'goto',
-      icon: null,
-      to: `/collection/${address}/traits/${trait?.key}`,
+      kind: 'terminal-link',
       text: trait?.key,
-      details: (
-        <>
+      description: (
+        <div className="terminal-command-description">
           {searchParams.getAll(`attributes[${trait?.key}]`).length > 0 && (
-            <div className=".terminal-command-details-active">
+            <div className="terminal-command-description-active">
               ({searchParams.getAll(`attributes[${trait?.key}]`).length} active)
             </div>
           )}
           {trait?.attributeCount && (
-            <div className="terminal-command-details-text">
+            <div className="terminal-command-description-text">
               {trait?.attributeCount} attributes
             </div>
           )}
           {Number.isInteger(trait?.minRange) &&
             Number.isInteger(trait?.maxRange) && (
-              <div className="terminal-command-details-text">
+              <div className="terminal-command-description-text">
                 {trait?.maxRange} - {trait?.minRange} attributes
               </div>
             )}
-        </>
+        </div>
       ),
+      args: {
+        to: `/collection/${address}/traits/${trait?.key}`,
+      },
     }))
   ) as any;
-
-  useEffect(() => {
-    setLength(commands?.length);
-  }, [commands?.length]);
-
-  useEffect(() => {
-    setSelected(commands[index]);
-  }, [index, commands?.length]);
 
   return (
     <>

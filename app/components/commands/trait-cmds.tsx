@@ -3,14 +3,14 @@ import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import { useParams } from 'react-router-dom';
 
 import Spinner from '~/components/spinner';
-import { useTerminal } from '~/contexts/terminal-context';
-import useTrait from '~/hooks/useTrait';
+import Command from '~/components/terminal/command';
+import { useKernel } from '~/contexts/kernel';
 import useCommands from '~/hooks/useCommands';
-import Command from '../components/command';
+import useTrait from '~/hooks/useTrait';
 
-export default function Trait() {
+export default function TraitCommands() {
   const { address, key } = useParams() as any;
-  const { prompt, index, setLength, setSelected } = useTerminal() as any;
+  const { prompt } = useKernel() as any;
   const {
     data: trait,
     loading,
@@ -21,16 +21,17 @@ export default function Trait() {
 
   const values = trait?.values
     ? trait?.values?.map((value: any) => ({
-        kind: 'form-checkbox',
-        key: `attributes[${key}]`,
-        value: value?.value,
-        icon: null,
+        kind: 'checkbox',
         text: value?.value,
-        details: (
+        description: (
           <div className="terminal-command-details-text">
             {value?.count} items
           </div>
         ),
+        args: {
+          key: `attributes[${key}]`,
+          value: value?.value,
+        },
       }))
     : [];
 
@@ -42,14 +43,6 @@ export default function Trait() {
       fetchNextPage();
     }
   }, [entry?.isIntersecting, hasNextPage]);
-
-  useEffect(() => {
-    setLength(commands?.length);
-  }, [commands?.length]);
-
-  useEffect(() => {
-    setSelected(commands[index]);
-  }, [index, loading, commands?.length]);
 
   return (
     <>
@@ -66,6 +59,9 @@ export default function Trait() {
             <div ref={ref}>
               <div className="terminal-load-more-area center">
                 {fetching && <Spinner kind="simpleDotsScrolling" />}
+                {!fetching && hasNextPage && (
+                  <button className="button button--fullscreen" onClick={fetchNextPage}>Load More</button>
+                )}
               </div>
             </div>
           )}

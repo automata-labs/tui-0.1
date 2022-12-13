@@ -1,58 +1,53 @@
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Spinner from '~/components/spinner';
-import { useTerminal } from '~/contexts/terminal-context';
+import Command from '~/components/terminal/command';
+import { useKernel } from '~/contexts/kernel';
 import useCommands from '~/hooks/useCommands';
 import useNFT from '~/hooks/useNFT';
-import Command from '../components/command';
 
-export default function Display() {
+export default function DisplayCommands() {
   const { address, id } = useParams() as any;
   const { data, loading } = useNFT(address, id);
-  const { index, setLength, setSelected } = useTerminal() as any;
 
-  const { prompt } = useTerminal() as any;
+  const { prompt } = useKernel() as any;
   const { commands } = useCommands(prompt, [
     {
-      kind: 'log',
+      kind: 'none',
       icon: 'fullscreen',
       text: 'Show Fullscreen',
-      to: '#',
     },
     {
-      kind: 'log',
+      kind: 'none',
       icon: 'arrow-right',
       text: 'Go to Owner',
       to: `/account/${data?.owner}`,
     },
     {
-      kind: 'navigate',
+      kind: 'link',
       icon: 'arrow-right',
       text: 'Go to Collection',
-      to: `/collection/${address}`,
+      args: {
+        to: `/collection/${address}`,
+      },
     },
     {
       kind: 'href',
       icon: 'opensea',
       text: 'View on OpenSea ↗',
-      to: `https://opensea.io/assets/ethereum/${data?.contract}/${data?.id}`,
+      args: {
+        href: `https://opensea.io/assets/ethereum/${data?.contract}/${data?.id}`,
+      }
     },
     {
       kind: 'href',
       icon: 'etherscan',
       text: 'View on Etherscan ↗',
-      to: `https://etherscan.io/address/${data?.contract}`,
+      args: {
+        href: `https://etherscan.io/address/${data?.contract}`,
+      }
     },
   ]) as any;
-
-  useEffect(() => {
-    setSelected(commands[index]);
-  }, [index]);
-
-  useEffect(() => {
-    setLength(commands?.length);
-  }, [commands?.length]);
 
   return (
     <>

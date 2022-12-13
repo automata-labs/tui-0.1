@@ -1,6 +1,6 @@
 import { useSearchParams } from '@remix-run/react';
 
-import Icon from '~/terminal/components/icon';
+import Icon from '~/components/icon';
 import { getSource } from '~/utils/constants';
 
 export default function CollectionFilter({ searchParam }: any) {

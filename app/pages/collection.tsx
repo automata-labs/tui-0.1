@@ -6,14 +6,13 @@ import NFT from '~/components/nft';
 import Spinner from '~/components/spinner';
 import { Tab, Tabs } from '~/components/tabs';
 import stylesheet from '~/styles/collection.css';
-import Filter from '~/components/filter';
 import Image from '~/components/image';
 import CollectionHeader from '~/skeletons/collection-header';
-import { useTerminal } from '~/contexts/terminal-context';
+import { useKernel } from '~/contexts/kernel';
 import useCollection from '~/hooks/useCollection';
 import useTraits from '~/hooks/useTraits';
 import CollectionFilter from '~/components/collection-filter';
-import Icon from '~/terminal/components/icon';
+import Icon from '~/components/icon';
 import useNFTs from '~/hooks/useNFTs';
 import useSources from '~/hooks/useSources';
 
@@ -24,9 +23,9 @@ export function links() {
 export default function Page() {
   const { address } = useParams() as any;
   const [searchParams, setSearchParams] = useSearchParams();
-  const { setAnchor, launch, hide } = useTerminal() as any;
+  const { setAnchor, launch } = useKernel() as any;
 
-  const { data: dataInfo, loading: loadingCollection } = useCollection(address);
+  const { data: collection, loading: loadingCollection } = useCollection(address);
   const {
     data: nfts,
     error,
@@ -43,7 +42,6 @@ export default function Page() {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    hide();
     setAnchor(`/collection/${address}`);
   }, [address]);
 
@@ -63,12 +61,12 @@ export default function Page() {
             <div className="collection-image-wrapper">
               <Image
                 className="collection-image"
-                src={dataInfo?.image}
-                alt={dataInfo?.name}
+                src={collection?.image}
+                alt={collection?.name}
               />
             </div>
             <div className="collection-core">
-              <div className="collection-core-name">{dataInfo?.name}</div>
+              <div className="collection-core-name">{collection?.name}</div>
               <div className="collection-core-address">{address}</div>
             </div>
 
@@ -76,41 +74,41 @@ export default function Page() {
               <div className="collection-info-group">
                 <div className="collection-info-group-key">FLOOR PRICE</div>
                 <div className="collection-info-group-value">
-                  Ξ{dataInfo?.floor?.price?.amount?.native}
+                  Ξ{collection?.floor?.price?.amount?.native}
                 </div>
               </div>
               <div className="collection-info-group">
                 <div className="collection-info-group-key">TOP BID</div>
                 <div className="collection-info-group-value">
-                  {dataInfo?.topBid?.price?.amount?.native
-                    ? `Ξ${dataInfo?.topBid?.price?.amount?.native}`
+                  {collection?.topBid?.price?.amount?.native
+                    ? `Ξ${collection?.topBid?.price?.amount?.native}`
                     : '—'}
                 </div>
               </div>
               <div className="collection-info-group">
                 <div className="collection-info-group-key">TOTAL VOLUME</div>
                 <div className="collection-info-group-value">
-                  {dataInfo?.volume?.allTime
-                    ? `Ξ${dataInfo?.volume?.allTime}`
+                  {collection?.volume?.allTime
+                    ? `Ξ${collection?.volume?.allTime}`
                     : '—'}
                 </div>
               </div>
               <div className="collection-info-group">
                 <div className="collection-info-group-key">TOTAL LISTED</div>
                 <div className="collection-info-group-value">
-                  {dataInfo?.listed ? dataInfo?.listed : '—'}
+                  {collection?.listed ? collection?.listed : '—'}
                 </div>
               </div>
               <div className="collection-info-group">
                 <div className="collection-info-group-key">TOTAL SUPPLY</div>
                 <div className="collection-info-group-value">
-                  {dataInfo?.supply ? dataInfo?.supply : '—'}
+                  {collection?.supply ? collection?.supply : '—'}
                 </div>
               </div>
               <div className="collection-info-group">
                 <div className="collection-info-group-key">TOTAL HOLDERS</div>
                 <div className="collection-info-group-value">
-                  {dataInfo?.holders ? dataInfo?.holders : '—'}
+                  {collection?.holders ? collection?.holders : '—'}
                 </div>
               </div>
             </div>
@@ -149,9 +147,9 @@ export default function Page() {
               Platform
               <Icon kind="filter" />
             </button>
-            {dataInfo?.supply ? (
+            {collection?.supply ? (
               <div className="collection-filters-items-number">
-                {dataInfo?.supply} items
+                {collection?.supply} items
               </div>
             ) : (
               <Spinner kind="line" />

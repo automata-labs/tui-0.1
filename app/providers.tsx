@@ -1,7 +1,7 @@
 import { CenterProvider } from '@center-inc/react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { TerminalProvider } from './contexts/terminal-context';
+import { KernelProvider } from './contexts/kernel';
 import { SpinnerProvider } from './contexts/spinner';
 import { SearchParamsProvider } from './contexts/search-params';
 
@@ -23,7 +23,7 @@ export function Providers({ children, env }: ProvidersProps) {
         apiKey={env.CENTER_KEY}
       >
         <SpinnerProvider>
-          <TerminalProvider>{children}</TerminalProvider>
+          <KernelProvider>{children}</KernelProvider>
         </SpinnerProvider>
       </CenterProvider>
     </QueryClientProvider>

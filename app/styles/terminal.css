@@ -46,6 +46,7 @@
   align-items: center;
   grid-gap: 10px;
   color: var(--color-grey0);
+  scroll-margin: 8px;
 
   border-radius: 2px;
   padding: 12px 12px;
@@ -65,7 +66,7 @@
   align-items: center;
 }
 
-.terminal-command-details {
+.terminal-command-description {
   display: flex;
   grid-gap: 16px;
   flex-grow: 1;
@@ -77,11 +78,11 @@
 .terminal-command-text {
 }
 
-.terminal-command-details-active {
+.terminal-command-description-active {
 }
 
 .terminal-load-more-area {
-  height: 64px;
+  height: 36px;
 }
 
 /**

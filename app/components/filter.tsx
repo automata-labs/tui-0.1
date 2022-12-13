@@ -1,4 +1,4 @@
-import Icon from '~/terminal/components/icon';
+import Icon from '~/components/icon';
 
 type FilterProps = {
   text: string;
