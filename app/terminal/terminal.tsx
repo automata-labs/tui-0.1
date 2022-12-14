@@ -7,6 +7,7 @@ import Breadcrumbs from '~/components/breadcrumbs/breadcrumbs';
 import { useKernel } from '~/contexts/kernel';
 import Collection from '~/components/commands/collection-cmds';
 import Display from '~/components/commands/display-cmds';
+import Sort from '~/components/commands/sort-cmds';
 import Sources from '~/components/commands/sources-cmds';
 import Trait from '~/components/commands/trait-cmds';
 import Traits from '~/components/commands/traits-cmds';
@@ -61,6 +62,7 @@ export default function Terminal({ styles, item }: any) {
                   <Route exact path="/nft/:address/:id" component={Display} />
 
                   <Route exact path="/collection/:address" component={Collection} />
+                  <Route exact path="/collection/:address/sort" component={Sort} />
                   <Route exact path="/collection/:address/traits" component={Traits} />
                   <Route exact path="/collection/:address/traits/:key" component={Trait} />
                   <Route exact path="/collection/:address/sources" component={Sources} />

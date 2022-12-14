@@ -127,10 +127,10 @@ export default function Page() {
             <button
               className="button button--filled attributes-filter"
               onClick={() => {
-                launch(`/collection/${address}/traits`);
+                launch(`/collection/${address}/sort`);
               }}
             >
-              Price: Low to High
+              Sort
               <Icon kind="arrow-switch-vertical" />
             </button>
             <button

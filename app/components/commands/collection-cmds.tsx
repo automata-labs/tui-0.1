@@ -16,6 +16,14 @@ export default function CollectionCommands() {
     {
       kind: 'terminal-link',
       icon: 'arrow-right',
+      text: 'Sort NFTs',
+      args: {
+        to: `/collection/${address}/sort`,
+      },
+    },
+    {
+      kind: 'terminal-link',
+      icon: 'arrow-right',
       text: 'Filter by Traits',
       args: {
         to: `/collection/${address}/traits`,
@@ -33,7 +41,7 @@ export default function CollectionCommands() {
       ? [
           {
             kind: 'href',
-            icon: 'opensea',
+            icon: 'opensea.io',
             text: 'View on OpenSea ↗',
             args: {
               href: `https://opensea.io/collection/${collection?.slug}`,

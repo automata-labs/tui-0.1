@@ -52,6 +52,12 @@
   padding: 12px 12px;
 }
 
+.terminal-command.terminal-command--button {
+  border: 0;
+  background-color: transparent;
+  line-height: 100%;
+}
+
 .terminal-command.active {
   background-color: var(--standard-fill-color--dark);
   color: white;

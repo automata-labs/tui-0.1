@@ -1,7 +1,7 @@
 import { useSearchParams } from '@remix-run/react';
 
 import Icon from '~/components/icon';
-import { getSource } from '~/utils/constants';
+import { getSort, getSource } from '~/utils/constants';
 
 export default function CollectionFilter({ searchParam }: any) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -49,6 +49,20 @@ export default function CollectionFilter({ searchParam }: any) {
         }}
       >
         Platform: {getSource(value).text} <Icon kind="x" />
+      </button>
+    );
+  } else if (fullkey === 'sortBy') {
+    return (
+      <button
+        className="button button--filled collection-filter"
+        onClick={() => {
+          searchParams.delete('sortBy');
+          searchParams.delete('sortDirection');
+          setSearchParams(searchParams, { replace: true });
+        }}
+      >
+        {getSort(searchParams.get('sortBy'), searchParams.get('sortDirection'))}{' '}
+        <Icon kind="x" />
       </button>
     );
   }

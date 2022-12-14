@@ -25,3 +25,31 @@ export function getSource(source: string) {
 
   return { text: source, icon: null };
 }
+
+export function getSort(sortBy: string | null, sortDirection: string | null) {
+  if (sortBy === 'floorAskPrice') {
+    if (sortDirection === 'desc') {
+      return 'Sort Price: High to Low';
+    } else {
+      return 'Sort Price: Low to High';
+    }
+  }
+
+  if (sortBy === 'tokenId') {
+    if (sortDirection === 'desc') {
+      return 'Sort Token ID: High to Low';
+    } else {
+      return 'Sort Token ID: Low to High';
+    }
+  }
+
+  if (sortBy === 'rarity') {
+    if (sortDirection === 'desc') {
+      return 'Sort Rarity: Bottom to Top';
+    } else {
+      return 'Sort Rarity: Top to Bottom';
+    }
+  }
+
+  return `${sortBy}: ${sortDirection}`;
+}

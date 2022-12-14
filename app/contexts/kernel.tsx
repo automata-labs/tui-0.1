@@ -127,6 +127,26 @@ export function KernelProvider({ children }: { children: React.ReactNode }) {
 
       setSearchParams(searchParams, { replace: true });
     }
+
+    if (command.kind === 'radio') {
+      const params = command.args?.params;
+
+      for (const param of params) {
+        searchParams.set(param?.key, param?.value);
+      }
+
+      hide();
+      setSearchParams(searchParams, { replace: true });
+    }
+
+    if (command.kind === 'radio-default') {
+      for (const param of command.args?.params) {
+        searchParams.delete(param?.key);
+      }
+
+      hide();
+      setSearchParams(searchParams, { replace: true });
+    }
   };
 
   useHotKeys('command+k,ctrl+k', toggle);

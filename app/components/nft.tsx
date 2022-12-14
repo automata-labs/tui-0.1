@@ -8,8 +8,6 @@ export default function NFT({ innerRef, nft }: any) {
   const address = nft?.address ?? nft?.contract;
   const id = nft?.id ?? nft?.tokenId;
 
-  console.log(nft);
-
   return (
     <Link className="nft" to={`/nft/${address}/${id}`}>
       <div ref={innerRef} className="nft-info">
@@ -29,7 +27,7 @@ export default function NFT({ innerRef, nft }: any) {
             <div className="nft-collection-name">{nft?.collection?.name}</div>
           </div>
         </div>
-        {nft?.floor?.source && (
+        {nft?.floor?.source?.domain && (
           <div className="nft-platform">
             <div className="nft-group-title">Platform</div>
             <div className="nft-platform-value">

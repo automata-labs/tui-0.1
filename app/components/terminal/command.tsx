@@ -6,7 +6,7 @@ import Icon from '~/components/icon';
 import { useKernel } from '~/contexts/kernel';
 
 export default function CommandComponent({ command }: any) {
-  const { refs, index, setIndex, hide } = useKernel() as any;
+  const { refs, index, setIndex, hide, run } = useKernel() as any;
   const [searchParams, setSearchParams] = useSearchParams();
 
   if (command.kind === 'none') {
@@ -105,28 +105,36 @@ export default function CommandComponent({ command }: any) {
           id={value}
           name={key}
           value={value}
-          onChange={(e) => {
-            if (e.target.checked) {
-              searchParams.append(key, value);
-            } else {
-              const values = searchParams
-                .getAll(key)
-                .filter((v) => v !== value);
-              searchParams.delete(key);
-
-              for (const value of values) {
-                searchParams.append(key, value);
-              }
-            }
-
-            setSearchParams(searchParams, { replace: true });
-          }}
+          onChange={(e) => run(command)}
           checked={searchParams.getAll(key).includes(value)}
         />
         <div style={{ paddingTop: 1 }}>{command.text}</div>
 
         {command.details}
       </label>
+    );
+  }
+
+  if (command.kind === 'radio' || command.kind === 'radio-default') {
+    const id = command?.id;
+
+    return (
+      <button
+        ref={(el) => refs.current.set(id, el)}
+        className={clsx([
+          'button',
+          'terminal-command',
+          'terminal-command--button',
+          index === id && 'active',
+        ])}
+        onMouseMove={() => setIndex(id)}
+        onClick={(e) => run(command)}
+      >
+        <Icon kind={command.icon} />
+        <div style={{ paddingTop: 1 }}>{command.text}</div>
+
+        {command.details}
+      </button>
     );
   }
 
