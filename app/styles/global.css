@@ -135,7 +135,9 @@ a {
 .button.button--fullscreen {
   background-color: var(--standard-fill-color);
   width: 100%;
-  text-align: center;
+
+  display: flex;
+  justify-content: center;
 }
 
 /**
