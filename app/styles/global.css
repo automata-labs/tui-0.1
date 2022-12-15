@@ -21,6 +21,10 @@ body {
   min-height: calc(100vh - 47px);
 }
 
+.display {
+  max-height: calc(100vh - 47px);
+}
+
 html,
 body {
   padding: 0;

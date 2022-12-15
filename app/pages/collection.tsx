@@ -114,7 +114,8 @@ export default function Page() {
             </div>
 
             <Tabs>
-              <Tab to={`/nft/${address}`} label="ITEMS" />
+              <Tab to={`/collection/${address}`} label="ITEMS" />
+              <Tab to={`/collection/${address}/holders`} label="HOLDERS" />
             </Tabs>
           </div>
           <div className="divider"></div>

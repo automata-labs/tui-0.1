@@ -58,6 +58,7 @@ export default function CollectionHeader() {
 
         <Tabs>
           <Tab to={`.`} label="ITEMS" />
+          <Tab to={`./holders`} label="HOLDERS" />
         </Tabs>
       </div>
       <div className="divider"></div>

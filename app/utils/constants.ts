@@ -23,6 +23,22 @@ export function getSource(source: string) {
     return { text: 'Zora', icon: 'zora'};
   }
 
+  if (source === 'nft.coinbase.com') {
+    return { text: 'Coinbase', icon: 'coinbase'};
+  }
+
+  if (source === 'rarible.com') {
+    return { text: 'Rarible', icon: 'rarible'};
+  }
+
+  if (source === 'www.apecoinmarketplace.com') {
+    return { text: 'ApeCoin Marketplace', icon: 'apecoin-marketplace'};
+  }
+
+  if (source === 'atomic0.com') {
+    return { text: 'Atomic0', icon: 'atomic0'};
+  }
+
   return { text: source, icon: null };
 }
 
