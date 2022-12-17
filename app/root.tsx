@@ -23,6 +23,7 @@ import reset from '~/styles/reset.css';
 import shared from '~/styles/shared.css';
 import terminal from '~/styles/terminal.css';
 import themes from '~/styles/themes.css';
+import middleware from '~/styles/middleware.css';
 
 export type LoaderData = {
   theme: Theme | null;
@@ -47,6 +48,7 @@ export function links() {
     { rel: 'stylesheet', href: themes },
     { rel: 'stylesheet', href: terminal },
     { rel: 'stylesheet', href: dialog },
+    { rel: 'stylesheet', href: middleware },
   ];
 }
 

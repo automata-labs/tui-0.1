@@ -1,5 +1,4 @@
 import Spinner from '~/components/spinner';
-import { Tab, Tabs } from '~/components/tabs';
 
 export default function CollectionHeader() {
   return (
@@ -19,47 +18,42 @@ export default function CollectionHeader() {
 
         <div className="collection-info">
           <div className="collection-info-group">
-            <div className="collection-info-group-key">FLOOR PRICE</div>
+            <div className="collection-info-group-key">Floor Price</div>
             <div className="collection-info-group-value">
               <Spinner kind="line" />
             </div>
           </div>
           <div className="collection-info-group">
-            <div className="collection-info-group-key">TOP BID</div>
+            <div className="collection-info-group-key">Top Bid</div>
             <div className="collection-info-group-value">
               <Spinner kind="line" />
             </div>
           </div>
           <div className="collection-info-group">
-            <div className="collection-info-group-key">TOTAL VOLUME</div>
+            <div className="collection-info-group-key">Total Volume</div>
             <div className="collection-info-group-value">
               <Spinner kind="line" />
             </div>
           </div>
           <div className="collection-info-group">
-            <div className="collection-info-group-key">TOTAL LISTED</div>
+            <div className="collection-info-group-key">Total Listed</div>
             <div className="collection-info-group-value">
               <Spinner kind="line" />
             </div>
           </div>
           <div className="collection-info-group">
-            <div className="collection-info-group-key">TOTAL SUPPLY</div>
+            <div className="collection-info-group-key">Total Supply</div>
             <div className="collection-info-group-value">
               <Spinner kind="line" />
             </div>
           </div>
           <div className="collection-info-group">
-            <div className="collection-info-group-key">TOTAL HOLDERS</div>
+            <div className="collection-info-group-key">Total Holders</div>
             <div className="collection-info-group-value">
               <Spinner kind="line" />
             </div>
           </div>
         </div>
-
-        <Tabs>
-          <Tab to={`.`} label="ITEMS" />
-          <Tab to={`./holders`} label="HOLDERS" />
-        </Tabs>
       </div>
       <div className="divider"></div>
     </>

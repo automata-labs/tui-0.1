@@ -9,6 +9,7 @@
     --color-grey1: rgba(255, 255, 255, 0.5);
     --color-scheme: dark;
 
+    --standard-border-color--dark: rgba(255, 255, 255, 0.3);
     --standard-border-color: rgba(255, 255, 255, 0.2);
     --standard-fill-color: rgba(255, 255, 255, 0.075);
     --standard-fill-color--dark: rgba(255, 255, 255, 0.115);

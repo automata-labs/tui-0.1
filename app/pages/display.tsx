@@ -3,6 +3,7 @@ import type { LoaderFunction } from '@remix-run/node';
 import { Link, useParams } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 
+import Icon from '~/components/icon';
 import Image from '~/components/image';
 import { Render } from '~/components/render';
 import { useKernel } from '~/contexts/kernel';
@@ -15,6 +16,23 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
+}
+
+export const handle = {
+  breadcrumb: () => <Breadcrumb />,
+};
+
+function Breadcrumb() {
+  const { address, id } = useParams() as any;
+  const { data: nft, loading: loadingCollection } =
+    useNFT(address, id);
+
+  return (
+    <>
+      <Icon kind="slash" />
+      <div className="breadcrumb-text">{nft?.name}</div>
+    </>
+  );
 }
 
 export default function Page() {

@@ -7,7 +7,7 @@ export function getSource(source: string) {
     return { text: 'LooksRare', icon: 'looksrare'};
   }
 
-  if (source === 'sudoswap.xyz') {
+  if (source === 'sudoswap.xyz' || source === 'sudoswap') {
     return { text: 'Sudoswap', icon: 'sudoswap'};
   }
 
