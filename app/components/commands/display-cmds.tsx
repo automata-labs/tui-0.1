@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-
 import Spinner from '~/components/spinner';
 import Command from '~/components/terminal/command';
 import { useKernel } from '~/contexts/kernel';
@@ -37,7 +36,7 @@ export default function DisplayCommands() {
       text: 'View on OpenSea ↗',
       args: {
         href: `https://opensea.io/assets/ethereum/${data?.contract}/${data?.id}`,
-      }
+      },
     },
     {
       kind: 'href',
@@ -45,7 +44,7 @@ export default function DisplayCommands() {
       text: 'View on Etherscan ↗',
       args: {
         href: `https://etherscan.io/address/${data?.contract}`,
-      }
+      },
     },
   ]) as any;
 

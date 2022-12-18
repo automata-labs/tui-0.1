@@ -1,6 +1,5 @@
 import { Link } from '@remix-run/react';
 import { clsx } from 'clsx';
-
 import { useSearch } from '~/contexts/search';
 
 type SearchResultProps = {

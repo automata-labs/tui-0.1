@@ -1,14 +1,14 @@
 import { useClickOutside } from '@react-hookz/web';
+import { useNavigate } from '@remix-run/react';
 import { DateTime } from 'luxon';
 import { useRef } from 'react';
-
-import Spinner from './spinner';
-import Image from './image';
-import { hashid } from '~/utils/hex';
 import { useSearch } from '~/contexts/search';
-import SearchResult from './search-result';
 import useMousetrap from '~/hooks/useMousetrap';
-import { useNavigate } from '@remix-run/react';
+import { hashid } from '~/utils/hex';
+
+import Image from './image';
+import SearchResult from './search-result';
+import Spinner from './spinner';
 
 function BlockResults() {
   const { blocks, match, selected } = useSearch() as any;
@@ -24,12 +24,16 @@ function BlockResults() {
             value={block}
             to={`/block/${block?.number}`}
             type="block"
-            active={selected?.type === 'block' && selected?.number === block?.number}
-            image={"Blk"}
+            active={
+              selected?.type === 'block' && selected?.number === block?.number
+            }
+            image={'Blk'}
             title={`Block ${block?.number}`}
             subtitle={hashid(block?.hash)}
             secondaryTitle={<>{block?.transactions?.length} txs</>}
-            secondarySubtitle={DateTime.fromSeconds(Number(block?.timestamp)).toRelative()}
+            secondarySubtitle={DateTime.fromSeconds(
+              Number(block?.timestamp),
+            ).toRelative()}
           />
         </>
       );
@@ -51,7 +55,9 @@ function TokenResults() {
         value={token}
         type="token"
         to={`/token/${token?.address}`}
-        active={selected?.type === 'token' && selected?.address === token.address}
+        active={
+          selected?.type === 'token' && selected?.address === token.address
+        }
         image={
           <Image
             className="search-result-image"
@@ -105,7 +111,9 @@ function CollectionResults() {
           value={collection}
           type="collection"
           to={`/collection/${collection?.collectionId ?? collection?.id}`}
-          active={selected?.type === 'collection' && selected?.id === collection?.id}
+          active={
+            selected?.type === 'collection' && selected?.id === collection?.id
+          }
           image={
             <Image
               className="search-result-image"

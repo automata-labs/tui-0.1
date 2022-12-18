@@ -1,5 +1,4 @@
 import { Link as TerminalLink, useParams } from 'react-router-dom';
-
 import Spinner from '~/components/spinner';
 import useCollection from '~/hooks/useCollection';
 

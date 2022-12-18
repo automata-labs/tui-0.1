@@ -1,46 +1,46 @@
 export function getSource(source: string) {
   if (source === 'opensea.io') {
-    return { text: 'OpenSea', icon: 'opensea'};
+    return { text: 'OpenSea', icon: 'opensea' };
   }
 
   if (source === 'looksrare.org') {
-    return { text: 'LooksRare', icon: 'looksrare'};
+    return { text: 'LooksRare', icon: 'looksrare' };
   }
 
   if (source === 'sudoswap.xyz' || source === 'sudoswap') {
-    return { text: 'Sudoswap', icon: 'sudoswap'};
+    return { text: 'Sudoswap', icon: 'sudoswap' };
   }
 
   if (source === 'x2y2.io') {
-    return { text: 'X2Y2', icon: 'xy2y'};
+    return { text: 'X2Y2', icon: 'xy2y' };
   }
 
   if (source === 'foundation.app') {
-    return { text: 'Foundation', icon: 'foundation'};
+    return { text: 'Foundation', icon: 'foundation' };
   }
 
   if (source === 'zora.co') {
-    return { text: 'Zora', icon: 'zora'};
+    return { text: 'Zora', icon: 'zora' };
   }
 
   if (source === 'nft.coinbase.com') {
-    return { text: 'Coinbase', icon: 'coinbase'};
+    return { text: 'Coinbase', icon: 'coinbase' };
   }
 
   if (source === 'rarible.com') {
-    return { text: 'Rarible', icon: 'rarible'};
+    return { text: 'Rarible', icon: 'rarible' };
   }
 
   if (source === 'www.apecoinmarketplace.com') {
-    return { text: 'ApeCoin Marketplace', icon: 'apecoin-marketplace'};
+    return { text: 'ApeCoin Marketplace', icon: 'apecoin-marketplace' };
   }
 
   if (source === 'atomic0.com') {
-    return { text: 'Atomic0', icon: 'atomic0'};
+    return { text: 'Atomic0', icon: 'atomic0' };
   }
 
   if (source === 'alienswap.xyz') {
-    return { text: 'AlienSwap', icon: 'alienswap.xyz'};
+    return { text: 'AlienSwap', icon: 'alienswap.xyz' };
   }
 
   return { text: source, icon: null };

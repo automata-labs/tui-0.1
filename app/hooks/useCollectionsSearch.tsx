@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 export default function useCollectionsSearch(search: string) {
   let url = search
     ? `https://api-nijynot.vercel.app/api/search/nfts?query=${encodeURIComponent(
-        search
+        search,
       )}`
     : `https://api-nijynot.vercel.app/api/trending/nfts`;
 

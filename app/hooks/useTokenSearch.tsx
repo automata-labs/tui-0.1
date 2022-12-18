@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 export default function useTokenSearch(search: string) {
   let url = search
     ? `https://api-nijynot.vercel.app/api/search/tokens?query=${encodeURIComponent(
-        search
+        search,
       )}`
     : `https://api-nijynot.vercel.app/api/trending/tokens`;
 

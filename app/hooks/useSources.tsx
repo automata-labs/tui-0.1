@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 export default function useSources(id?: string) {
   const fetcher = () => {
     return fetch(
-      `https://api-nijynot.vercel.app/api/collection/sources?id=${id}`
+      `https://api-nijynot.vercel.app/api/collection/sources?id=${id}`,
     ).then((res) => res.json());
   };
 
@@ -17,7 +17,9 @@ export default function useSources(id?: string) {
   });
 
   return {
-    data: data ? data.filter((value: any) => value.source !== 'sudoswap.xyz') : [],
+    data: data
+      ? data.filter((value: any) => value.source !== 'sudoswap.xyz')
+      : [],
     loading: isLoading || isFetching,
   };
 }

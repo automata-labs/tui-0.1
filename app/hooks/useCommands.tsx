@@ -1,6 +1,5 @@
 import Fuse from 'fuse.js';
 import { useEffect } from 'react';
-
 import { useKernel } from '~/contexts/kernel';
 
 function identify(arr: Array<any>) {
@@ -9,7 +8,7 @@ function identify(arr: Array<any>) {
 
 export default function useSchemaFilter(
   prompt: string,
-  schema: Array<any>
+  schema: Array<any>,
 ): {
   commands: Array<any>;
 } {

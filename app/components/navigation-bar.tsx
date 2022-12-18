@@ -1,12 +1,12 @@
 import { easings, useTransition } from '@react-spring/web';
 import { Link } from '@remix-run/react';
+import { useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
+import Breadcrumbs, { TabsModule } from '~/contexts/breadcrumbs';
+import { useKernel } from '~/contexts/kernel';
+import Terminal from '~/terminal/terminal';
 
 import Search from './search';
-import Terminal from '~/terminal/terminal';
-import { useKernel } from '~/contexts/kernel';
-import Breadcrumbs, { TabsModule } from '~/contexts/breadcrumbs';
-import { useEffect, useState } from 'react';
 
 export function NavigationBar() {
   const { visible } = useKernel() as any;

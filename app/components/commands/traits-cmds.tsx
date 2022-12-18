@@ -1,11 +1,10 @@
 import { useSearchParams } from '@remix-run/react';
 import { useParams } from 'react-router-dom';
-
-import Command from '~/components/terminal/command';
 import Spinner from '~/components/spinner';
+import Command from '~/components/terminal/command';
 import { useKernel } from '~/contexts/kernel';
-import useTraits from '~/hooks/useTraits';
 import useCommands from '~/hooks/useCommands';
+import useTraits from '~/hooks/useTraits';
 
 export default function Traits() {
   const { address } = useParams() as any;
@@ -41,7 +40,7 @@ export default function Traits() {
       args: {
         to: `/collection/${address}/traits/${trait?.key}`,
       },
-    }))
+    })),
   ) as any;
 
   return (

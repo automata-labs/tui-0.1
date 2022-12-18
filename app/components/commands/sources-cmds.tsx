@@ -1,5 +1,4 @@
 import { useParams } from '@remix-run/react';
-
 import Command from '~/components/terminal/command';
 import { useKernel } from '~/contexts/kernel';
 import useCommands from '~/hooks/useCommands';
@@ -22,7 +21,7 @@ export default function Sources() {
         key: 'source',
         value: value?.source,
       },
-    }))
+    })),
   );
 
   return (

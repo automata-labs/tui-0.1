@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom';
-
 import Spinner from '~/components/spinner';
+import Command from '~/components/terminal/command';
 import { useKernel } from '~/contexts/kernel';
 import useCollection from '~/hooks/useCollection';
 import useCommands from '~/hooks/useCommands';
 import useTraits from '~/hooks/useTraits';
-import Command from '~/components/terminal/command';
 
 export default function CollectionCommands() {
   const { address } = useParams() as any;

@@ -1,21 +1,20 @@
 import { useParams, useSearchParams } from '@remix-run/react';
 import { useEffect, useRef } from 'react';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
-
+import CollectionFilter from '~/components/collection-filter';
+import CollectionIcon from '~/components/collection-icon';
+import Icon from '~/components/icon';
+import Image from '~/components/image';
 import NFT from '~/components/nft';
 import Spinner from '~/components/spinner';
 import { Tab } from '~/components/tabs';
-import stylesheet from '~/styles/collection.css';
-import Image from '~/components/image';
-import CollectionHeader from '~/skeletons/collection-header';
 import { useKernel } from '~/contexts/kernel';
 import useCollection from '~/hooks/useCollection';
-import useTraits from '~/hooks/useTraits';
-import CollectionFilter from '~/components/collection-filter';
-import Icon from '~/components/icon';
 import useNFTs from '~/hooks/useNFTs';
 import useSources from '~/hooks/useSources';
-import CollectionIcon from '~/components/collection-icon';
+import useTraits from '~/hooks/useTraits';
+import CollectionHeaderSkeleton from '~/skeletons/collection-header';
+import stylesheet from '~/styles/collection.css';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
@@ -91,7 +90,7 @@ export default function Page() {
     <>
       <main className="page">
         {loadingCollection ? (
-          <CollectionHeader />
+          <CollectionHeaderSkeleton />
         ) : (
           <>
             <div className="collection-header pad">

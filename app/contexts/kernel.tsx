@@ -7,7 +7,6 @@ import React, {
   useState,
 } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-
 import useHotKeys from '~/hooks/useHotKeys';
 
 export const KernelContext = React.createContext({});
@@ -31,7 +30,7 @@ export function KernelProvider({ children }: { children: React.ReactNode }) {
     (path: string) => {
       history.push(path);
     },
-    [history]
+    [history],
   );
 
   const launch = (to?: string) => {
@@ -74,7 +73,7 @@ export function KernelProvider({ children }: { children: React.ReactNode }) {
     }
 
     if (e.key === 'ArrowUp') {
-      select(index > 0 ? index - 1 : (refs.current.size - 1 ?? 0));
+      select(index > 0 ? index - 1 : refs.current.size - 1 ?? 0);
     }
 
     if (e.key === 'k' && e.metaKey) {
@@ -115,9 +114,7 @@ export function KernelProvider({ children }: { children: React.ReactNode }) {
       if (!checked) {
         searchParams.append(key, value);
       } else {
-        const values = searchParams
-          .getAll(key)
-          .filter((v) => v !== value);
+        const values = searchParams.getAll(key).filter((v) => v !== value);
         searchParams.delete(key);
 
         for (const value of values) {

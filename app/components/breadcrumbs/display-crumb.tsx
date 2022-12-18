@@ -1,6 +1,6 @@
 import { Link as TerminalLink, useParams } from 'react-router-dom';
-
 import useNFT from '~/hooks/useNFT';
+
 import Spinner from '../spinner';
 
 export default function DisplayCrumb() {
@@ -9,7 +9,7 @@ export default function DisplayCrumb() {
 
   return (
     <>
-    <div className="breadcrumb-divider">{'>'}</div>
+      <div className="breadcrumb-divider">{'>'}</div>
       <TerminalLink className="breadcrumb-icon" to={`/collection/${address}`}>
         <div
           className="breadcrumb-icon-image"
@@ -24,15 +24,16 @@ export default function DisplayCrumb() {
           {loading && <Spinner kind="line" />}
         </div>
         <div className="breadcrumb">
-          {loading ? <Spinner kind="simpleDotsScrolling" /> : nft?.collection?.name}
+          {loading ? (
+            <Spinner kind="simpleDotsScrolling" />
+          ) : (
+            nft?.collection?.name
+          )}
         </div>
       </TerminalLink>
 
       <div className="breadcrumb-divider">{'>'}</div>
-      <TerminalLink
-        className="breadcrumb"
-        to={`/nft/${address}/${id}`}
-      >
+      <TerminalLink className="breadcrumb" to={`/nft/${address}/${id}`}>
         {loading ? <Spinner kind="simpleDotsScrolling" /> : nft?.name}
       </TerminalLink>
     </>

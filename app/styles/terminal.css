@@ -2,14 +2,14 @@
  * Terminal
  */
 
- .terminal {
+.terminal {
   background-color: var(--bs-modal-bg);
   border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
   border-radius: var(--bs-modal-border-radius);
 
   background-color: rgba(0, 0, 0, 1);
   backdrop-filter: blur(20px) saturate(190%) contrast(70%) brightness(80%);
-  
+
   max-width: 640px;
 }
 
@@ -99,7 +99,7 @@
   display: flex;
   align-items: center;
   grid-gap: 8px;
-  
+
   padding: 14px 14px 2px 14px;
 }
 

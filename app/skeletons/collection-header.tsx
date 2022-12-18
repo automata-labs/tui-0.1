@@ -11,9 +11,7 @@ export default function CollectionHeader() {
           <div>
             <Spinner kind="simpleDotsScrolling" />
           </div>
-          <div className="collection-core-address">
-            -
-          </div>
+          <div className="collection-core-address">-</div>
         </div>
 
         <div className="collection-info">

@@ -26,8 +26,7 @@
 
 .collection-image-wrapper::after {
   border-radius: 4px;
-  box-shadow:
-    inset 1px 0px var(--standard-border-color),
+  box-shadow: inset 1px 0px var(--standard-border-color),
     inset 0px 1px var(--standard-border-color),
     inset -1px 0px var(--standard-border-color),
     inset 0px -1px var(--standard-border-color);

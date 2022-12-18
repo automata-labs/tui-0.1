@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 export default function useNFT(address: string, id: string) {
   const fetcher = () => {
     return fetch(
-      `https://api-nijynot.vercel.app/api/nft?address=${address}&id=${id}`
+      `https://api-nijynot.vercel.app/api/nft?address=${address}&id=${id}`,
     ).then((res) => res.json());
   };
 

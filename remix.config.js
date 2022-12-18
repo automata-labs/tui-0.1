@@ -13,6 +13,7 @@ module.exports = {
       route('/collection/:address', 'pages/collection.tsx');
       route('/nft/:address/:id', 'pages/display.tsx');
       route('/spinners', 'pages/spinners.tsx');
+      route('/token/:address', 'pages/token.tsx');
     });
   },
   // appDirectory: "app",

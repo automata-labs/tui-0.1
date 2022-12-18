@@ -29,7 +29,7 @@ function useRange(address: string, key: string, enabled: boolean) {
       refetchOnMount: false,
       refetchOnReconnect: false,
       getNextPageParam: (lastPage: any) => {
-        return (lastPage.length > 20) ? offset.current : undefined;
+        return lastPage.length > 20 ? offset.current : undefined;
       },
       enabled,
     });

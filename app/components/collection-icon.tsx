@@ -1,5 +1,5 @@
-import Spinner from './spinner';
 import Image from './image';
+import Spinner from './spinner';
 
 export default function CollectionIcon({ image, loading }: any) {
   return (

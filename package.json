@@ -3,7 +3,9 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev"
+    "dev": "remix dev",
+    "lint": "eslint .",
+    "fmt": "npx prettier --write ."
   },
   "dependencies": {
     "@center-inc/react": "^1.1.5",
@@ -39,6 +41,7 @@
     "@remix-run/dev": "^1.8.2",
     "@remix-run/eslint-config": "^1.7.6",
     "@remix-run/serve": "^1.8.2",
+    "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/lodash": "^4.14.191",
     "@types/luxon": "^3.1.0",
@@ -47,6 +50,7 @@
     "@types/react-dom": "^18.0.8",
     "@types/styled-components": "^5.1.26",
     "eslint": "^8.27.0",
+    "prettier": "2.8.1",
     "typescript": "^4.8.4"
   },
   "engines": {

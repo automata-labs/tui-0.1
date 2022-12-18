@@ -2,7 +2,6 @@ import { useMeasure } from '@react-hookz/web';
 import type { LoaderFunction } from '@remix-run/node';
 import { Link, useParams } from '@remix-run/react';
 import { useEffect, useState } from 'react';
-
 import Icon from '~/components/icon';
 import Image from '~/components/image';
 import { Render } from '~/components/render';
@@ -25,7 +24,7 @@ export const handle = {
 
 function Breadcrumb() {
   const { address, id } = useParams() as any;
-  const { data: nft, loading} = useNFT(address, id);
+  const { data: nft, loading } = useNFT(address, id);
 
   return (
     <>
@@ -121,9 +120,7 @@ export default function Page() {
               </div>
               <div className="display-label-group">
                 <div className="display-label-group-key">Contract</div>
-                <div className="display-label-group-value">
-                  {nft?.contract}
-                </div>
+                <div className="display-label-group-value">{nft?.contract}</div>
               </div>
 
               <div className="divider divider--display"></div>

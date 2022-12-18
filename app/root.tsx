@@ -1,3 +1,5 @@
+import type { LoaderFunction, MetaFunction } from '@remix-run/node';
+import { json } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -6,24 +8,21 @@ import {
   Scripts,
   useLoaderData,
 } from '@remix-run/react';
-import type { LoaderFunction, MetaFunction } from '@remix-run/node';
-import { json } from '@remix-run/node';
 import { MemoryRouter } from 'react-router-dom';
-
-import { Providers } from '~/providers';
 import { NavigationBar } from '~/components/navigation-bar';
 import { ScrollRestoration } from '~/components/scroll-restoration';
 import { SearchProvider } from '~/contexts/search';
 import type { Theme } from '~/contexts/theme';
 import { ThemeProvider, useTheme } from '~/contexts/theme';
+import { Providers } from '~/providers';
 import { getThemeSession } from '~/servers/theme.server';
-import global from '~/styles/global.css';
 import dialog from '~/styles/dialog.css';
+import global from '~/styles/global.css';
+import middleware from '~/styles/middleware.css';
 import reset from '~/styles/reset.css';
 import shared from '~/styles/shared.css';
 import terminal from '~/styles/terminal.css';
 import themes from '~/styles/themes.css';
-import middleware from '~/styles/middleware.css';
 
 export type LoaderData = {
   theme: Theme | null;

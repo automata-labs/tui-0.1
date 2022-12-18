@@ -1,5 +1,4 @@
 import { useSearchParams } from '@remix-run/react';
-
 import Icon from '~/components/icon';
 import { getSort, getSource } from '~/utils/constants';
 

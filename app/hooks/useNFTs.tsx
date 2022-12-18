@@ -1,11 +1,11 @@
-import { useSearchParams } from "@remix-run/react";
-import { useInfiniteQuery } from "react-query";
+import { useSearchParams } from '@remix-run/react';
+import { useInfiniteQuery } from 'react-query';
 
 export default function useNFTs(address: string): any {
   const fetcher = ({ pageParam }: any) => {
     const url = pageParam
       ? `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&cursor=${encodeURIComponent(
-          pageParam
+          pageParam,
         )}&${searchParams.toString()}`
       : `https://api-nijynot.vercel.app/api/collection/nfts?id=${address}&${searchParams.toString()}`;
 
@@ -28,7 +28,7 @@ export default function useNFTs(address: string): any {
     getNextPageParam: (lastPage: any) => {
       return lastPage?.cursor;
     },
-  }) as any; 
+  }) as any;
 
   return {
     data,

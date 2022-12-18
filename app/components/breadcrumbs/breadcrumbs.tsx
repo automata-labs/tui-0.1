@@ -1,9 +1,9 @@
-import { Link as TerminalLink, Route } from 'react-router-dom';
-
+import { Route, Link as TerminalLink } from 'react-router-dom';
 import CollectionCrumb from '~/components/breadcrumbs/collection-crumb';
 import DisplayCrumb from '~/components/breadcrumbs/display-crumb';
-import TraitsCrumb from '~/components/breadcrumbs/traits-crumb';
 import TraitCrumb from '~/components/breadcrumbs/trait-crumb';
+import TraitsCrumb from '~/components/breadcrumbs/traits-crumb';
+
 import SortCrumb from './sort-crumb';
 
 export default function Breadcrumbs() {

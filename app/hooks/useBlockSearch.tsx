@@ -9,20 +9,16 @@ export default function useBlockSearch(number: string) {
     url = `https://api-nijynot.vercel.app/api/blockchain/block?number=${number}`;
   }
 
-  const { data, isLoading, isFetching } = useQuery(
-    {
-      queryKey: `useBlockSearch:${number}`,
-      queryFn: () => {
-        return (url)
-         ? fetch(url).then((res) => res.json())
-         : undefined;
-      },
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-    }
-  ) as any;
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: `useBlockSearch:${number}`,
+    queryFn: () => {
+      return url ? fetch(url).then((res) => res.json()) : undefined;
+    },
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+  }) as any;
 
   return {
     match,

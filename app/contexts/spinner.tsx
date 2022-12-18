@@ -35,7 +35,7 @@ export function SpinnerProvider({ children }: SpinnerProviderProps) {
     // ':.........',
   ];
   const simpleDotsScrolling = ['.  ', '.. ', '...', ' ..', '  .', '   '].map(
-    (frame) => frame.replace(/\s/g, '&nbsp;')
+    (frame) => frame.replace(/\s/g, '&nbsp;'),
   );
   const star = ['✶', '✸', '✹', '✺', '✹', '✷'];
   const bouncingBar = [

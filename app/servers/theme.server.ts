@@ -1,5 +1,4 @@
 import { createCookieSessionStorage } from '@remix-run/node';
-
 import { isTheme } from '~/contexts/theme';
 import type { Theme } from '~/contexts/theme';
 

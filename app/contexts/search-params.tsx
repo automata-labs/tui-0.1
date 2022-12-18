@@ -15,7 +15,10 @@ export function SearchParamsProvider({ children }: SearchParamsProviderProps) {
   const submit = useSubmit();
 
   useDeepCompareEffect(() => {
-    submit(new URLSearchParams(searchParams), { replace: true, action: location.pathname });
+    submit(new URLSearchParams(searchParams), {
+      replace: true,
+      action: location.pathname,
+    });
   }, [searchParams]);
 
   return (
@@ -35,7 +38,7 @@ export function useSearchParamsContext() {
 
   if (context === undefined) {
     throw new Error(
-      '`useSearchParamsContext` must be within a SearchParamsProvider'
+      '`useSearchParamsContext` must be within a SearchParamsProvider',
     );
   }
 

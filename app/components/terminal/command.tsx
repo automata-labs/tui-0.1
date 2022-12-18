@@ -1,7 +1,6 @@
 import { Link, useSearchParams } from '@remix-run/react';
 import clsx from 'clsx';
 import { Link as TerminalLink } from 'react-router-dom';
-
 import Icon from '~/components/icon';
 import { useKernel } from '~/contexts/kernel';
 

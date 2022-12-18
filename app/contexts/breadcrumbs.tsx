@@ -1,6 +1,5 @@
 import { animated, easings, useTransition } from '@react-spring/web';
 import { useMatches } from '@remix-run/react';
-
 import Icon from '~/components/icon';
 import { Tabs } from '~/components/tabs';
 
@@ -40,7 +39,7 @@ export function TabsModule({ logo }: any) {
             <animated.div style={{ ...styles }}>
               <Icon kind="eclipse" />
             </animated.div>
-          )
+          ),
       )}
 
       {tabs}

@@ -1,5 +1,5 @@
-import { hexlify } from '@ethersproject/bytes';
 import { BigNumber } from '@ethersproject/bignumber';
+import { hexlify } from '@ethersproject/bytes';
 
 export function hexify(value: string) {
   if (!value) {
@@ -22,5 +22,8 @@ export function hashid(value: string) {
     return '';
   }
 
-  return `${value.substring(0, 6)}...${value.substring(value.length - 4, value.length)}`;
+  return `${value.substring(0, 6)}...${value.substring(
+    value.length - 4,
+    value.length,
+  )}`;
 }

@@ -1,18 +1,12 @@
 import { useFetcher } from '@remix-run/react';
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
 enum Theme {
   DARK = 'dark',
   LIGHT = 'light',
   MONOKAI = 'monokai',
-};
+}
 
 type ThemeContextType = [Theme | null, Dispatch<SetStateAction<Theme | null>>];
 
@@ -31,7 +25,7 @@ function fallbackTheme(theme: Theme | null) {
       return null;
     }
   }
-  
+
   if (typeof document === 'undefined') {
     return null;
   }
@@ -40,7 +34,9 @@ function fallbackTheme(theme: Theme | null) {
 }
 
 function ThemeProvider({ children, specifiedTheme }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme | null>(fallbackTheme(specifiedTheme));
+  const [theme, setTheme] = useState<Theme | null>(
+    fallbackTheme(specifiedTheme),
+  );
   const fetcher = useFetcher();
   const fetcherRef = useRef(fetcher);
   const mounted = useRef(false);
@@ -61,7 +57,7 @@ function ThemeProvider({ children, specifiedTheme }: ThemeProviderProps) {
 
     fetcherRef.current.submit(
       { theme },
-      { action: 'action/set-theme', method: 'post' }
+      { action: 'action/set-theme', method: 'post' },
     );
   }, [theme]);
 
@@ -88,9 +84,4 @@ function isTheme(value: unknown): value is Theme {
   );
 }
 
-export {
-  isTheme,
-  Theme,
-  ThemeProvider,
-  useTheme,
-};
+export { isTheme, Theme, ThemeProvider, useTheme };

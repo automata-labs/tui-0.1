@@ -8,8 +8,8 @@
  *
  * @license MIT
  */
-import * as React from 'react';
 import { useBeforeUnload, useLocation, useTransition } from '@remix-run/react';
+import * as React from 'react';
 
 let STORAGE_KEY = 'positions';
 let positions = {};
@@ -60,7 +60,7 @@ function useScrollRestoration() {
   useBeforeUnload(
     React.useCallback(() => {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(positions));
-    }, [])
+    }, []),
   );
 
   if (typeof document !== 'undefined') {

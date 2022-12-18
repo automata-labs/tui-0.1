@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import { useParams } from 'react-router-dom';
-
 import Spinner from '~/components/spinner';
 import Command from '~/components/terminal/command';
 import { useKernel } from '~/contexts/kernel';
@@ -60,7 +59,12 @@ export default function TraitCommands() {
               <div className="terminal-load-more-area center">
                 {fetching && <Spinner kind="simpleDotsScrolling" />}
                 {!fetching && hasNextPage && (
-                  <button className="button button--fullscreen" onClick={fetchNextPage}>Load More</button>
+                  <button
+                    className="button button--fullscreen"
+                    onClick={fetchNextPage}
+                  >
+                    Load More
+                  </button>
                 )}
               </div>
             </div>

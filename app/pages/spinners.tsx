@@ -14,7 +14,7 @@ export default function Spinners() {
           background: 'rgba(255, 255, 255, 0.2)',
         }}
       >
-        <Spinner kind='line' />
+        <Spinner kind="line" />
       </div>
       <div
         style={{
@@ -27,7 +27,7 @@ export default function Spinners() {
           background: 'rgba(255, 255, 255, 0.2)',
         }}
       >
-        <Spinner kind='dotted' />
+        <Spinner kind="dotted" />
       </div>
       <div
         style={{
@@ -40,7 +40,7 @@ export default function Spinners() {
           background: 'rgba(255, 255, 255, 0.2)',
         }}
       >
-        <Spinner kind='simple-dots-scrolling' />
+        <Spinner kind="simple-dots-scrolling" />
       </div>
       <div
         style={{
@@ -53,7 +53,7 @@ export default function Spinners() {
           background: 'rgba(255, 255, 255, 0.2)',
         }}
       >
-        <Spinner kind='star' />
+        <Spinner kind="star" />
       </div>
       <div
         style={{
@@ -66,7 +66,7 @@ export default function Spinners() {
           background: 'rgba(255, 255, 255, 0.2)',
         }}
       >
-        <Spinner kind='bouncingBar' />
+        <Spinner kind="bouncingBar" />
       </div>
       <div
         style={{
@@ -79,7 +79,7 @@ export default function Spinners() {
           background: 'rgba(255, 255, 255, 0.2)',
         }}
       >
-        <Spinner kind='grenade' />
+        <Spinner kind="grenade" />
       </div>
       <div
         style={{
@@ -92,7 +92,7 @@ export default function Spinners() {
           background: 'rgba(255, 255, 255, 0.2)',
         }}
       >
-        <Spinner kind='longDottedFrames' />
+        <Spinner kind="longDottedFrames" />
       </div>
     </div>
   );

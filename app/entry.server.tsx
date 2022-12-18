@@ -1,7 +1,6 @@
 // import type { EntryContext } from '@remix-run/node';
 // import { RemixServer } from '@remix-run/react';
 // import { renderToString } from 'react-dom/server';
-
 // export default function handleRequest(
 //   request: Request,
 //   responseStatusCode: number,
@@ -11,15 +10,12 @@
 //   const markup = renderToString(
 //     <RemixServer context={remixContext} url={request.url} />
 //   );
-
 //   responseHeaders.set('Content-Type', 'text/html');
-
 //   return new Response('<!DOCTYPE html>' + markup, {
 //     headers: responseHeaders,
 //     status: responseStatusCode,
 //   });
 // }
-
 import type { EntryContext } from '@remix-run/node';
 import { Response } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
@@ -33,20 +29,20 @@ export default function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext
+  remixContext: EntryContext,
 ) {
   return isbot(request.headers.get('user-agent'))
     ? handleBotRequest(
         request,
         responseStatusCode,
         responseHeaders,
-        remixContext
+        remixContext,
       )
     : handleBrowserRequest(
         request,
         responseStatusCode,
         responseHeaders,
-        remixContext
+        remixContext,
       );
 }
 
@@ -54,7 +50,7 @@ function handleBotRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext
+  remixContext: EntryContext,
 ) {
   return new Promise((resolve, reject) => {
     let didError = false;
@@ -71,7 +67,7 @@ function handleBotRequest(
             new Response(body, {
               headers: responseHeaders,
               status: didError ? 500 : responseStatusCode,
-            })
+            }),
           );
 
           pipe(body);
@@ -84,7 +80,7 @@ function handleBotRequest(
 
           console.error(error);
         },
-      }
+      },
     );
 
     setTimeout(abort, ABORT_DELAY);
@@ -95,7 +91,7 @@ function handleBrowserRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext
+  remixContext: EntryContext,
 ) {
   return new Promise((resolve, reject) => {
     let didError = false;
@@ -112,7 +108,7 @@ function handleBrowserRequest(
             new Response(body, {
               headers: responseHeaders,
               status: didError ? 500 : responseStatusCode,
-            })
+            }),
           );
 
           pipe(body);
@@ -125,7 +121,7 @@ function handleBrowserRequest(
 
           console.error(error);
         },
-      }
+      },
     );
 
     setTimeout(abort, ABORT_DELAY);

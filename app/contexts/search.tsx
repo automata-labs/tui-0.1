@@ -1,6 +1,5 @@
 import { useDebouncedState } from '@react-hookz/web';
 import React, { useContext, useEffect, useState } from 'react';
-
 import useBlockSearch from '~/hooks/useBlockSearch';
 import useCollectionsSearch from '~/hooks/useCollectionsSearch';
 import useTokenSearch from '~/hooks/useTokenSearch';
@@ -40,11 +39,23 @@ export function SearchProvider({ children }: SearchProviderProps) {
     const current = results[value];
 
     if (current?.type === 'block') {
-      return { type: 'block', number: current?.number, to: `/block/${current?.number}` };
+      return {
+        type: 'block',
+        number: current?.number,
+        to: `/block/${current?.number}`,
+      };
     } else if (current?.type === 'token') {
-      return { type: 'token', address: current?.address, to: `/token/${current?.address}` };
+      return {
+        type: 'token',
+        address: current?.address,
+        to: `/token/${current?.address}`,
+      };
     } else if (current?.type === 'collection') {
-      return { type: 'collection', id: current?.id, to: `/collection/${current?.id}` };
+      return {
+        type: 'collection',
+        id: current?.id,
+        to: `/collection/${current?.id}`,
+      };
     }
 
     return {};
@@ -60,21 +71,20 @@ export function SearchProvider({ children }: SearchProviderProps) {
     if (value?.type === 'block') {
       return results.findIndex(
         (element) =>
-          element.type === value?.type && element.number === value?.number
+          element.type === value?.type && element.number === value?.number,
       );
     }
 
     if (value?.type === 'token') {
       return results.findIndex(
         (element) =>
-          element.type === value?.type && element.address === value?.address
+          element.type === value?.type && element.address === value?.address,
       );
     }
 
     if (value?.type === 'collection') {
       return results.findIndex(
-        (element) =>
-          element.type === value?.type && element.id === value?.id
+        (element) => element.type === value?.type && element.id === value?.id,
       );
     }
 
