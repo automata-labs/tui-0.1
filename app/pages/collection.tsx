@@ -1,11 +1,10 @@
-import { easings, useTransition, animated } from '@react-spring/web';
 import { useParams, useSearchParams } from '@remix-run/react';
 import { useEffect, useRef } from 'react';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 
 import NFT from '~/components/nft';
 import Spinner from '~/components/spinner';
-import { Tab, Tabs } from '~/components/tabs';
+import { Tab } from '~/components/tabs';
 import stylesheet from '~/styles/collection.css';
 import Image from '~/components/image';
 import CollectionHeader from '~/skeletons/collection-header';
@@ -16,6 +15,7 @@ import CollectionFilter from '~/components/collection-filter';
 import Icon from '~/components/icon';
 import useNFTs from '~/hooks/useNFTs';
 import useSources from '~/hooks/useSources';
+import CollectionIcon from '~/components/collection-icon';
 
 export function links() {
   return [{ rel: 'stylesheet', href: stylesheet }];
@@ -28,27 +28,16 @@ export const handle = {
 
 function Breadcrumb() {
   const { address } = useParams() as any;
-  const { data: collection, loading: loadingCollection } =
-    useCollection(address);
+  const { data: collection, loading } = useCollection(address);
 
   return (
     <>
       <Icon kind="slash" />
 
       <div className="nft-collection" style={{ flexShrink: 1 }}>
-        <div
-          className="collection-icon"
-          style={{
-            backgroundImage: collection?.image
-              ? `url(${collection?.image})`
-              : '',
-          }}
-        >
-          {loadingCollection && <Spinner kind="line" />}
-          {!loadingCollection && !collection?.image && <Image className="img--fallback" />}
-        </div>
+        <CollectionIcon image={collection?.image} loading={loading} />
         <div className="breadcrumb-text breadcrumb-text--auto-hide">
-          {loadingCollection ? <Spinner kind="simpleDotsScrolling" /> : collection?.name}
+          {loading ? <Spinner kind="simpleDotsScrolling" /> : collection?.name}
         </div>
       </div>
     </>
@@ -57,26 +46,12 @@ function Breadcrumb() {
 
 function TabsBar({ logo }: any) {
   const { address } = useParams() as any;
-  const transitions = useTransition(logo, {
-    from: { opacity: 0, width: '0px' },
-    enter: { opacity: 1, width: '36px' },
-    leave: { opacity: 0, width: '0px' },
-    config: {
-      duration: 500,
-      easing: easings.easeOutExpo,
-    },
-  });
 
   return (
-    <Tabs>
-      {transitions((styles, item) => item && (
-        <animated.div style={{ ...styles }}>
-          <Icon kind="eclipse" />
-        </animated.div>
-      ))}
+    <>
       <Tab to={`/collection/${address}`} label="Items" />
       <Tab to={`/collection/${address}/holders`} label="Holders" />
-    </Tabs>
+    </>
   );
 }
 
@@ -231,21 +206,13 @@ export default function Page() {
               </div>
             )}
             <div ref={scrollerRef}>
-              {nfts?.pages?.map((page: any, i: number) => {
-                return (
-                  <div key={i} className="nft-grid pad">
-                    {page?.tokens?.map((nft: any, j: number) => {
-                      return (
-                        <NFT
-                          key={`${i}:${j}:${nft.id}`}
-                          nft={nft}
-                          market={nft?.market}
-                        />
-                      );
-                    })}
-                  </div>
-                );
-              })}
+              {nfts?.pages?.map((page: any, i: number) => (
+                <div key={i} className="nft-grid pad">
+                  {page?.tokens?.map((nft: any, j: number) => (
+                    <NFT key={`${i}:${j}:${nft.id}`} nft={nft} />
+                  ))}
+                </div>
+              ))}
 
               {load1 && (
                 <div className="nft-grid pad">

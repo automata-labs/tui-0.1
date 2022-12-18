@@ -1,29 +1,20 @@
 import { Link } from '@remix-run/react';
-import Icon from './icon';
 
-import Image from './image';
+import CollectionIcon from './collection-icon';
+import Icon from './icon';
 import { Render } from './render';
 
-export default function NFT({ innerRef, nft }: any) {
+export default function NFT({ nft }: any) {
   const address = nft?.address ?? nft?.contract;
   const id = nft?.id ?? nft?.tokenId;
 
   return (
     <Link className="nft" to={`/nft/${address}/${id}`}>
-      <div ref={innerRef} className="nft-info">
+      <div className="nft-info">
         <div className="nft-name-collection">
           <div className="nft-name">{nft?.name ? nft?.name : `#${id}`}</div>
           <div className="nft-collection">
-            <div
-              className="nft-collection-icon"
-              style={{
-                background: `url(${nft?.collection?.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              {!nft?.collection?.image && <Image className="img--fallback" />}
-            </div>
+            <CollectionIcon image={nft?.collection?.image} loading={false} />
             <div className="nft-collection-name">{nft?.collection?.name}</div>
           </div>
         </div>

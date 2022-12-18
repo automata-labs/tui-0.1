@@ -25,7 +25,7 @@
 }
 
 .collection-image-wrapper::after {
-  border-radius: 2px;
+  border-radius: 4px;
   box-shadow:
     inset 1px 0px var(--standard-border-color),
     inset 0px 1px var(--standard-border-color),
@@ -84,7 +84,7 @@
 .collection-filters {
   display: flex;
   align-items: center;
-  grid-gap: 16px;
+  grid-gap: 10px;
 
   margin-top: 16px;
 }
@@ -107,10 +107,10 @@
 
 .collection-active-filters {
   display: flex;
-  grid-gap: 16px;
+  grid-gap: 12px;
   flex-wrap: wrap;
 
-  margin-top: 16px;
+  margin-top: 10px;
 }
 
 .collection-filter {

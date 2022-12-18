@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Icon from '~/components/icon';
 import Image from '~/components/image';
 import { Render } from '~/components/render';
+import Spinner from '~/components/spinner';
 import { useKernel } from '~/contexts/kernel';
 import useNFT from '~/hooks/useNFT';
 import stylesheet from '~/styles/display.css';
@@ -24,20 +25,22 @@ export const handle = {
 
 function Breadcrumb() {
   const { address, id } = useParams() as any;
-  const { data: nft, loading: loadingCollection } =
-    useNFT(address, id);
+  const { data: nft, loading} = useNFT(address, id);
 
   return (
     <>
       <Icon kind="slash" />
-      <div className="breadcrumb-text">{nft?.name}</div>
+      <div className="breadcrumb-text">
+        {loading && <Spinner kind="simpleDotsScrolling" />}
+        {!loading && (nft?.name ?? `#${nft?.id}`)}
+      </div>
     </>
   );
 }
 
 export default function Page() {
   const { address, id } = useParams() as any;
-  const { data, loading } = useNFT(address, id) as any;
+  const { data: nft, loading } = useNFT(address, id) as any;
 
   const [readMore, setReadMore] = useState(false);
   const [measurement, ref] = useMeasure<HTMLDivElement>();
@@ -60,7 +63,7 @@ export default function Page() {
             </div>
             <div className="display-label">
               <div className="display-label-name">
-                {data?.name ?? `#${data?.id}`}
+                {nft?.name ?? `#${nft?.id}`}
               </div>
               <div>
                 <Link
@@ -70,28 +73,28 @@ export default function Page() {
                   <div
                     className="display-label-collection-icon"
                     style={{
-                      background: `url(${data?.collection?.image})`,
+                      background: `url(${nft?.collection?.image})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                     }}
                   >
-                    {!data?.collection?.image && (
+                    {!nft?.collection?.image && (
                       <Image className="img--fallback" />
                     )}
                   </div>
                   <div className="display-label-collection-name">
-                    {data?.collection?.name}
+                    {nft?.collection?.name}
                   </div>
                 </Link>
               </div>
               <div className="display-label-description-wrapper">
-                {data?.description && (
+                {nft?.description && (
                   <div
                     ref={ref}
                     className="display-label-description"
                     style={{ maxHeight: readMore ? '100%' : '150px' }}
                   >
-                    {data?.description}
+                    {nft?.description}
 
                     {height >= 143 && !readMore && (
                       <div className="display-label-description-gradient"></div>
@@ -110,28 +113,28 @@ export default function Page() {
 
               <div className="display-label-group">
                 <div className="display-label-group-key">Owner</div>
-                <div className="display-label-group-value">{data?.owner}</div>
+                <div className="display-label-group-value">{nft?.owner}</div>
               </div>
               <div className="display-label-group">
                 <div className="display-label-group-key">ID</div>
-                <div className="display-label-group-value">{data?.id}</div>
+                <div className="display-label-group-value">{nft?.id}</div>
               </div>
               <div className="display-label-group">
                 <div className="display-label-group-key">Contract</div>
                 <div className="display-label-group-value">
-                  {data?.contract}
+                  {nft?.contract}
                 </div>
               </div>
 
               <div className="divider divider--display"></div>
 
-              {data?.attributes?.length > 0 && (
+              {nft?.attributes?.length > 0 && (
                 <div className="display-label-attributes">
                   <div className="display-label-attributes-heading">
                     ATTRIBUTES
                   </div>
 
-                  {data?.attributes.map((attribute: any, i: number) => (
+                  {nft?.attributes.map((attribute: any, i: number) => (
                     <div key={i} className="display-label-attribute">
                       <div className="display-label-attribute-key">
                         {attribute?.key}

@@ -39,6 +39,10 @@ export function getSource(source: string) {
     return { text: 'Atomic0', icon: 'atomic0'};
   }
 
+  if (source === 'alienswap.xyz') {
+    return { text: 'AlienSwap', icon: 'alienswap.xyz'};
+  }
+
   return { text: source, icon: null };
 }
 

@@ -203,10 +203,10 @@
 .nft-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 16px;
+  grid-gap: 10px;
   max-width: 100%;
 
-  margin-top: 16px;
+  margin-top: 10px;
 }
 
 .nft {
