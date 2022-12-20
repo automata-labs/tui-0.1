@@ -1,4 +1,5 @@
 import { useParams, useSearchParams } from '@remix-run/react';
+import clsx from 'clsx';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
@@ -41,9 +42,9 @@ export default function Pair() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [ref, { entry }] = useIntersectionObserver();
 
-  const [interval, setInterval] = useState('1W');
   const [price, setPrice] = useState(null);
   const [date, setDate] = useState(null);
+  const range = searchParams.get('range') || '1W';
 
   const { data: info } = usePairInfo(address) as any;
   const { data: details } = usePairDetails(address) as any;
@@ -53,13 +54,18 @@ export default function Pair() {
     fetchNextPage,
     hasNextPage,
   } = usePairEvents(address) as any;
-  const { data: chart } = useTokenChart(address, interval) as any;
+  const { data: chart } = useTokenChart(address, range) as any;
 
   useEffect(() => {
     if (entry?.isIntersecting && hasNextPage) {
       fetchNextPage();
     }
   }, [entry?.isIntersecting, hasNextPage]);
+
+  function handleRange(range: string) {
+    searchParams.set('range', range);
+    setSearchParams(searchParams, { replace: true });
+  }
 
   return (
     <main className="page page--dual">
@@ -71,13 +77,18 @@ export default function Pair() {
         </div>
 
         <div className="pair-chart-intervals pad">
-          <div className="pair-chart-interval">1D</div>
-          <div className="pair-chart-interval">1W</div>
-          <div className="pair-chart-interval">1M</div>
-          <div className="pair-chart-interval">3M</div>
-          <div className="pair-chart-interval">6M</div>
-          <div className="pair-chart-interval">1Y</div>
-          <div className="pair-chart-interval">ALL</div>
+          {['1D', '1W', '1M', '3M', '6M', '1Y'].map((value: string) => (
+            <button
+              key={value}
+              className={clsx(
+                'button button--text button--option pair-chart-interval',
+                (value === range) && 'active',
+              )}
+              onClick={() => handleRange(value)}
+            >
+              {value}
+            </button>
+          ))}
         </div>
 
         <div className="pair-events">
@@ -188,7 +199,7 @@ export default function Pair() {
           {info?.token0?.symbol}/{info?.token1?.symbol}
         </div>
         <div className="pair-price">
-          ${price ? price : chart && chart[chart?.length - 1].y}
+          ${price ? price : chart && chart[chart?.length - 1]?.y}
         </div>
         <div className="pair-date">
           {date && `@${DateTime.fromSeconds(date).toLocal().toFormat('DD, t')}`}

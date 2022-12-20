@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import { useQuery } from 'react-query';
 
 export default function useTokenChart(address: string, interval: string) {
@@ -17,10 +16,10 @@ export default function useTokenChart(address: string, interval: string) {
     refetchOnReconnect: false,
   });
 
-  const chart = data?.map(({ time, price }: any) => ({
+  const chart = data?.length > 0 ? data?.map(({ time, price }: any) => ({
     x: time,
     y: price,
-  }));
+  })) : [];
 
   return {
     data: chart,

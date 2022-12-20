@@ -194,7 +194,7 @@ export default function Page() {
                 })}
 
                 <button
-                  className="button button--text"
+                  className="button button--small-text"
                   onClick={() => {
                     setSearchParams({}, { replace: true });
                   }}

@@ -124,12 +124,26 @@ svg {
   background: transparent;
   border: 0;
   padding: 0;
+}
+
+.button.button--option {
+  opacity: 0.5;
+}
+
+.button.button--option.active {
+  opacity: 1;
+}
+
+.button.button--small-text {
+  background: transparent;
+  border: 0;
+  padding: 0;
   opacity: 0.5;
 
   font-size: 11px;
 }
 
-.button.button--text:hover {
+.button.button--small-text:hover {
   opacity: 1;
 }
 
