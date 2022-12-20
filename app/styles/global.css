@@ -207,3 +207,11 @@ svg {
   padding: 2px;
   opacity: 0.75;
 }
+
+/**
+ * Other
+ */
+
+.visx-tooltip-glyph svg {
+  width: 1px;
+}

@@ -346,5 +346,57 @@ export default function Icon({ kind }: any) {
     );
   }
 
+  if (kind === 'chart-asterisk') {
+    return (
+      <svg
+        width="18"
+        height="18"
+        viewBox="12 12 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        overflow="auto"
+        strokeWidth={1.5}
+      >
+        <line
+          x1="17.6709"
+          y1="6.35612"
+          x2="7.67094"
+          y2="16.3561"
+          stroke="white"
+        />
+        <line
+          x1="9.69144"
+          y1="14.3352"
+          x2="6.36388"
+          y2="17.6628"
+          stroke="white"
+        />
+        <line
+          x1="6.37113"
+          y1="6.31442"
+          x2="16.3711"
+          y2="16.3144"
+          stroke="white"
+        />
+        <line
+          x1="14.3506"
+          y1="14.2937"
+          x2="17.6782"
+          y2="17.6212"
+          stroke="white"
+        />
+        <rect
+          x="11.5293"
+          y="11.5146"
+          width="0.941176"
+          height="0.941176"
+          fill="white"
+        />
+        <line x1="12" y1="19.9851" x2="12" y2="3.98511" stroke="white" />
+        <line x1="20" y1="11.9851" x2="4" y2="11.9851" stroke="white" />
+      </svg>
+    );
+  }
+
   return <></>;
 }

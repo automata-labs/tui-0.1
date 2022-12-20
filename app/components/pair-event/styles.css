@@ -1,0 +1,16 @@
+.pair-event {
+  display: flex;
+  grid-gap: 10px;
+}
+
+.pair-event-type {
+  padding-left: 16px;
+}
+
+.pair-event-type.sell {
+  color: rgb(255, 69, 58);
+}
+
+.pair-event-type.buy {
+  color: rgb(48, 209, 88);
+}

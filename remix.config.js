@@ -14,6 +14,7 @@ module.exports = {
       route('/nft/:address/:id', 'pages/display.tsx');
       route('/spinners', 'pages/spinners.tsx');
       route('/token/:address', 'pages/token.tsx');
+      route('/pair/:address', 'pages/pair.tsx');
     });
   },
   // appDirectory: "app",

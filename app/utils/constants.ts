@@ -73,3 +73,9 @@ export function getSort(sortBy: string | null, sortDirection: string | null) {
 
   return `${sortBy}: ${sortDirection}`;
 }
+
+export function getExchange(key: string) {
+  return {
+    uniswap: 'Uniswap',
+  }[key];
+}
