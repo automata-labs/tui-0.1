@@ -107,7 +107,7 @@ function CollectionResults() {
 
       return (
         <SearchResult
-          key={collection?.collectionId}
+          key={collection?.collectionId ?? collection?.id}
           value={collection}
           type="collection"
           to={`/collection/${collection?.collectionId ?? collection?.id}`}

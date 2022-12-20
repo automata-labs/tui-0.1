@@ -10,7 +10,7 @@ export default function Breadcrumbs() {
     <>
       {matches
         .filter((match) => match.handle && match.handle.breadcrumb)
-        .map((match, index) => match?.handle?.breadcrumb(match))}
+        .map((match, i) => match?.handle?.breadcrumb(match, i))}
     </>
   );
 }

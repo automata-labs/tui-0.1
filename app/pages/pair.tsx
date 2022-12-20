@@ -1,7 +1,7 @@
-import { useWindowSize } from '@react-hookz/web';
 import { useParams, useSearchParams } from '@remix-run/react';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
+import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import Icon from '~/components/icon';
 import PairEvent, { links as pairEventLinks } from '~/components/pair-event';
 import Spinner from '~/components/spinner';
@@ -18,7 +18,7 @@ export function links() {
 }
 
 export const handle = {
-  breadcrumb: () => <Breadcrumb />,
+  breadcrumb: (_: any, key: number) => <Breadcrumb key={key} />,
 };
 
 function Breadcrumb() {
@@ -39,7 +39,7 @@ function Breadcrumb() {
 export default function Pair() {
   const { address } = useParams() as any;
   const [searchParams, setSearchParams] = useSearchParams();
-  const size = useWindowSize();
+  const [ref, { entry }] = useIntersectionObserver();
 
   const [interval, setInterval] = useState('1W');
   const [price, setPrice] = useState(null);
@@ -47,8 +47,19 @@ export default function Pair() {
 
   const { data: info } = usePairInfo(address) as any;
   const { data: details } = usePairDetails(address) as any;
-  const { data: events } = usePairEvents(address) as any;
+  const {
+    data: events,
+    fetching,
+    fetchNextPage,
+    hasNextPage,
+  } = usePairEvents(address) as any;
   const { data: chart } = useTokenChart(address, interval) as any;
+
+  useEffect(() => {
+    if (entry?.isIntersecting && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [entry?.isIntersecting, hasNextPage]);
 
   return (
     <main className="page page--dual">
@@ -143,7 +154,7 @@ export default function Pair() {
 
           {events &&
             info &&
-            events?.items?.map((event: any, i: number) => (
+            events?.map((event: any, i: number) => (
               <PairEvent
                 key={i}
                 i={i + 1}
@@ -153,6 +164,22 @@ export default function Pair() {
                 tokenOfInterest={details?.tokenOfInterest}
               />
             ))}
+
+          {hasNextPage && (
+            <div ref={ref} style={{ gridColumn: '1 / -1', padding: 10 }}>
+              <div className="terminal-load-more-area center">
+                {fetching && <Spinner kind="simpleDotsScrolling" />}
+                {!fetching && hasNextPage && (
+                  <button
+                    className="button button--fullscreen"
+                    onClick={fetchNextPage}
+                  >
+                    Load More
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
