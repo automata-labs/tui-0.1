@@ -34,6 +34,7 @@
   padding: 20px;
   border-left: 1px solid var(--standard-border-color);
 
+  max-height: calc(100vh - 44px);
   overflow-y: auto;
 }
 
@@ -44,11 +45,14 @@
 .side-group-key {
   font-size: 11px;
   opacity: 0.5;
+  margin-bottom: 6px;
 }
 
-.side-group-value {
-  margin-top: 6px;
+.side-group-key.side-group-key--tokens {
+  margin-bottom: 8px;
 }
+
+.side-group-value {}
 
 .divider.divider--side {
   margin: 20px 0;
