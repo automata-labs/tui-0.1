@@ -47,7 +47,6 @@
 .collection-core {
   display: flex;
   flex-direction: column;
-  grid-gap: 6px;
 }
 
 .collection-core-name {
@@ -68,7 +67,7 @@
 .collection-info-group {
   display: flex;
   flex-direction: column;
-  grid-gap: 6px;
+  grid-gap: 2px;
 }
 
 .collection-info-group-key {

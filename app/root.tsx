@@ -42,14 +42,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export function links() {
   return [
-    { rel: 'stylesheet', href: reset },
+    { rel: 'stylesheet', href: tailwind },
+    // { rel: 'stylesheet', href: reset },
     { rel: 'stylesheet', href: global },
     { rel: 'stylesheet', href: shared },
     { rel: 'stylesheet', href: themes },
     { rel: 'stylesheet', href: terminal },
     { rel: 'stylesheet', href: dialog },
     { rel: 'stylesheet', href: middleware },
-    // { rel: 'stylesheet', href: tailwind },
   ];
 }
 

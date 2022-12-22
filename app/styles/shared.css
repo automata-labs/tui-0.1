@@ -1,5 +1,5 @@
 /**
- * Shared components
+ * Page
  */
 
 .root-content {
@@ -19,6 +19,10 @@
 .pad {
   padding: 0 16px;
 }
+
+/**
+ * Layout
+ */
 
 .main {
   display: flex;
@@ -42,10 +46,14 @@
   margin-top: 16px;
 }
 
+.side-group.side-group--no-margin {
+  margin-top: 6px;
+}
+
 .side-group-key {
   font-size: 11px;
   opacity: 0.5;
-  margin-bottom: 6px;
+  margin-bottom: 2px;
 }
 
 .side-group-key.side-group-key--tokens {
@@ -63,15 +71,26 @@
 }
 
 /**
+ * Header
+ */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px;
+  margin: 16px;
+}
+
+/**
  * Grid
  */
 
 .head {
-  padding: 16px 20px;
+  padding: 13px 20px;
 }
 
 .cell {
-  padding: 12px 20px;
+  padding: 10px 20px;
 }
 
 .cell--end {

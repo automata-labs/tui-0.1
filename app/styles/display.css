@@ -96,7 +96,7 @@
 }
 
 .display-label-group-value {
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 .display-label-attributes-heading {
@@ -112,7 +112,7 @@
 }
 
 .display-label-attribute-value {
-  margin-top: 6px;
+  margin-top: 2px;
 
   display: flex;
 }

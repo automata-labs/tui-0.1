@@ -1,14 +1,16 @@
 import { useQuery } from 'react-query';
 
-export default function usePairDetails(address: string) {
+export default function useTokenTopPair(address: string, range?: string) {
   const fetcher = () => {
     return fetch(
-      `https://api-nijynot.vercel.app/api/token/pair/details?address=${address}`,
+      range
+        ? `https://api-nijynot.vercel.app/api/token/pair/top?address=${address}&range=${range}`
+        : `https://api-nijynot.vercel.app/api/token/pair/top?address=${address}`,
     ).then((res) => res.json());
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `pair-details:${address}`,
+    queryKey: `token-top-pair:${address}`,
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

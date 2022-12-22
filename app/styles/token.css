@@ -1,0 +1,47 @@
+.metadata {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 16px;
+}
+
+.image-wrapper {
+  background-color: var(--nft-background-color);
+  border-radius: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+
+  max-height: 50px;
+  max-width: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.image-wrapper::after {
+  border-radius: 100%;
+  box-shadow: inset 1px 0px var(--standard-border-color),
+    inset 0px 1px var(--standard-border-color),
+    inset -1px 0px var(--standard-border-color),
+    inset 0px -1px var(--standard-border-color);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.image {
+  max-height: 50px;
+  max-width: 50px;
+  vertical-align: top;
+}
+
+.token-chart-info-header {
+  padding: 13px 16px;
+}

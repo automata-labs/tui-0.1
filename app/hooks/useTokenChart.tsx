@@ -16,13 +16,8 @@ export default function useTokenChart(address: string, interval: string) {
     refetchOnReconnect: false,
   });
 
-  const chart = data?.length > 0 ? data?.map(({ time, price }: any) => ({
-    x: time,
-    y: price,
-  })) : [];
-
   return {
-    data: chart,
+    data,
     loading: isLoading || isFetching,
   };
 }

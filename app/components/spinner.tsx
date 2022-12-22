@@ -13,21 +13,21 @@ export default function Spinner({ kind } = { kind: 'line' }) {
   } = useContext(SpinnerContext) as any;
 
   if (kind === 'line') {
-    return <div>{line}</div>;
+    return <span>{line}</span>;
   } else if (kind === 'dotted') {
-    return <div>{dotted}</div>;
+    return <span>{dotted}</span>;
   } else if (kind === 'simpleDotsScrolling') {
     return (
-      <div dangerouslySetInnerHTML={{ __html: simpleDotsScrolling }}></div>
+      <span dangerouslySetInnerHTML={{ __html: simpleDotsScrolling }}></span>
     );
   } else if (kind === 'star') {
-    return <div dangerouslySetInnerHTML={{ __html: star }}></div>;
+    return <span dangerouslySetInnerHTML={{ __html: star }}></span>;
   } else if (kind === 'bouncingBar') {
-    return <div dangerouslySetInnerHTML={{ __html: bouncingBar }}></div>;
+    return <span dangerouslySetInnerHTML={{ __html: bouncingBar }}></span>;
   } else if (kind === 'grenade') {
-    return <div dangerouslySetInnerHTML={{ __html: grenade }}></div>;
+    return <span dangerouslySetInnerHTML={{ __html: grenade }}></span>;
   } else if (kind === 'longDottedFrames') {
-    return <div dangerouslySetInnerHTML={{ __html: longDottedFrames }}></div>;
+    return <span dangerouslySetInnerHTML={{ __html: longDottedFrames }}></span>;
   }
 
   return <div>none.</div>;

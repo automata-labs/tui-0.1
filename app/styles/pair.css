@@ -21,7 +21,7 @@
 }
 
 .pair-date {
-  min-height: 1em;
+  min-height: 1.5em;
   margin-top: 4px;
   opacity: 0.5;
 }
@@ -33,6 +33,7 @@
 .pair-chart-intervals {
   display: flex;
   height: 44px;
+  border-top: 1px solid var(--standard-border-color);
   border-bottom: 1px solid var(--standard-border-color);
   align-items: center;
   grid-gap: 16px;

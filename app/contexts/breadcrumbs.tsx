@@ -29,7 +29,7 @@ export function TabsModule({ logo }: any) {
 
   const tabs = matches
     .filter((match) => match.handle && match.handle.tabs)
-    .map((match, index) => match?.handle?.tabs(match, logo));
+    .map((match, i) => match?.handle?.tabs(match, logo, i));
 
   return tabs?.length > 0 ? (
     <Tabs>
