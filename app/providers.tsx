@@ -1,8 +1,7 @@
 import { CenterProvider } from '@center-inc/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { KernelProvider } from './contexts/kernel';
-import { SearchParamsProvider } from './contexts/search-params';
 import { SpinnerProvider } from './contexts/spinner';
 
 const client = new QueryClient();

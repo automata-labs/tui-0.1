@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useTokenSearch(search: string) {
   let url = search
@@ -8,7 +8,7 @@ export default function useTokenSearch(search: string) {
     : `https://api-nijynot.vercel.app/api/trending/tokens`;
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `search-tokens:${search}`,
+    queryKey: [`search-tokens:${search}`],
     queryFn: () => fetch(url).then((res) => res.json()),
     staleTime: Infinity,
     refetchOnWindowFocus: false,

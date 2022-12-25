@@ -2,7 +2,7 @@ import type { MediaPreset } from '@center-inc/react';
 import { useCenterContext } from '@center-inc/react';
 import contentTypeParser from 'content-type-parser';
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import Spinner from './spinner';
 
@@ -26,7 +26,7 @@ export function Render({ preRender, address, id, preset }: RenderProps) {
   const { client } = useCenterContext();
   const [shouldRender, setShouldRender] = useState(!preRender);
   const [loaded, setLoaded] = useState(false);
-  const { data } = useQuery(`nft:${address}:${id}:${preset}`, fetcher, {
+  const { data } = useQuery([`render:${address}:${id}:${preset}`], fetcher, {
     enabled: shouldRender,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

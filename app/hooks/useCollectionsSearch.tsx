@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useCollectionsSearch(search: string) {
   let url = search
@@ -8,7 +8,7 @@ export default function useCollectionsSearch(search: string) {
     : `https://api-nijynot.vercel.app/api/trending/nfts`;
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `useCollectionsSearch:${search}`,
+    queryKey: [`useCollectionsSearch:${search}`],
     queryFn: () => fetch(url).then((res) => res.json()),
     staleTime: Infinity,
     refetchOnWindowFocus: false,

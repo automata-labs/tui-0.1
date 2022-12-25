@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 import useTraits from './useTraits';
 
@@ -22,7 +22,7 @@ function useRange(address: string, key: string, enabled: boolean) {
   const offset = useRef(0);
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: `collection:traits:range:${address}+${key}`,
+      queryKey: [`collection:traits:range:${address}+${key}`],
       queryFn: fetcher,
       staleTime: Infinity,
       refetchOnWindowFocus: false,

@@ -12,8 +12,8 @@
   flex-shrink: 0;
   aspect-ratio: 1;
 
-  max-height: 50px;
-  max-width: 50px;
+  height: 50px;
+  width: 50px;
 
   display: flex;
   align-items: center;
@@ -44,4 +44,36 @@
 
 .token-chart-info-header {
   padding: 13px 16px;
+}
+
+.content {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.tag {
+  background-color: var(--standard-fill-color);
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 0.5);
+  display: inline-flex;
+  align-items: center;
+  grid-gap: 4px;
+  font-size: 10px;
+  padding: 1px 4px 0px 4px;
+}
+
+.tag.tag--large {
+  font-size: 11px;
+  padding: 2px 4px 1px 4px;
+}
+
+.tag svg {
+  opacity: 0.8;
+  stroke-width: 0.5px;
+  stroke: yellow;
+}
+
+.pair-grid {
+  align-items: center;
+  grid-template-columns: auto 1fr auto auto;
 }

@@ -6,7 +6,7 @@ module.exports = {
   // so we default back to the standard build output.
   server: process.env.NODE_ENV === 'development' ? undefined : './server.js',
   ignoredRouteFiles: ['**/.*'],
-  serverDependenciesToBundle: ['@center-inc/react'],
+  serverDependenciesToBundle: ['@center-inc/react', 'd3-array', 'd3-time-format'],
   routes: async (define) => {
     return define((route) => {
       route('/action/set-theme', 'actions/set-theme.tsx');

@@ -1,0 +1,31 @@
+.pair-row {
+  display: contents;
+}
+
+.pair-row-hoverable {
+  position: relative;
+  grid-column: 1 / -1;
+  height: 100%;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.pair-row-hoverable:hover > .pair-row-overlay {
+  opacity: 1;
+}
+
+.pair-row-overlay {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0.25turn, transparent, 50%, black);
+  font-weight: 700;
+  color: #2F80ED;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useCollection(address: string): any {
   const fetcher = () => {
@@ -8,7 +8,7 @@ export default function useCollection(address: string): any {
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `collection:${address}`,
+    queryKey: [`collection:${address}`],
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

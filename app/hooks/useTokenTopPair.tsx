@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useTokenTopPair(address: string, range?: string) {
   const fetcher = () => {
@@ -10,7 +10,7 @@ export default function useTokenTopPair(address: string, range?: string) {
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `token-top-pair:${address}`,
+    queryKey: [`token-top-pair:${address}+${range}`],
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

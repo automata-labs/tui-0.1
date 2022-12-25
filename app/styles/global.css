@@ -2,13 +2,6 @@
  * Axiom
  */
 
-/* body {
-  overflow-y: scroll !important;
-}
-
-html body {
-  margin-right: 0 !important;
-} */
 
 html,
 body {
@@ -82,6 +75,14 @@ svg {
 
 .pad-2x {
   padding: 16px;
+}
+
+/**
+ * Border
+ **/
+
+.border-transparent-20 {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /**

@@ -1,26 +1,29 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useRef } from 'react';
-import { useInfiniteQuery } from 'react-query';
 
-export default function useRange(address: string) {
+
+export default function usePairs(address: string) {
   const fetcher = ({ pageParam }: any) => {
     const url = pageParam
-      ? `https://api-nijynot.vercel.app/api/token/pairs?address=${address}&limit=15&cursor=${pageParam}`
-      : `https://api-nijynot.vercel.app/api/token/pairs?address=${address}&limit=15`;
-
+      // ? `https://api-nijynot.vercel.app/api/token/pairs?address=${address}&limit=15&cursor=${pageParam}`
+      // : `https://api-nijynot.vercel.app/api/token/pairs?address=${address}&limit=15`;
+      ? `http://localhost:3001/api/token/pairs?address=${address}&limit=15&cursor=${pageParam}`
+      : `http://localhost:3001/api/token/pairs?address=${address}&limit=15`;
+  
     return fetch(url).then((res) => res.json());
   };
 
   const offset = useRef(0);
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: `pairs:${address}`,
+      queryKey: [`pairs:${address}`],
       queryFn: fetcher,
       staleTime: Infinity,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
       getNextPageParam: (lastPage: any) => {
-        return lastPage.length > 20 ? offset.current : undefined;
+        return lastPage.length > 20 ? offset.current : 0;
       },
     });
 

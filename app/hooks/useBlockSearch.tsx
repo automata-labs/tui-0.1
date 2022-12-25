@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import _ from 'lodash';
-import { useQuery } from 'react-query';
 
 export default function useBlockSearch(number: string) {
   let url: string | null;
@@ -10,9 +10,9 @@ export default function useBlockSearch(number: string) {
   }
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `useBlockSearch:${number}`,
+    queryKey: [`useBlockSearch:${number}`],
     queryFn: () => {
-      return url ? fetch(url).then((res) => res.json()) : undefined;
+      return url ? fetch(url).then((res) => res.json()) : () => {};
     },
     staleTime: Infinity,
     refetchOnWindowFocus: false,

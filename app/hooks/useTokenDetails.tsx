@@ -1,4 +1,53 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
+import _ from 'lodash';
+
+function twitterLink(handle: string) {
+  if (handle) {
+    return `https://twitter.com/${handle}`;
+  }
+
+  return null;
+}
+
+function websiteLink(homepage: Array<string>) {
+  return _.head(homepage);
+}
+
+function discordLink(links: Array<string>) {
+  const filtered = links.reduce((state: any, link) => {
+    if (link.includes('discord.com') || link.includes('discord.gg')) {
+      return [...state, link];
+    }
+
+    return state;
+  }, []);
+
+  return _.head(filtered);
+}
+
+function telegramLink(id: string) {
+  if (id) {
+    return `https://t.me/${id}`;
+  }
+
+  return null;
+}
+
+function redditLink(link: string) {
+  return link ? link : null;
+}
+
+function repoLink(links: any) {
+  if (_.head(links?.github)) {
+    return _.head(links?.github)
+  }
+
+  if (_.head(links?.bitbucket)) {
+    return _.head(links?.bitbucket)
+  }
+
+  return null;
+}
 
 export default function useTokenInfo(address: string) {
   const fetcher = () => {
@@ -45,12 +94,20 @@ export default function useTokenInfo(address: string) {
         stats1y: {
           percentage: data?.market_data?.price_change_percentage_1y,
         },
+        links: {
+          website: websiteLink(data?.links?.homepage),
+          twitter: twitterLink(data?.links?.twitter_screen_name),
+          discord: discordLink(data?.links?.chat_url),
+          telegram: telegramLink(data?.links?.telegram_channel_identifier),
+          reddit: redditLink(data?.links?.subreddit_url),
+          repo: repoLink(data?.links?.repos_url),
+        },
       };
     });
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `token-details:${address}`,
+    queryKey: [`token-details:${address}`],
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

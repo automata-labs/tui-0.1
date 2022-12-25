@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useTraits(id: string) {
   const fetcher = () => {
@@ -8,7 +8,7 @@ export default function useTraits(id: string) {
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `collection:traits:${id}`,
+    queryKey: [`collection:traits:${id}`],
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

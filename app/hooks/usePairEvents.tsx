@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function usePairDetails(address: string) {
   const fetcher = ({ pageParam }: any) => {
@@ -11,7 +11,7 @@ export default function usePairDetails(address: string) {
 
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: `pair-events:${address}`,
+      queryKey: [`pair-events:${address}`],
       queryFn: fetcher,
       staleTime: Infinity,
       refetchOnWindowFocus: false,

@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useTokenChart(address: string, interval: string) {
   const fetcher = () => {
@@ -8,7 +8,7 @@ export default function useTokenChart(address: string, interval: string) {
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `token-chart:${address}+${interval}`,
+    queryKey: [`token-chart:${address}+${interval}`],
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

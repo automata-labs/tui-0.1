@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function usePairInfo(address: string) {
   const fetcher = () => {
@@ -8,7 +8,7 @@ export default function usePairInfo(address: string) {
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `pair-info:${address}`,
+    queryKey: [`pair-info:${address}`],
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

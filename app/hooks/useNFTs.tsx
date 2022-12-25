@@ -1,5 +1,5 @@
 import { useSearchParams } from '@remix-run/react';
-import { useInfiniteQuery } from 'react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function useNFTs(address: string): any {
   const fetcher = ({ pageParam }: any) => {
@@ -22,7 +22,7 @@ export default function useNFTs(address: string): any {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: `nft-pages:${address}:${searchParams.toString()}`,
+    queryKey: [`nft-pages:${address}:${searchParams.toString()}`],
     queryFn: fetcher,
     staleTime: Infinity,
     getNextPageParam: (lastPage: any) => {

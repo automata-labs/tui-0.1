@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export default function useNFT(address: string, id: string) {
   const fetcher = () => {
@@ -8,7 +8,7 @@ export default function useNFT(address: string, id: string) {
   };
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: `nft:${address}+${id}`,
+    queryKey: [`nft:${address}+${id}`],
     queryFn: fetcher,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
