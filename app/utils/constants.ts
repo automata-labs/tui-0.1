@@ -76,6 +76,7 @@ export function getSort(sortBy: string | null, sortDirection: string | null) {
 
 export function getExchange(key: string) {
   return {
+    kyber: 'KyberSwap',
     uniswap: 'Uniswap',
   }[key];
 }

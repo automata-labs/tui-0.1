@@ -46,7 +46,7 @@ export default function PairEvent({
         <div className="cell cell--end" style={{ gridRow: n * 2 - 1 }}>
           {shorten(event?.maker)}
         </div>
-        <div className="cell cell--end" style={{ gridRow: n * 2 - 1 }}>
+        <div className="cell cell--end opacity-50" style={{ gridRow: n * 2 - 1 }}>
           {DateTime.fromSeconds(Number(event?.timestamp)).toRelative()}
         </div>
         <div className="divider divider--grid" style={{ gridRow: n * 2 }}></div>
@@ -72,7 +72,7 @@ export default function PairEvent({
         <div className="cell cell--end" style={{ gridRow: n * 2 - 1 }}>
           {shorten(event?.maker)}
         </div>
-        <div className="cell cell--end" style={{ gridRow: n * 2 - 1 }}>
+        <div className="cell cell--end opacity-50" style={{ gridRow: n * 2 - 1 }}>
           {DateTime.fromSeconds(Number(event?.timestamp)).toRelative()}
         </div>
         <div className="divider divider--grid" style={{ gridRow: n * 2 }}></div>
@@ -98,7 +98,7 @@ export default function PairEvent({
         <div className="cell cell--end" style={{ gridRow: n * 2 - 1 }}>
           {shorten(event?.maker)}
         </div>
-        <div className="cell cell--end" style={{ gridRow: n * 2 - 1 }}>
+        <div className="cell cell--end opacity-50" style={{ gridRow: n * 2 - 1 }}>
           {DateTime.fromSeconds(Number(event?.timestamp)).toRelative()}
         </div>
         <div className="divider divider--grid" style={{ gridRow: n * 2 }}></div>
@@ -118,7 +118,7 @@ export default function PairEvent({
       >
         {event?.type}
       </div>
-      <div className="cell cell--end" style={{ gridRow: n * 2 - 1 }}>
+      <div className="cell cell--end opacity-50" style={{ gridRow: n * 2 - 1 }}>
         {DateTime.fromSeconds(Number(event?.timestamp)).toRelative()}
       </div>
       <div className="divider divider--grid" style={{ gridRow: n * 2 }}></div>

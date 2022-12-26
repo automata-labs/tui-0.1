@@ -18,6 +18,7 @@ import usePairInfo from '~/hooks/usePairInfo';
 import useTokenChart from '~/hooks/useTokenChart';
 import stylesheet from '~/styles/pair.css';
 import { getExchange } from '~/utils/constants';
+import { formatUsd } from '~/utils/fmt';
 
 export function links() {
   return [
@@ -171,7 +172,7 @@ export default function Pair() {
             />
           </div>
         </div>
-        <div className="side-group">
+        {info?.exchange && <div className="side-group">
           <div className="side-group-key">Exchange</div>
           <div className="side-group-value">
             <Text
@@ -180,8 +181,8 @@ export default function Pair() {
               text={getExchange(info?.exchange)}
             />
           </div>
-        </div>
-        <div className="side-group">
+        </div>}
+        {info?.version && <div className="side-group">
           <div className="side-group-key">Version</div>
           <div className="side-group-value">
             <Text
@@ -190,8 +191,8 @@ export default function Pair() {
               text={info?.version}
             />
           </div>
-        </div>
-        <div className="side-group">
+        </div>}
+        {info?.fee && <div className="side-group">
           <div className="side-group-key">Fee</div>
           <div className="side-group-value">
             <Text
@@ -200,7 +201,7 @@ export default function Pair() {
               text={info?.fee}
             />
           </div>
-        </div>
+        </div>}
 
         <div className="divider divider--side"></div>
 
@@ -274,7 +275,7 @@ export default function Pair() {
               kind="simpleDotsScrolling"
               text={
                 <>
-                  ${details?.stats12h?.usd?.volume?.currentValue} (
+                  {formatUsd(details?.stats12h?.usd?.volume?.currentValue)} (
                   {BigNumber(details?.stats12h?.usd?.volume?.change)
                     .multipliedBy(100)
                     .dp(2)
@@ -294,7 +295,7 @@ export default function Pair() {
               kind="simpleDotsScrolling"
               text={
                 <>
-                  ${details?.stats1d?.usd?.volume?.currentValue} (
+                  {formatUsd(details?.stats1d?.usd?.volume?.currentValue)} (
                   {BigNumber(details?.stats1d?.usd?.volume?.change)
                     .multipliedBy(100)
                     .dp(2)
@@ -314,7 +315,7 @@ export default function Pair() {
               kind="simpleDotsScrolling"
               text={
                 <>
-                  ${details?.stats1w?.usd?.volume?.currentValue} (
+                  {formatUsd(details?.stats1w?.usd?.volume?.currentValue)} (
                   {BigNumber(details?.stats1w?.usd?.volume?.change)
                     .multipliedBy(100)
                     .dp(2)
@@ -334,7 +335,7 @@ export default function Pair() {
               kind="simpleDotsScrolling"
               text={
                 <>
-                  ${details?.stats1m?.usd?.volume?.currentValue} (
+                  {formatUsd(details?.stats1m?.usd?.volume?.currentValue)} (
                   {BigNumber(details?.stats1m?.usd?.volume?.change)
                     .multipliedBy(100)
                     .dp(2)

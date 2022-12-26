@@ -43,7 +43,7 @@
 }
 
 .side-group {
-  margin-top: 16px;
+  margin-top: 0.75rem;
 }
 
 .side-group.side-group--no-margin {
@@ -53,7 +53,7 @@
 .side-group-key {
   font-size: 11px;
   opacity: 0.5;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .side-group-key.side-group-key--tokens {
@@ -63,7 +63,7 @@
 .side-group-value {}
 
 .divider.divider--side {
-  margin: 20px 0;
+  margin: 1rem 0;
 }
 
 .divider.divider--grid {

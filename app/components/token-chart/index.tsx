@@ -43,7 +43,6 @@ export default function TokenChart({
           orientation="bottom"
           stroke={'transparent'}
           strokeWidth={1}
-          numTicks={7}
           tickStroke={'transparent'}
           tickFormat={(v) => DateTime.fromSeconds(v).toFormat('d LLL')}
           tickLabelProps={() =>
@@ -51,8 +50,6 @@ export default function TokenChart({
               fill: 'rgba(255, 255, 255, 0.5)',
               fontSize: 10,
               fontFamily: 'ABC Diatype Mono Unlicensed Trial',
-              textAnchor: 'start',
-              verticalAnchor: 'end',
               dy: -24,
             } as const)
           }

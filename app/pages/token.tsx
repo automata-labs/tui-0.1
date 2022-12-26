@@ -387,7 +387,7 @@ export default function Page() {
               <div className="flex flex-col py-1">
                 <div className="flex">
                   <div className="opacity-50 grow">Discord</div>
-                  <a href={details?.links?.discord}>{details?.links?.discord}</a>
+                  <a href={details?.links?.discord as string}>{details?.links?.discord}</a>
                 </div>
               </div>
             )}
@@ -411,7 +411,7 @@ export default function Page() {
               <div className="flex flex-col py-1">
                 <div className="flex">
                   <div className="opacity-50 grow">Repository</div>
-                  <a href={details?.links?.repo}>{details?.links?.repo}</a>
+                  <a href={details?.links?.repo as string}>{details?.links?.repo}</a>
                 </div>
               </div>
             )}
