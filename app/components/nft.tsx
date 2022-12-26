@@ -2,7 +2,7 @@ import { Link } from '@remix-run/react';
 
 import CollectionIcon from './collection-icon';
 import Icon from './icon';
-import { Render } from './render';
+import Render from './render';
 
 export default function NFT({ nft }: any) {
   const address = nft?.address ?? nft?.contract;
@@ -51,6 +51,7 @@ export default function NFT({ nft }: any) {
           address={address}
           id={id}
           preset="medium"
+          fallback={nft?.collection?.image}
         />
       </div>
     </Link>

@@ -1,0 +1,41 @@
+.collection-image-wrapper {
+  background-color: var(--nft-background-color);
+  border-radius: 2px;
+  overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+
+  min-height: 100px;
+  min-width: 100px;
+  height: 100px;
+  width: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+.collection-image-wrapper.collection-image-wrapper--large {
+  height: 200px;
+  width: 200px;
+}
+
+.collection-image-wrapper::after {
+  border-radius: 4px;
+  box-shadow: inset 1px 0px var(--standard-border-color),
+    inset 0px 1px var(--standard-border-color),
+    inset -1px 0px var(--standard-border-color),
+    inset 0px -1px var(--standard-border-color);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.collection-image {
+  vertical-align: top;
+}

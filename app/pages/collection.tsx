@@ -3,8 +3,8 @@ import { useEffect, useRef } from 'react';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import CollectionFilter from '~/components/collection-filter';
 import CollectionIcon from '~/components/collection-icon';
+import CollectionImage, { links as collectionImageLinks } from '~/components/collection-image';
 import Icon from '~/components/icon';
-import Image from '~/components/image';
 import NFT from '~/components/nft';
 import Spinner from '~/components/spinner';
 import { Tab } from '~/components/tabs';
@@ -17,7 +17,10 @@ import CollectionHeaderSkeleton from '~/skeletons/collection-header';
 import stylesheet from '~/styles/collection.css';
 
 export function links() {
-  return [{ rel: 'stylesheet', href: stylesheet }];
+  return [
+    ...collectionImageLinks(),
+    { rel: 'stylesheet', href: stylesheet },
+  ];
 }
 
 export const handle = {
@@ -94,13 +97,7 @@ export default function Page() {
         ) : (
           <>
             <div className="collection-header pad">
-              <div className="collection-image-wrapper">
-                <Image
-                  className="collection-image"
-                  src={collection?.image}
-                  alt={collection?.name}
-                />
-              </div>
+              <CollectionImage src={collection?.image} alt={collection?.name} />
               <div className="collection-core">
                 <div className="collection-core-name">{collection?.name}</div>
                 <div className="collection-core-address">{address}</div>

@@ -4,7 +4,7 @@ import { Link, useParams } from '@remix-run/react';
 import { useEffect, useState } from 'react';
 import Icon from '~/components/icon';
 import Image from '~/components/image';
-import { Render } from '~/components/render';
+import Render, { links as renderLinks } from '~/components/render';
 import Spinner from '~/components/spinner';
 import { useKernel } from '~/contexts/kernel';
 import useNFT from '~/hooks/useNFT';
@@ -15,7 +15,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 export function links() {
-  return [{ rel: 'stylesheet', href: stylesheet }];
+  return [...renderLinks(), { rel: 'stylesheet', href: stylesheet }];
 }
 
 export const handle = {
@@ -58,7 +58,12 @@ export default function Page() {
         {!loading && (
           <>
             <div className="display-image">
-              <Render preset="original" address={address} id={id} />
+              <Render
+                preset="original"
+                address={address}
+                id={id}
+                fallback={nft?.collection?.image}
+              />
             </div>
             <div className="display-label">
               <div className="display-label-name">
@@ -127,10 +132,6 @@ export default function Page() {
 
               {nft?.attributes?.length > 0 && (
                 <div className="display-label-attributes">
-                  <div className="display-label-attributes-heading">
-                    ATTRIBUTES
-                  </div>
-
                   {nft?.attributes.map((attribute: any, i: number) => (
                     <div key={i} className="display-label-attribute">
                       <div className="display-label-attribute-key">
