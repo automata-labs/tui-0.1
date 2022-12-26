@@ -1,4 +1,4 @@
-import BigNumber from "bignumber.js";
+import BigNumber from 'bignumber.js';
 
 export function formatUsd(num: any) {
   if (num === 0 || num === '0') {
@@ -7,7 +7,7 @@ export function formatUsd(num: any) {
       currency: 'USD',
       minimumFractionDigits: 1,
       maximumFractionDigits: 1,
-    }).format(num)
+    }).format(num);
   }
 
   return new Intl.NumberFormat('en-US', {

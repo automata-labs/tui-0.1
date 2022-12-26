@@ -87,6 +87,7 @@
 
 .head {
   padding: 13px 20px;
+  z-index: 10;
 }
 
 .cell {

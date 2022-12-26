@@ -1,4 +1,3 @@
-import { useWindowSize } from '@react-hookz/web';
 import clsx from 'clsx';
 import PairEvent from '~/components/pair-event';
 import Spinner from '~/components/spinner';
@@ -16,23 +15,8 @@ export default function PairClient({
 }: any) {
   return (
     <>
-      <div className="pair-chart-intervals pad">
-        {['1D', '1W', '1M', '3M', '6M', '1Y'].map((value: string) => (
-          <button
-            key={value}
-            className={clsx(
-              'button button--text button--option pair-chart-interval',
-              value === range && 'active',
-            )}
-            onClick={() => handleRange(value)}
-          >
-            {value}
-          </button>
-        ))}
-      </div>
-
       {events && (
-        <div className="pair-events">
+        <div className="pair-events mx-2 mb-2 border border-transparent-20 rounded-sm">
           <div
             className="head"
             style={{

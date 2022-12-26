@@ -34,7 +34,6 @@
   display: flex;
   height: 44px;
   border-top: 1px solid var(--standard-border-color);
-  border-bottom: 1px solid var(--standard-border-color);
   align-items: center;
   grid-gap: 16px;
 }
@@ -44,8 +43,7 @@
   grid-template-columns: auto 1fr 1fr 1fr 1fr auto;
 
   border-top: 1px solid var(--standard-border-color);
-  margin-top: 4px;
 
-  max-height: calc(55vh - 93px);
+  max-height: calc(55vh - 114px);
   overflow-y: auto;
 }

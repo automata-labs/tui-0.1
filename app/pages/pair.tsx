@@ -1,5 +1,6 @@
 import { useParams, useSearchParams } from '@remix-run/react';
 import { BigNumber } from 'bignumber.js';
+import clsx from 'clsx';
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
@@ -90,12 +91,28 @@ export default function Pair() {
     <main className="page page--dual">
       <div className="main">
         {mounted && (
-          <TokenChartClient
-            chart={chart}
-            loadingChart={loadingChart}
-            setPrice={setPrice}
-            setDate={setDate}
-          />
+          <div className="m-2 border border-transparent-20 rounded-sm">
+            <TokenChartClient
+              chart={chart}
+              loadingChart={loadingChart}
+              setPrice={setPrice}
+              setDate={setDate}
+            />
+            <div className="pair-chart-intervals pad">
+              {['1D', '1W', '1M', '3M', '6M', '1Y'].map((value: string) => (
+                <button
+                  key={value}
+                  className={clsx(
+                    'button button--text button--option pair-chart-interval',
+                    value === range && 'active',
+                  )}
+                  onClick={() => handleRange(value)}
+                >
+                  {value}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
         {mounted && (
           <PairClient
