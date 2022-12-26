@@ -5,10 +5,8 @@ import { useRef } from 'react';
 export default function usePairs(address: string) {
   const fetcher = ({ pageParam }: any) => {
     const url = pageParam
-      // ? `https://api-nijynot.vercel.app/api/token/pairs?address=${address}&limit=15&cursor=${pageParam}`
-      // : `https://api-nijynot.vercel.app/api/token/pairs?address=${address}&limit=15`;
-      ? `http://localhost:3001/api/token/pairs?address=${address}&limit=15&cursor=${pageParam}`
-      : `http://localhost:3001/api/token/pairs?address=${address}&limit=15`;
+      ? `https://api-nijynot.vercel.app/api/token/pairs?address=${address}&limit=15&cursor=${pageParam}`
+      : `https://api-nijynot.vercel.app/api/token/pairs?address=${address}&limit=15`;
   
     return fetch(url).then((res) => res.json());
   };

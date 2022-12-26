@@ -5,11 +5,8 @@
 }
 
 .token-icon-img-wrapper {
-  border-radius: 50px;
-  box-shadow: inset 1px 0px var(--standard-border-color),
-    inset 0px 1px var(--standard-border-color),
-    inset -1px 0px var(--standard-border-color),
-    inset 0px -1px var(--standard-border-color);
+  position: relative;
+  border-radius: 100%;
 
   display: flex;
   justify-content: center;
@@ -20,7 +17,24 @@
   min-width: 20px;
   height: 20px;
   width: 20px;
+
+  overflow: hidden;
 }
+
+.token-icon-img-wrapper::after {
+  border-radius: 100%;
+  box-shadow: inset 1px 0px var(--standard-border-color),
+    inset 0px 1px var(--standard-border-color),
+    inset -1px 0px var(--standard-border-color),
+    inset 0px -1px var(--standard-border-color);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
 
 .token-icon-img {
   height: 100%;
